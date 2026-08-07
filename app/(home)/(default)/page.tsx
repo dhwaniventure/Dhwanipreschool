@@ -13,8 +13,9 @@ import Rewards from '@/components/Reward';
 
 export default function Page() {
   return (
-    <div className="w-full  to-white overflow-x-hidden relative">
-      <HeroNEW/>
+    <div className="w-full bg-white overflow-x-hidden relative">
+      hello
+      {/* <HeroNEW/>
       <SmallAbout/>
         <ProgramsSection/>
         <Daycare/>
@@ -24,7 +25,7 @@ export default function Page() {
         <OurOffices/>
       <BlogSection/>
       <Faqsection/>
-      <Rewards/>
+      <Rewards/> */}
     </div>
   );
 }
