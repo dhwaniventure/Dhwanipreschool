@@ -1,168 +1,139 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Sparkles, Heart } from "lucide-react";
-import Image from "next/image";
-import { Titan_One, Nunito, Caveat } from 'next/font/google';
-import maineimage from "../public/mainimage.png";
+import { Fredoka, Quicksand, Kalam } from 'next/font/google';
 import Link from "next/link";
 
-// --- FONT CONFIGURATION ---
-const titleFont = Titan_One({ 
-  weight: '400', 
+// --- NEW FONT CONFIGURATION ---
+const titleFont = Fredoka({ 
+  weight: ['600', '700'], 
   subsets: ['latin'],
   display: 'swap',
 });
 
-const bodyFont = Nunito({ 
+const bodyFont = Quicksand({ 
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
-const handwritingFont = Caveat({
-  subsets: ['latin'],
+const handwritingFont = Kalam({
   weight: ['400', '700'],
+  subsets: ['latin'],
   display: 'swap',
 });
+
+// Dummy images for the carousel. 
+const carouselImages = [
+  "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=2000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2000&auto=format&fit=crop" 
+];
 
 const Hero = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+    }, 2000); 
+
+    return () => clearInterval(timer); 
+  }, []);
+
   return (
-    <section className="w-full md:h-[900px]  mt-[80px] flex flex-col md:relative md:block overflow-hidden bg-white">
-      
-      {/* --- HANGING HEART DECORATION (UPDATED) --- 
-          Hidden on mobile, hangs from top on desktop.
-          Replaced social icons with a bobbing heart.
-      */}
-      <div className="hidden xl:flex absolute left-12 top-0 bottom-0 flex-col items-center z-30">
-        {/* The String/Rope - Grows down */}
-        <motion.div 
-          initial={{ height: 0 }}
-          animate={{ height: "240px" }} // A bit longer to give room for bobbing
-          transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
-          className="w-[3px] bg-rose-300/70 rounded-b-full"
-        ></motion.div>
+    <section className="w-full md:h-[900px] mt-[80px] flex flex-col md:relative md:block overflow-hidden bg-white">
 
-        {/* The Bobbing Heart Container */}
-        <motion.div
-          // Initial State (before dropping in)
-          initial={{ opacity: 0, scale: 0.8, y: -30 }}
-          // Animation States
-          animate={{ 
-            opacity: 1, 
-            scale: 1,
-            // Keyframes for continuous up and down motion relative to resting point
-            y: [0, 25, 0] 
-          }}
-          // Transition Configurations
-          transition={{
-            // Initial drop-in fade/scale transition
-            opacity: { duration: 0.5, delay: 1.6 },
-            scale: { duration: 0.5, delay: 1.6 },
-            // Continuous bobbing transition
-            y: {
-              duration: 4, // Very slow cycle (4 seconds)
-              repeat: Infinity, // Loop forever
-              repeatType: "reverse", // Go back and forth smoothly
-              ease: "easeInOut",
-              delay: 1.6 // Wait for the string to finish growing before starting to bob
-            }
-          }}
-          className="relative -mt-2 filter drop-shadow-[0_10px_15px_rgba(244,63,94,0.3)]"
-        >
-          {/* A little "knot" or bow at the top of the heart */}
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-5 h-5 bg-rose-400 rounded-full z-10"></div>
-          
-          {/* The Heart Icon Itself */}
-          <div className="bg-gradient-to-br from-white to-rose-50 p-5 rounded-full border-[3px] border-rose-200 relative z-0">
-             <Heart className="w-12 h-12 text-rose-500 fill-rose-500/80" />
-          </div>
-        </motion.div>
-      </div>
+      {/* --- IMAGE CAROUSEL SECTION --- */}
+      <div className="relative w-full h-[250px] md:h-[930px] md:absolute md:inset-0 z-0 bg-slate-100">
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={currentImageIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <img 
+              src={carouselImages[currentImageIndex]}
+              alt={`Happy children at Little Dreamers - Slide ${currentImageIndex + 1}`} 
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
+        
+        <div className="absolute bottom-6 md:bottom-20 left-0 right-0 flex justify-center gap-2 z-20 md:justify-end md:right-20">
+          {carouselImages.map((_, idx) => (
+            <div 
+              key={idx}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                idx === currentImageIndex ? "w-8 bg-rose-500" : "w-2 bg-white/60"
+              }`}
+            />
+          ))}
+        </div>
 
-
-      {/* --- IMAGE SECTION --- */}
-      <div className="relative w-full h-[250px]  md:h-[930px] md:absolute md:inset-0  z-0">
-        <Image 
-          src={maineimage}
-          alt="Happy children at Little Dreamers" 
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 md:bg-gradient-to-r md:from-white/90 md:via-white/40 md:to-transparent"></div>
+        {/* OVERLAY UPDATED: Added a white gradient on desktop so the dark text remains readable without the card */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 md:bg-gradient-to-r md:from-white/80 md:via-white/40 md:to-transparent z-10 pointer-events-none"></div>
       </div>
 
       {/* --- CONTENT SECTION --- */}
-      <div className="relative z-10  mt-8  flex-1 md:h-full md:flex md:ml-[120px]  max-w-8xl mx-auto md:px-2 lg:px-8">
+      <div className="relative z-10 mt-8 flex-1 md:h-full md:flex md:items-center md:ml-[120px] max-w-9xl mx-auto md:px-2 lg:px-8 pointer-events-none">
         
-        {/* Content Card Wrapper */}
+        {/* TEXT CONTAINER UPDATED: Kept white card for mobile, removed background/borders for md (desktop) */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
           className={`
-            w-full bg-white px-6 py-10 -mt-10 rounded-t-[40px] shadow-[0_-10px_40px_rgba(0,0,0,0.1)]
-            md:mt-0 md:bg-white/0     backdrop-blur-md  md:backdrop-blur-none  md:rounded-[50px] md:p-12 md:max-w-2xl  md:shadow-none md:border-none  border-2  border-white/50
+            w-full bg-white px-6 py-10 -mt-10 rounded-t-[40px] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] pointer-events-auto
+            md:mt-0 md:bg-transparent md:backdrop-blur-none md:p-10 md:max-w-[720px] md:shadow-none md:border-none
           `}
         >
-          
-          {/* Badge */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex  items-center gap-2 bg-gradient-to-r from-pink-500 to-rose-500 px-4 py-1.5 rounded-full shadow-md mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-yellow-200 fill-yellow-200" />
-            <span className={`text-xs font-bold text-white tracking-widest uppercase ${bodyFont.className}`}>Admissions Open 2026</span>
-          </motion.div>
-
           {/* Heading */}
-          <h1 className={`text-4xl sm:text-5xl lg:text-6xl leading-[1.15] mb-4 ${titleFont.className}`}>
-            <span className="text-gray-800">Welcome to</span>
-            <br />
-            <span className="text-rose-500 relative inline-block">
-              Little Dreamers
-              {/* Desktop Only Heart Decoration next to text */}
-              <Heart className="hidden md:block  absolute -top-4 -right-10 w-8 h-8 text-pink-400 fill-pink-400 animate-bounce" />
+          <h1 className={`text-4xl sm:text-5xl lg:text-[4rem] leading-[1.1] mb-6 text-slate-800 ${titleFont.className}`}>
+            Welcome to <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-fuchsia-500 to-rose-500 pb-2 inline-block">
+              Dhawani Dreamers
             </span>
-              <span className="text-rose-500 right text-lg inline-block ml-2 align-top">
-             At cambridge
-            </span>
+            
           </h1>
 
-          {/* Tagline */}
-          <h2 className={`text-2xl sm:text-3xl  text-rose-500 mb-6 font-bold ${handwritingFont.className}`}>
-            Where Little Dreams Begin to Shine!
-          </h2>
+          {/* Highlighted Tagline Box */}
+          <div className="relative inline-block mb-8">
+            <div className="absolute inset-0 bg-yellow-300 transform -skew-x-12 rounded-lg"></div>
+            <h2 className={`relative text-xl sm:text-2xl text-slate-800 px-5 py-2.5 font-bold transform -rotate-2 ${handwritingFont.className}`}>
+              Where Little Dreams Begin to Shine! ✨
+            </h2>
+          </div>
 
           {/* Description */}
-          <p className={`text-gray-600 text-base sm:text-lg leading-relaxed font-semibold mb-8 ${bodyFont.className}`}>
+          <p className={`text-slate-700 text-base sm:text-lg leading-relaxed font-semibold mb-10 ${bodyFont.className}`}>
             We cherish the magical early years of childhood — a phase where curiosity sparks, imagination takes flight, and the foundation for lifelong learning is built with love, care, and laughter.
           </p>
 
-          {/* Buttons */}
+          {/* Button */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/admission">
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg flex items-center justify-center gap-2 transition-all ${bodyFont.className}`}
+              <motion.button 
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 2, scale: 0.98 }}
+                className={`w-full sm:w-auto bg-violet-500 hover:bg-violet-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-[0_6px_0_theme(colors.violet.700)] hover:shadow-[0_4px_0_theme(colors.violet.700)] active:shadow-none active:translate-y-[6px] flex items-center justify-center gap-3 transition-all ${bodyFont.className}`}
               >
-              Enroll Your Child <ArrowRight className="w-5 h-5" />
-            </motion.button>
-              </Link>
+                Enroll Your Child <ArrowRight className="w-5 h-5" />
+              </motion.button>
+            </Link>
           </div>
 
         </motion.div>
       </div>
 
       {/* Decorative Floating Blobs (Desktop Only) */}
-      <div className="hidden md:block absolute top-20 right-20 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-      <div className="hidden md:block absolute bottom-20 right-40 w-32 h-32 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+      <div className="hidden md:block absolute top-20 right-20 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob pointer-events-none"></div>
+      <div className="hidden md:block absolute bottom-20 right-40 w-32 h-32 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 pointer-events-none"></div>
     </section>
   );
 };

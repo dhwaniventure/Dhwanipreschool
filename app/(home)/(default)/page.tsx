@@ -15,8 +15,8 @@ export default function Page() {
   return (
     <div className="w-full bg-white overflow-x-hidden relative">
       hello
-      {/* <HeroNEW/>
-      <SmallAbout/>
+      <HeroNEW/>
+      {/* <SmallAbout/>
         <ProgramsSection/>
         <Daycare/>
               <Programs/>

@@ -1,11 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X, ArrowRight, Sparkles, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { 
+  Menu, X, ArrowRight, Sparkles, Facebook, Instagram, Twitter, Youtube,
+  Phone, AlertTriangle, Home, BookOpen, ShieldCheck, GraduationCap, 
+   MapPin, Mail, Gamepad2, Users
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // <--- 1. Import this
+import { usePathname } from "next/navigation"; 
 import { Titan_One, Nunito, Caveat } from 'next/font/google';
 import logo from "../../public/logo.png"; 
 
@@ -15,18 +19,17 @@ const bodyFont = Nunito({ subsets: ['latin'], weight: ['400', '600', '700', '800
 const handwritingFont = Caveat({ subsets: ['latin'], weight: ['400', '700'] });
 
 const Navbar = () => {
-  const pathname = usePathname(); // <--- 2. Get current path
+  const pathname = usePathname(); 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
-  // Scroll Effect & Active Section Detection (For Home Page Sections)
+  // Scroll Effect & Active Section Detection
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Only check for sections if we are on the home page
       if (pathname === "/") {
         const sections = ["about", "programs", "gallery"];
         let current = "";
@@ -35,7 +38,6 @@ const Navbar = () => {
           const element = document.getElementById(section);
           if (element) {
             const rect = element.getBoundingClientRect();
-            // Check if element is roughly in view
             if (rect.top <= 150 && rect.bottom >= 150) {
               current = `/#${section}`;
             }
@@ -43,7 +45,7 @@ const Navbar = () => {
         }
         if (current) setActiveSection(current);
       } else {
-        setActiveSection(""); // Reset if not on home page
+        setActiveSection(""); 
       }
     };
 
@@ -51,154 +53,138 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
+  // Updated Navigation Links with Icons and specific Colors matching screenshot styling
   const navLinks = [
-    { href: "/about", label: "About Us" },
-    { href: "/#programs", label: "Programs" },
-    { href: "/Whyus", label: "Why Us" },
-    { href: "/admission", label: "Admissions" },
-    { href: "/franchise", label: "Franchise" },
-    { href: "/Ourcenters", label: "Our Centers" },
-    { href: "/contact", label: "Contact Us" },
-    { href: "/gamezone", label: "Game Zone" },
+    { href: "/", label: "Home", icon: Home, colorCls: "text-purple-500 border-purple-500", hoverCls: "group-hover:text-purple-500" },
+    { href: "/about", label: "About Us", icon: BookOpen, colorCls: "text-amber-500 border-amber-500", hoverCls: "group-hover:text-amber-500" },
+    { href: "/Whyus", label: "Why Us", icon: ShieldCheck, colorCls: "text-red-500 border-red-500", hoverCls: "group-hover:text-red-500" },
+    { href: "/#programs", label: "Programs", icon: GraduationCap, colorCls: "text-green-500 border-green-500", hoverCls: "group-hover:text-green-500" },
+    { href: "/admission", label: "Admissions", icon: Users, colorCls: "text-sky-500 border-sky-500", hoverCls: "group-hover:text-sky-500" },
+    { href: "/franchise", label: "Franchise", icon: BookOpen, colorCls: "text-indigo-400 border-indigo-400", hoverCls: "group-hover:text-indigo-400" },
+    { href: "/Ourcenters", label: "Our Centers", icon: MapPin, colorCls: "text-purple-600 border-purple-600", hoverCls: "group-hover:text-purple-600" },
+    { href: "/contact", label: "Contact", icon: Mail, colorCls: "text-orange-500 border-orange-500", hoverCls: "group-hover:text-orange-500" },
   ];
 
   const socialLinks = [
-    { 
-      icon: Facebook, 
-      href: "https://www.facebook.com/littledreamersatcambridge/", 
-      className: "text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-100" 
-    },
-    { 
-      icon: Instagram, 
-      href: "https://www.instagram.com/little_dreamers_at_cambridge/", 
-      className: "text-pink-600 bg-pink-50 hover:bg-pink-100 border border-pink-100" 
-    },
-    { 
-      icon: Youtube, 
-      href: "https://www.youtube.com/@LittleDreamersAtCambridge", 
-      className: "text-red-600 bg-red-50 hover:bg-red-100 border border-red-100" 
-    },
+    { icon: Facebook, href: "https://www.facebook.com/littledreamersatcambridge/", className: "text-blue-600 bg-blue-50 hover:bg-blue-100" },
+    { icon: Instagram, href: "https://www.instagram.com/little_dreamers_at_cambridge/", className: "text-pink-600 bg-pink-50 hover:bg-pink-100" },
+    { icon: Youtube, href: "https://www.youtube.com/@LittleDreamersAtCambridge", className: "text-red-600 bg-red-50 hover:bg-red-100" },
   ];
 
   return (
-    <nav
-      className={`fixed top-0 md:px-[200px] px-2  left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm py-2"
-          : "bg-white py-2 md:py-2"
-      }`}
-    >
-      <div className=" mx-auto  md:px-2">
-        <div className="flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 flex flex-col">
+      {/* --- TOP BAR (Hides on Scroll) --- */}
+      <div 
+        className={`bg-[#2c305c] w-full flex flex-col sm:flex-row justify-between items-center text-white transition-all duration-300 overflow-hidden px-4 md:px-10 lg:px-20 ${
+          scrolled ? 'h-0 opacity-0' : 'h-auto py-2 sm:h-10 sm:py-0 opacity-100'
+        }`}
+      >
+        <div className="font-semibold text-xs sm:text-sm flex items-center gap-2">
+          Call Us : +91 901 576 4000
+        </div>
+        <div className="flex items-center gap-2 text-xs sm:text-sm mt-1 sm:mt-0">
+          <AlertTriangle className="text-amber-400 w-4 h-4" />
+          <span><strong className="text-white">Public Notice:</strong> Instances of misuse</span>
+        </div>
+      </div>
 
-          {/* --- LOGO --- */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-[300px] group-hover:rotate-6 transition-transform duration-300">
-              <Image 
-                src={logo} 
-                width={240}  
-                height={240}
-                alt="Little Dreamers Logo"
-                className="object-contain"
-              />
-            </div>
-          </Link>
+      {/* --- MULTI-COLOR BORDER --- */}
+      <div className="flex h-1 w-full">
+         <div className="h-full w-1/6 bg-purple-500"></div>
+         <div className="h-full w-1/6 bg-amber-500"></div>
+         <div className="h-full w-1/6 bg-red-500"></div>
+         <div className="h-full w-1/6 bg-green-500"></div>
+         <div className="h-full w-1/6 bg-sky-500"></div>
+         <div className="h-full w-1/6 bg-indigo-500"></div>
+      </div>
 
-          {/* --- DESKTOP MENU --- */}
-          <div className="hidden xl:flex items-center gap-6">
-            {navLinks.map((link) => {
-              // 3. UPDATED LOGIC: 
-              // Active if: 
-              // A. User is hovering OR
-              // B. The current URL exactly matches the link (e.g. /admission) OR
-              // C. We are scrolling on home page and hit a section anchor
-              const isActive = 
-                hoveredLink === link.href || 
-                pathname === link.href || 
-                (pathname === "/" && activeSection === link.href);
+      {/* --- MAIN NAVBAR --- */}
+      <nav
+        className={`w-full bg-white transition-all duration-300 shadow-sm md:px-10 lg:px-20 px-4 flex items-center justify-between ${
+          scrolled ? "py-1" : "py-3 md:py-4"
+        }`}
+      >
+        {/* --- LOGO --- */}
+        <Link href="/" className="flex items-center shrink-0">
+          <div className={`relative transition-all duration-300 ease-in-out hover:rotate-2 ${scrolled ? 'w-[120px] md:w-[150px]' : 'w-[180px] md:w-[240px]'}`}>
+            <Image 
+              src={logo} 
+              width={240}  
+              height={240}
+              alt="Little Dreamers Logo"
+              className="object-contain w-full h-auto"
+              priority
+            />
+          </div>
+        </Link>
 
-              return (
+        {/* --- DESKTOP MENU --- */}
+        <div className="hidden xl:flex items-end justify-center flex-1 ml-10">
+          {navLinks.map((link, i) => {
+            const isActive = hoveredLink === link.href || pathname === link.href || (pathname === "/" && activeSection === link.href);
+
+            return (
+              <div key={link.href} className="flex px-2 items-end">
                 <Link
-                  key={link.href}
                   href={link.href}
                   onMouseEnter={() => setHoveredLink(link.href)}
                   onMouseLeave={() => setHoveredLink(null)}
-                  className="relative group py-2"
+                  className="flex flex-col items-center group relative px-1"
                 >
-                  {/* The Handwritten Sparkle */}
-                    {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10, rotate: -10 }}
-                        animate={{ opacity: 1, y: 0, rotate: 0 }}
-                        exit={{ opacity: 0, y: -5 }}
-                        className="absolute -top-4 left-1/2 -translate-x-1/2 text-rose-500"
-                      >
-                         <Sparkles className="w-4 h-4 fill-rose-500" />
-                      </motion.div>
-                    )}
-
-                  <span className={`text-base transition-colors duration-300 ${
-                    isActive ? "text-rose-500 font-bold" : "text-slate-500 font-semibold"
-                  } ${bodyFont.className}`}>
+                  {/* Icon in Circle */}
+                  <div className={`rounded-full border-2 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-1 mb-1 bg-white ${link.colorCls} ${scrolled ? 'w-8 h-8' : 'w-11 h-11'}`}>
+                    <link.icon className={`transition-all duration-300 ${scrolled ? 'w-4 h-4' : 'w-5 h-5'}`} />
+                  </div>
+                  
+                  {/* Text Label */}
+                  <span className={`transition-colors duration-300 whitespace-nowrap ${bodyFont.className} ${scrolled ? 'text-[11px]' : 'text-sm'} ${
+                    isActive ? link.colorCls.split(' ')[0] : "text-[#706d97] font-semibold"
+                  } ${link.hoverCls}`}>
                     {link.label}
                   </span>
                 </Link>
-              );
-            })}
-          </div>
 
-          {/* --- RIGHT ACTIONS --- */}
-          <div className="flex items-center gap-4">
-            
-      
-
-            {/* Desktop Enroll Button */}
-            <Link href="/admission" className="hidden sm:block">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`bg-rose-500 hover:bg-rose-600 text-white rounded-full px-6 py-2.5 shadow-lg shadow-rose-200 flex items-center gap-2 text-sm font-bold transition-all ${bodyFont.className}`}
-              >
-                Enroll Now <ArrowRight className="w-4 h-4" />
-              </motion.button>
-            </Link>
-
-                  {/* Social Icons */}
-            <div className="hidden md:flex items-center gap-3 border-l border-slate-200 pl-6 mr-1">
-                {socialLinks.map((social, i) => (
-                    <a 
-                        key={i} 
-                        href={social.href} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className={`p-2 rounded-full transition-all duration-300 hover:-translate-y-1 ${social.className}`}
-                    >
-                        <social.icon className="w-5 h-5" />
-                    </a>
-                ))}
-            </div>
-
-            {/* Mobile Toggle */}
-            <button
-              className="xl:hidden p-2 text-slate-600 hover:bg-rose-50 rounded-full transition-colors"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+                {/* Vertical Separator */}
+                {i < navLinks.length - 1 && (
+                  <span className={`text-slate-300 mx-2 transition-all duration-300 ${scrolled ? 'text-xs mb-[2px]' : 'text-sm mb-0.5'}`}>|</span>
+                )}
+              </div>
+            );
+          })}
         </div>
-      </div>
+
+        {/* --- RIGHT ACTIONS (Desktop Enroll + Mobile Toggle) --- */}
+        <div className="flex items-center gap-3 shrink-0 ml-4">
+          <Link href="/admission" className="hidden lg:block">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`bg-rose-500 hover:bg-rose-600 text-white rounded-full shadow-md shadow-rose-200 flex items-center gap-1.5 font-bold transition-all ${bodyFont.className} ${scrolled ? 'px-4 py-1.5 text-xs' : 'px-5 py-2 text-sm'}`}
+            >
+              Enroll <ArrowRight className={scrolled ? 'w-3 h-3' : 'w-4 h-4'} />
+            </motion.button>
+          </Link>
+
+          {/* Mobile Toggle */}
+          <button
+            className="xl:hidden p-2 text-slate-600 hover:bg-rose-50 rounded-full transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </nav>
 
       {/* --- MOBILE MENU --- */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden bg-white border-t border-slate-100 shadow-xl overflow-hidden absolute w-full left-0 top-full"
+            className="xl:hidden bg-white border-t border-slate-100 shadow-xl overflow-y-auto absolute w-full left-0 top-full"
           >
-            <div className="container mx-auto px-4 py-6 flex flex-col gap-2">
+            <div className="container mx-auto px-44 py-6 flex flex-col gap-2 pb-32">
               {navLinks.map((link, i) => {
                  const isActive = pathname === link.href || (pathname === "/" && activeSection === link.href);
                  
@@ -212,30 +198,31 @@ const Navbar = () => {
                     <Link
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className={`block px-4 py-3 rounded-xl text-lg font-bold transition-all ${bodyFont.className} ${
+                      className={`flex items-center gap-4 px-4 py-3 rounded-xl text-lg font-bold transition-all ${bodyFont.className} ${
                         isActive 
                           ? "text-rose-500 bg-rose-50" 
                           : "text-slate-600 hover:bg-slate-50"
                       }`}
                     >
+                      <div className={`p-2 rounded-full border-2 ${link.colorCls}`}>
+                         <link.icon className="w-5 h-5" />
+                      </div>
                       {link.label}
                     </Link>
                   </motion.div>
                  );
               })}
-              
-           
 
-              <div className="mt-2">
-                <Link href="/enroll" onClick={() => setMobileMenuOpen(false)}>
+              <div className="mt-4">
+                <Link href="/admission" onClick={() => setMobileMenuOpen(false)}>
                   <button className={`w-full bg-rose-500 text-white py-3 rounded-xl font-bold shadow-md flex justify-center items-center gap-2 ${bodyFont.className}`}>
                     Enroll Now <ArrowRight className="w-5 h-5" />
                   </button>
                 </Link>
               </div>
 
-                 <div className="flex justify-center gap-6 py-4 border-t border-slate-100 mt-2">
-                 {socialLinks.map((social, i) => (
+              <div className="flex justify-center gap-6 py-6 border-t border-slate-100 mt-4">
+                {socialLinks.map((social, i) => (
                     <a 
                         key={i} 
                         href={social.href} 
@@ -249,7 +236,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 };
 
