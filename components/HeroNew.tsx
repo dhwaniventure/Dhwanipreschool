@@ -2,18 +2,18 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Sparkles, Heart } from "lucide-react";
+import { ArrowRight, PlayCircle, Star, Sparkles, Cloud } from "lucide-react";
 import { Fredoka, Quicksand, Kalam } from 'next/font/google';
 import Link from "next/link";
 
 // --- NEW FONT CONFIGURATION ---
-const titleFont = Fredoka({ 
-  weight: ['600', '700'], 
+const titleFont = Fredoka({
+  weight: ['500', '600', '700'],
   subsets: ['latin'],
   display: 'swap',
 });
 
-const bodyFont = Quicksand({ 
+const bodyFont = Quicksand({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
@@ -27,9 +27,9 @@ const handwritingFont = Kalam({
 
 // Dummy images for the carousel. 
 const carouselImages = [
-  "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2000&auto=format&fit=crop" 
+  "https://t4.ftcdn.net/jpg/06/46/78/41/360_F_646784196_u1F6LtwEULzPKO7rXY1nUUS1RZqu5oLG.jpg",
+  "https://media.istockphoto.com/id/2224235754/photo/drawing-education-and-teacher-with-children-in-classroom-for-learning-students-and-creative.jpg?s=612x612&w=0&k=20&c=pnsJb3Eb2WJ4SWYyorVf2sDp47WEkYci6uUbTNnrE5Q=",
+  "https://thumbs.dreamstime.com/b/child-girl-schoolgirl-elementary-school-student-123686003.jpg"
 ];
 
 const Hero = () => {
@@ -38,102 +38,153 @@ const Hero = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
-    }, 2000); 
+    }, 4000);
 
-    return () => clearInterval(timer); 
+    return () => clearInterval(timer);
   }, []);
 
   return (
-    <section className="w-full md:h-[900px] mt-[80px] flex flex-col md:relative md:block overflow-hidden bg-white">
+    <section className="relative mt-12 w-full min-h-[100vh] lg:min-h-[900px] bg-[#FDF8F5] flex items-center pt-32 pb-16 overflow-hidden">
 
-      {/* --- IMAGE CAROUSEL SECTION --- */}
-      <div className="relative w-full h-[250px] md:h-[930px] md:absolute md:inset-0 z-0 bg-slate-100">
-        <AnimatePresence mode="popLayout">
+      {/* Playful scattered background elements */}
+      <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute top-40 left-10 text-yellow-300 opacity-60 pointer-events-none">
+        <svg width="60" height="60" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 0 L58 35 L95 25 L65 50 L95 75 L58 65 L50 100 L42 65 L5 75 L35 50 L5 25 L42 35 Z" />
+        </svg>
+      </motion.div>
+
+      <motion.div animate={{ y: [0, -30, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-20 left-1/4 text-sky-200 opacity-70 pointer-events-none">
+        <Cloud className="w-20 h-20 fill-current" />
+      </motion.div>
+
+      <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 45, 0] }} transition={{ duration: 8, repeat: Infinity }} className="absolute top-32 right-1/4 text-rose-300 opacity-50 pointer-events-none">
+        <Sparkles className="w-16 h-16 fill-current" />
+      </motion.div>
+
+      <div className="container mx-auto  relative z-10 max-w-9xl">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-8">
+
+          {/* --- LEFT TEXT CONTENT --- */}
           <motion.div
-            key={currentImageIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="absolute inset-0"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-full lg:w-[50%] flex flex-col items-center text-center lg:items-start lg:text-left z-20"
           >
-            <img 
-              src={carouselImages[currentImageIndex]}
-              alt={`Happy children at Little Dreamers - Slide ${currentImageIndex + 1}`} 
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        </AnimatePresence>
-        
-        <div className="absolute bottom-6 md:bottom-20 left-0 right-0 flex justify-center gap-2 z-20 md:justify-end md:right-20">
-          {carouselImages.map((_, idx) => (
-            <div 
-              key={idx}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                idx === currentImageIndex ? "w-8 bg-rose-500" : "w-2 bg-white/60"
-              }`}
-            />
-          ))}
-        </div>
+            {/* Tagline Badge */}
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white shadow-sm border-2 border-rose-100 mb-8">
+              <span className="text-xl">🎈</span>
+              <span className={`text-sm font-extrabold text-rose-500 tracking-wider uppercase ${bodyFont.className}`}>Admissions Open 2026</span>
+            </div>
 
-        {/* OVERLAY UPDATED: Added a white gradient on desktop so the dark text remains readable without the card */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 md:bg-gradient-to-r md:from-white/80 md:via-white/40 md:to-transparent z-10 pointer-events-none"></div>
-      </div>
+            {/* Giant Bold Title */}
+            <h1 className={`${titleFont.className} text-5xl sm:text-6xl lg:text-[4.5rem] leading-[1.1] text-slate-800 mb-6 relative`}>
+              <span className="relative z-10">Dhwani Cambridge</span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500 relative z-10">Montessori</span>
+            </h1>
 
-      {/* --- CONTENT SECTION --- */}
-      <div className="relative z-10 mt-8 flex-1 md:h-full md:flex md:items-center md:ml-[120px] max-w-9xl mx-auto md:px-2 lg:px-8 pointer-events-none">
-        
-        {/* TEXT CONTAINER UPDATED: Kept white card for mobile, removed background/borders for md (desktop) */}
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-          className={`
-            w-full bg-white px-6 py-10 -mt-10 rounded-t-[40px] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] pointer-events-auto
-            md:mt-0 md:bg-transparent md:backdrop-blur-none md:p-10 md:max-w-[720px] md:shadow-none md:border-none
-          `}
-        >
-          {/* Heading */}
-          <h1 className={`text-4xl sm:text-5xl lg:text-[4rem] leading-[1.1] mb-6 text-slate-800 ${titleFont.className}`}>
-            Welcome to <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-fuchsia-500 to-rose-500 pb-2 inline-block">
-              Dhawani Dreamers
-            </span>
-            
-          </h1>
-
-          {/* Highlighted Tagline Box */}
-          <div className="relative inline-block mb-8">
-            <div className="absolute inset-0 bg-yellow-300 transform -skew-x-12 rounded-lg"></div>
-            <h2 className={`relative text-xl sm:text-2xl text-slate-800 px-5 py-2.5 font-bold transform -rotate-2 ${handwritingFont.className}`}>
-              Where Little Dreams Begin to Shine! ✨
+            <h2 className={`${titleFont.className} text-2xl sm:text-3xl lg:text-4xl text-slate-600 mb-6`}>
+              Preschool & Day Care
             </h2>
-          </div>
 
-          {/* Description */}
-          <p className={`text-slate-700 text-base sm:text-lg leading-relaxed font-semibold mb-10 ${bodyFont.className}`}>
-            We cherish the magical early years of childhood — a phase where curiosity sparks, imagination takes flight, and the foundation for lifelong learning is built with love, care, and laughter.
-          </p>
+            {/* Handwriting Tagline */}
+            <div className="mb-8">
+              <h3 className={`${handwritingFont.className} text-2xl sm:text-3xl text-rose-400 transform -rotate-3`}>
+                Where Little Dreams Begin to Shine! ✨
+              </h3>
+            </div>
 
-          {/* Button */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/admission">
-              <motion.button 
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 2, scale: 0.98 }}
-                className={`w-full sm:w-auto bg-violet-500 hover:bg-violet-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-[0_6px_0_theme(colors.violet.700)] hover:shadow-[0_4px_0_theme(colors.violet.700)] active:shadow-none active:translate-y-[6px] flex items-center justify-center gap-3 transition-all ${bodyFont.className}`}
-              >
-                Enroll Your Child <ArrowRight className="w-5 h-5" />
-              </motion.button>
-            </Link>
-          </div>
+            <p className={`${bodyFont.className} text-slate-500 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl font-bold`}>
+              We cherish the magical early years of childhood — a phase where curiosity sparks, imagination takes flight, and the foundation for lifelong learning is built with love and laughter.
+            </p>
 
-        </motion.div>
+            {/* Colorful Buttons */}
+            <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
+              <Link href="/admission" className="w-full sm:w-auto">
+                <motion.button
+                  whileHover={{ scale: 1.05, rotate: -1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`${titleFont.className} w-full sm:w-auto bg-rose-500 hover:bg-rose-600 text-white px-8 py-5 rounded-3xl text-xl shadow-[0_8px_0_theme(colors.rose.700)] hover:shadow-[0_4px_0_theme(colors.rose.700)] hover:translate-y-1 active:shadow-none active:translate-y-2 transition-all flex items-center justify-center gap-3`}
+                >
+                  Enroll Now <ArrowRight className="w-6 h-6" />
+                </motion.button>
+              </Link>
+
+              {/* <Link href="/about" className="w-full sm:w-auto mt-2 sm:mt-0">
+                <motion.button
+                  whileHover={{ scale: 1.05, rotate: 1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`${titleFont.className} w-full sm:w-auto bg-sky-400 hover:bg-sky-500 text-white px-8 py-5 rounded-3xl text-xl shadow-[0_8px_0_theme(colors.sky.600)] hover:shadow-[0_4px_0_theme(colors.sky.600)] hover:translate-y-1 active:shadow-none active:translate-y-2 transition-all flex items-center justify-center gap-3`}
+                >
+                  <PlayCircle className="w-6 h-6" /> Watch Video
+                </motion.button>
+              </Link> */}
+            </div>
+
+          </motion.div>
+
+          {/* --- RIGHT: DYNAMIC BLOB CAROUSEL --- */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, type: "spring", bounce: 0.4 }}
+            className="w-full lg:w-[40%] relative mt-10 lg:mt-0 flex justify-center items-center"
+          >
+            {/* Background Blob Shadow/Decoration */}
+            <motion.div
+              animate={{
+                rotate: [0, 10, -10, 0],
+                borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "30% 60% 70% 40% / 50% 60% 30% 60%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 bg-gradient-to-tr from-yellow-300 to-rose-300 w-full aspect-square max-w-[600px] xl:max-w-[700px] m-auto opacity-70 blur-xl"
+            />
+
+            {/* The Carousel Container masked as an animated blob */}
+            <motion.div
+              animate={{
+                borderRadius: ["40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%"]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full aspect-square max-w-[600px] xl:max-w-[700px] bg-slate-200 overflow-hidden shadow-2xl border-[12px] border-white z-10"
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentImageIndex}
+                  initial={{ opacity: 0, scale: 1.2 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={carouselImages[currentImageIndex]}
+                    alt={`Happy children at Dhwani Cambridge - Slide ${currentImageIndex + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+
+
+            {/* Carousel Dots */}
+            <div className="absolute -bottom-20 left-0 right-0 flex justify-center gap-3 z-20">
+              {carouselImages.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentImageIndex(idx)}
+                  className={`h-3 rounded-full transition-all duration-300 ${idx === currentImageIndex ? "w-10 bg-rose-500" : "w-3 bg-slate-300 hover:bg-slate-400"
+                    }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+          </motion.div>
+
+        </div>
       </div>
-
-      {/* Decorative Floating Blobs (Desktop Only) */}
-      <div className="hidden md:block absolute top-20 right-20 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob pointer-events-none"></div>
-      <div className="hidden md:block absolute bottom-20 right-40 w-32 h-32 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 pointer-events-none"></div>
     </section>
   );
 };

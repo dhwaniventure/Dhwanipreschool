@@ -14,18 +14,11 @@ import Rewards from '@/components/Reward';
 export default function Page() {
   return (
     <div className="w-full bg-white overflow-x-hidden relative">
-      hello
-      <HeroNEW/>
-      {/* <SmallAbout/>
-        <ProgramsSection/>
-        <Daycare/>
-              <Programs/>
-        <Homecta/>  
-         <GallerySection/>
-        <OurOffices/>
-      <BlogSection/>
-      <Faqsection/>
-      <Rewards/> */}
+      <HeroNEW />
+      <ProgramsSection />
+      <Daycare />
+      <Faqsection />
+
     </div>
   );
 }

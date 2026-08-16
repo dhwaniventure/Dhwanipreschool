@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import Admissionheader from "@/components/AdmissioHeader";
 import Ctasection from "@/components/HomeCta";
 import boysitting from "../public/boysitting.png";
-import Image from "next/image";
+import girlwithbook from "../public/girlwithbook 1.svg";
+import boywithelephant from "../public/boywithelephent.png";
+import girlonswing from "../public/girlonwing.png";
 import { EmailFormschemaType } from "@/lib/schema";
+import Image from "next/image";
 import { IEmaildetail } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import {
@@ -32,78 +35,45 @@ import {
   BadgeCheck, // Verification
   Building2,  // Infrastructure
   ChevronRight,
-  Loader2     // Added for loading state
+  Loader2,    // Added for loading state
+  Star
 } from "lucide-react";
-import { Titan_One, Nunito } from 'next/font/google';
+import { Fredoka, Quicksand, Kalam } from 'next/font/google';
 
 // --- FONTS ---
-const titleFont = Titan_One({
-  weight: '400',
+const titleFont = Fredoka({
+  weight: ['500', '600', '700'],
   subsets: ['latin'],
   display: 'swap',
 });
 
-const bodyFont = Nunito({
+const bodyFont = Quicksand({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
-// --- REUSABLE WAVE COMPONENT ---
-interface WaveSeparatorProps {
-  position: "top" | "bottom";
-  color: string;
-}
+const handwritingFont = Kalam({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+});
 
-const WaveSeparator: React.FC<WaveSeparatorProps> = ({ position, color }) => {
-  const viewBoxWidth = 2000;
-  const viewBoxHeight = 100;
-
-  const getWavePath = (count: number) => {
-    const waveWidth = viewBoxWidth / count;
-    let pathD = "";
-
-    if (position === "top") {
-      pathD = `M0,${viewBoxHeight / 2} `;
-      for (let i = 0; i < count; i++) {
-        pathD += `q ${waveWidth / 4}, 25 ${waveWidth / 2}, 0 t ${waveWidth / 2}, 0 `;
-      }
-      pathD += `V ${viewBoxHeight} 0 H 0 Z`;
-    } else {
-      pathD = `M0,${viewBoxHeight / 2} `;
-      for (let i = 0; i < count; i++) {
-        pathD += `q ${waveWidth / 4}, -25 ${waveWidth / 2}, 0 t ${waveWidth / 2}, 0 `;
-      }
-      pathD += `V ${viewBoxHeight} H 0 Z`;
-    }
-    return pathD;
-  };
-
-  const mobilePath = getWavePath(5);
-  const desktopPath = getWavePath(20);
-
-  const WaveLayer = ({ pathD, opacityClass, duration }: { pathD: string, opacityClass: string, duration: number }) => (
-    <motion.div
-      className={`absolute inset-0 w-[200%] h-full ${color} ${opacityClass}`}
-      animate={{ x: position === "top" ? ["0%", "-50%"] : ["-50%", "0%"] }}
-      transition={{ duration: duration, repeat: Infinity, ease: "linear" }}
-    >
-      <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`} preserveAspectRatio="none">
-        <path d={pathD} fill="currentColor"></path>
-      </svg>
-    </motion.div>
-  );
-
+// --- REUSABLE EDGE COMPONENT ---
+const ElegantEdge = ({ position, fillColor = "#ffffff" }: { position: "top" | "bottom", fillColor?: string }) => {
   return (
-    <div className={`absolute left-0 w-full h-[60px] md:h-[100px] overflow-hidden z-20 ${position === "top" ? "top-0" : "bottom-0"}`}>
-      <div className="block md:hidden w-full h-full absolute inset-0">
-        <WaveLayer pathD={mobilePath} opacityClass="opacity-40" duration={20} />
-        <WaveLayer pathD={mobilePath} opacityClass="opacity-100" duration={15} />
-      </div>
-      <div className="hidden md:block w-full h-full absolute inset-0">
-        <WaveLayer pathD={desktopPath} opacityClass="opacity-40" duration={20} />
-        <WaveLayer pathD={desktopPath} opacityClass="opacity-100" duration={15} />
-      </div>
+    <div className={`absolute left-0 w-full overflow-hidden leading-none z-20 pointer-events-none ${position === "top" ? "top-0" : "bottom-0 rotate-180"}`}>
+      <svg
+        className="relative block w-[calc(100%+1.3px)] h-[50px] md:h-[90px] lg:h-[120px]"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+          style={{ fill: fillColor }}
+        ></path>
+      </svg>
     </div>
   );
 };
@@ -127,7 +97,7 @@ export default function AdmissionPage({
       phone: defaultEmail?.phone,
       country: defaultEmail?.country,
       city: defaultEmail?.city,
-      state:  defaultEmail?.state,
+      state: defaultEmail?.state,
       message: defaultEmail?.message,
       admission_seeking: "Little Explorers - Playgroup (2 - 3 Years)" // Set a valid default
     },
@@ -146,24 +116,22 @@ export default function AdmissionPage({
       <Admissionheader />
 
       {/* =========================================
-          SECTION 1: ENQUIRY FORM (Violet Theme)
+          SECTION 1: ENQUIRY FORM 
       ========================================= */}
-      <section className="relative w-full bg-violet-300 pt-12 pb-24 overflow-hidden">
-        <WaveSeparator position="top" color="text-white" />
+      <section className="relative w-full bg-indigo-50 pt-16 pb-32 overflow-hidden">
 
-        <div className="absolute inset-0 pointer-events-none opacity-20 top-20">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M10,10 Q50,50 90,10" fill="none" stroke="#8b5cf6" strokeWidth="0.5" strokeDasharray="2,2" />
-          </svg>
-        </div>
 
-        <div className=" mx-auto px-6 relative z-10">
-          <div className="text-center mb-4">
-            <h2 className={`text-3xl md:text-5xl font-black text-violet-900 mb-2 ${titleFont.className}`}>
+        {/* Background Blobs */}
+        {/* <div className="absolute top-30 right-0 w-[600px] h-[600px] bg-sky-200/40 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div> */}
+        <div className="absolute bottom-60 left-0 w-[500px] h-[500px] bg-purple-200/40 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/3"></div>
+
+        <div className="mx-auto px-6 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className={`text-4xl md:text-5xl font-bold text-slate-800 mb-4 ${titleFont.className}`}>
               Enquiry Form
             </h2>
-            <p className="text-violet-800 text-lg">
-              Fill out the form below and our admissions team will contact you shortly.
+            <p className="text-slate-600 text-lg font-medium max-w-2xl mx-auto">
+              Ready to take the first step? Fill out the form below and our admissions team will contact you shortly.
             </p>
           </div>
 
@@ -172,63 +140,63 @@ export default function AdmissionPage({
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto bg-white rounded-[2.5rem] p-6 md:p-10 shadow-2xl border-4 border-white relative"
+            className="max-w-4xl mx-auto bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-white relative"
           >
-            <div className="absolute -top-12 mb-6 -right-6 w-[94px] h-[94px] flex items-center justify-center ">
+            <div className="absolute -top-12 mb-6 -right-6 w-[120px] h-[120px] flex items-center justify-center animate-bounce-slow">
               <Image src={boysitting} alt="Boy Sitting" />
             </div>
 
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
               {/* Name */}
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-slate-700 ml-2">Name <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <User className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
+              <div className="flex flex-col gap-2">
+                <label className="font-bold text-slate-700 text-sm tracking-wide">Name <span className="text-red-500">*</span></label>
+                <div className="relative group">
+                  <User className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                   <input
                     {...register("name", { required: true })}
                     type="text"
                     placeholder="John Doe"
                     disabled={isLoading}
-                    className={`w-full bg-slate-50 border-2 rounded-xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-violet-400 transition-colors ${errors.name ? 'border-red-400' : 'border-slate-100'}`}
+                    className={`w-full bg-slate-50/50 border-2 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all ${errors.name ? 'border-red-400' : 'border-slate-200'}`}
                   />
                 </div>
               </div>
 
               {/* Country */}
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-slate-700 ml-2">Country <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <Building2 className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
+              <div className="flex flex-col gap-2">
+                <label className="font-bold text-slate-700 text-sm tracking-wide">Country <span className="text-red-500">*</span></label>
+                <div className="relative group">
+                  <Building2 className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                   <input
                     {...register("country", { required: true })}
                     type="text"
                     placeholder="Country"
                     disabled={isLoading}
-                    className={`w-full bg-slate-50 border-2 rounded-xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-violet-400 transition-colors ${errors.country ? 'border-red-400' : 'border-slate-100'}`}
+                    className={`w-full bg-slate-50/50 border-2 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all ${errors.country ? 'border-red-400' : 'border-slate-200'}`}
                   />
                 </div>
               </div>
 
               {/* Phone Number */}
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-slate-700 ml-2">Phone Number <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <Phone className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
+              <div className="flex flex-col gap-2">
+                <label className="font-bold text-slate-700 text-sm tracking-wide">Phone Number <span className="text-red-500">*</span></label>
+                <div className="relative group">
+                  <Phone className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                   <input
                     {...register("phone", { required: true })}
                     type="tel"
                     placeholder="+1 234 567 890"
                     disabled={isLoading}
-                    className={`w-full bg-slate-50 border-2 rounded-xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-violet-400 transition-colors ${errors.phone ? 'border-red-400' : 'border-slate-100'}`}
+                    className={`w-full bg-slate-50/50 border-2 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all ${errors.phone ? 'border-red-400' : 'border-slate-200'}`}
                   />
                 </div>
               </div>
 
               {/* Email Address */}
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-slate-700 ml-2">Email Address <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
+              <div className="flex flex-col gap-2">
+                <label className="font-bold text-slate-700 text-sm tracking-wide">Email Address <span className="text-red-500">*</span></label>
+                <div className="relative group">
+                  <Mail className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                   <input
                     {...register("email", {
                       required: true,
@@ -237,48 +205,48 @@ export default function AdmissionPage({
                     type="email"
                     placeholder="example@mail.com"
                     disabled={isLoading}
-                    className={`w-full bg-slate-50 border-2 rounded-xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-violet-400 transition-colors ${errors.email ? 'border-red-400' : 'border-slate-100'}`}
+                    className={`w-full bg-slate-50/50 border-2 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all ${errors.email ? 'border-red-400' : 'border-slate-200'}`}
                   />
                 </div>
               </div>
 
               {/* City */}
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-slate-700 ml-2">City <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <Building2 className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
+              <div className="flex flex-col gap-2">
+                <label className="font-bold text-slate-700 text-sm tracking-wide">City <span className="text-red-500">*</span></label>
+                <div className="relative group">
+                  <Building2 className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                   <input
                     {...register("city", { required: true })}
                     type="text"
                     placeholder="City"
                     disabled={isLoading}
-                    className={`w-full bg-slate-50 border-2 rounded-xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-violet-400 transition-colors ${errors.city ? 'border-red-400' : 'border-slate-100'}`}
+                    className={`w-full bg-slate-50/50 border-2 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all ${errors.city ? 'border-red-400' : 'border-slate-200'}`}
                   />
                 </div>
               </div>
 
               {/* State */}
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-slate-700 ml-2">State <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <Building2 className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
+              <div className="flex flex-col gap-2">
+                <label className="font-bold text-slate-700 text-sm tracking-wide">State <span className="text-red-500">*</span></label>
+                <div className="relative group">
+                  <Building2 className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                   <input
                     {...register("state", { required: true })}
                     type="text"
                     placeholder="State"
                     disabled={isLoading}
-                    className={`w-full bg-slate-50 border-2 rounded-xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-violet-400 transition-colors ${errors.state ? 'border-red-400' : 'border-slate-100'}`}
+                    className={`w-full bg-slate-50/50 border-2 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all ${errors.state ? 'border-red-400' : 'border-slate-200'}`}
                   />
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1 md:col-span-2">
-                <label className="font-bold text-slate-700 ml-2">Seeking Admission For</label>
-                <div className="relative">
+              <div className="flex flex-col gap-2 md:col-span-2">
+                <label className="font-bold text-slate-700 text-sm tracking-wide">Seeking Admission For</label>
+                <div className="relative group">
                   <select
                     {...register("admission_seeking")}
                     disabled={isLoading}
-                    className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-3 px-4 text-slate-700 focus:outline-none focus:border-violet-400 transition-colors appearance-none"
+                    className="w-full bg-slate-50/50 border-2 border-slate-200 rounded-2xl py-3 px-4 text-slate-700 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all appearance-none cursor-pointer"
                   >
                     <option value="Little Explorers - Playgroup (2 - 3 Years)">Little Explorers - Playgroup (2 - 3 Years)</option>
                     <option value="Curious Learners - Nursery (3 - 4 Years)">Curious Learners - Nursery (3 - 4 Years)</option>
@@ -286,33 +254,33 @@ export default function AdmissionPage({
                     <option value="Future Leaders - Senior Kindergarten (5 - 6 Years)">Future Leaders - Upper Kindergarten (5 - 6 Years)</option>
                     <option value="Daycare">Daycare</option>
                   </select>
-                  <ChevronRight className="absolute right-4 top-3.5 w-5 h-5 text-slate-400 rotate-90 pointer-events-none" />
+                  <ChevronRight className="absolute right-4 top-3.5 w-5 h-5 text-slate-400 rotate-90 pointer-events-none group-focus-within:text-indigo-500" />
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1 md:col-span-2">
-                <label className="font-bold text-slate-700 ml-2">Message (Optional)</label>
-                <div className="relative">
-                  <MessageSquare className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
+              <div className="flex flex-col gap-2 md:col-span-2">
+                <label className="font-bold text-slate-700 text-sm tracking-wide">Message (Optional)</label>
+                <div className="relative group">
+                  <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                   <textarea
                     {...register("message")}
                     rows={4}
                     placeholder="Any specific questions?"
                     disabled={isLoading}
-                    className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-violet-400 transition-colors resize-none"
+                    className="w-full bg-slate-50/50 border-2 border-slate-200 rounded-2xl py-4 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all resize-none"
                   />
                 </div>
               </div>
 
-              <div className="md:col-span-2 mt-2">
+              <div className="md:col-span-2 mt-4">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className={`w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 text-lg ${isLoading ? 'opacity-70 cursor-not-allowed hover:translate-y-0' : ''}`}
+                  className={`w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-4 rounded-2xl shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 text-lg ${isLoading ? 'opacity-70 cursor-not-allowed hover:translate-y-0 hover:shadow-lg' : ''}`}
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Loader2 className="w-6 h-6 animate-spin" />
                       Sending...
                     </>
                   ) : (
@@ -326,199 +294,171 @@ export default function AdmissionPage({
             </form>
           </motion.div>
         </div>
-
-        {/* Bottom Wave: Transitions to White */}
-        <WaveSeparator position="bottom" color="text-white" />
       </section>
 
 
       {/* =========================================
-          SECTION 2: ADMISSION PROCESS (White Theme)
+          NEW SECTION: WHY DHWANI MONTESSORI
       ========================================= */}
-      {/* Reduced padding: py-20/32 -> py-12 */}
-      <section className="w-full bg-white py-2 overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-8">
-            <h2 className={`text-4xl md:text-5xl font-black text-slate-900 mb-2 ${titleFont.className}`}>
-              Admission <span className="text-violet-500">Process</span>
-            </h2>
-            <div className="w-24 h-2 bg-violet-200 rounded-full mx-auto"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: FileText, title: "1. Online Inquiry", desc: "Fill out the form above to express your interest." },
-              { icon: School, title: "2. Campus Visit", desc: "Schedule a tour to see our vibrant environment." },
-              { icon: CalendarCheck, title: "3. Interaction", desc: "A friendly interaction with the child and parents." },
-              { icon: CheckCircle, title: "4. Enrollment", desc: "Complete documentation and welcome to the family!" }
-            ].map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center text-center group"
-              >
-                <div className="w-20 h-20 bg-slate-50 border-4 border-violet-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-violet-500 group-hover:border-violet-200 transition-all duration-300 shadow-lg">
-                  <step.icon className="w-8 h-8 text-violet-500 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-1">{step.title}</h3>
-                <p className="text-slate-500 leading-relaxed text-sm">{step.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* =========================================
-          SECTION 3: AGE CRITERIA (Sky Blue Theme)
-      ========================================= */}
-      {/* Reduced padding: pt-32 -> pt-28 (clears wave), pb-32 -> pb-24 */}
-      <section className="relative w-full bg-sky-300 pt-28 pb-24 overflow-hidden">
-
-        {/* Top Wave: White to match previous section */}
-        <WaveSeparator position="top" color="text-white" />
+      <section className="relative w-full bg-white py-24 overflow-hidden">
+        <ElegantEdge position="top" fillColor="#eef2ff" />
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-8">
-            <h2 className={`text-4xl md:text-5xl font-black text-sky-900 mb-2 ${titleFont.className}`}>
-              Age Criteria
+          <div className="text-center mb-16">
+            <h2 className={`text-4xl md:text-5xl font-bold text-slate-800 mb-4 ${titleFont.className}`}>
+              Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">Dhwani Montessori</span> Preschool & Daycare?
             </h2>
+            <div className="w-20 h-1.5 bg-gradient-to-r from-slate-200 to-transparent mx-auto rounded-full mb-12"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { title: "Little Explorers", age: " (Playgroup # 2 - 3 Years)", icon: Baby, color: "bg-rose-400" },
-              { title: "Curious Learners  ", age: "(Nursery  # 3 - 4 Years)", icon: Smile, color: "bg-amber-400" },
-              { title: "Creative Thinkers ", age: "(Junior kindergarten # 4 - 5 Years)", icon: BookOpen, color: "bg-emerald-400" },
-              { title: "Future Leaders     ", age: "(Senior kindergarten # 5 - 6 Years)", icon: GraduationCap, color: "bg-indigo-400" },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -5 }}
-                className="bg-white rounded-[2rem] p-6 shadow-xl text-center border-b-8 border-sky-200"
-              >
-                <div className={`w-14 h-14 ${item.color} rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-md rotate-3`}>
-                  <item.icon className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-xl font-black text-slate-800 mb-2">{item.title}</h3>
-                <p className="text-sky-600 font-bold bg-sky-50 py-2 rounded-full inline-block px-4 text-sm">
-                  {item.age}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Wave: Transitions to next section (white) */}
-        <WaveSeparator position="bottom" color="text-white" />
-      </section>
-
-      <section className="w-full bg-white py-2 overflow-hidden">
-        {/* <div>boy</div> */}
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto bg-rose-50 rounded-[3rem] p-8 md:p-12 border-4 border-rose-100 shadow-sm relative overflow-hidden">
-            {/* Background Doodle inside card */}
-            <div className="absolute -right-20 -bottom-20 opacity-10">
-              {/* <FileText className="w-96 h-96 text-rose-500" /> */}
-            </div>
-
-            <h2 className={`text-3xl md:text-4xl font-black text-rose-900 mb-6 text-center ${titleFont.className}`}>
-              Documents Required
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6">
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            {/* Left side text */}
+            <div className="w-full lg:w-3/5 space-y-6">
               {[
-                "Birth Certificate of the Child",
-                "Passport Size Photos (Child & Parents)",
-                "Aadhar Card of Parents",
-                "Residence Proof",
-                "Medical Fitness Certificate",
-                "Transfer Certificate (if applicable)"
-              ].map((doc, i) => (
-                <div key={i} className="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
-                  <div className="w-6 h-6 bg-rose-100 rounded-full flex items-center justify-center shrink-0">
-                    <CheckCircle className="w-4 h-4 text-rose-500" />
+                { title: "Child-centric curriculum matching the best in the world:", desc: "The environment at Dhwani Montessori Preschool & Daycare is child-centered, allowing children to progress at their own comfort. Lessons are delivered individually or in small groups, enabling teachers to understand each child's development and needs." },
+                { title: "International standard of Montessori education:", desc: "We strive to offer a learning environment based on the internationally renowned Montessori philosophy established by Dr. Maria Montessori. Our curriculum is sourced and researched globally and delivered through operational centers across Asia." },
+                { title: "Focus on holistic child development:", desc: "Dhwani is committed to ensuring love, compassion, and harmony, while fostering critical thinking and independence in every child." },
+                { title: "Supported by international Montessori experts:", desc: "Our team consists of passionate educators from esteemed institutions who utilize insights from recent research in educational neuroscience and child development to shape early years' education." },
+                { title: "Academically challenging and flexible curriculum:", desc: "The school provides a curriculum that is both challenging and adaptable to meet individual children's needs during these formative years." }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex gap-4"
+                >
+                  <div className="mt-1 shrink-0">
+                    <div className="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center">
+                      <Star className="w-3 h-3 text-indigo-500" fill="currentColor" />
+                    </div>
                   </div>
-                  <span className="text-slate-700 font-medium text-sm">{doc}</span>
-                </div>
+                  <div>
+                    <h3 className={`text-lg font-bold text-slate-800 mb-1 ${bodyFont.className}`}>{item.title}</h3>
+                    <p className="text-slate-600 leading-relaxed text-sm md:text-base">{item.desc}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
+
+            {/* Right side floating oval background */}
+            <div className="w-full lg:w-2/5 flex items-center justify-center mt-10 lg:mt-0 relative h-[400px]">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-tr from-sky-300 to-indigo-300 shadow-2xl opacity-60 m-auto"
+                animate={{
+                  borderRadius: ["40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%"]
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                style={{ width: '90%', height: '90%' }}
+              />
+              <motion.div
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 w-full h-full p-8"
+              >
+                <Image
+                  src={girlwithbook}
+                  alt="Girl learning"
+                  fill
+                  className="object-contain drop-shadow-2xl"
+                />
+              </motion.div>
+            </div>
           </div>
         </div>
-
-        {/* <div>girl</div> */}
-
       </section>
 
-
       {/* =========================================
-          SECTION 4: FACILITIES (Orange Theme)
+          NEW SECTION: GROUND RULES & HYGIENE
       ========================================= */}
-      {/* Reduced padding: pt-32 -> pt-28, pb-32 -> pb-24 */}
-      <section className="relative w-full bg-orange-100 pt-28 pb-24 overflow-hidden">
-
-        {/* Top Wave: White to mask the top of the orange section */}
-        <WaveSeparator position="top" color="text-white" />
-
-        <div className="absolute inset-0 pointer-events-none opacity-10 top-20">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,0 Q50,100 100,0" fill="none" stroke="#f97316" strokeWidth="0.5" strokeDasharray="2,2" />
-          </svg>
-        </div>
+      <section className="relative w-full bg-slate-50 pt-24 pb-32 overflow-hidden">
+        <ElegantEdge position="top" fillColor="#ffffff" />
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-8">
-            <h2 className={`text-4xl md:text-5xl font-black text-orange-900 mb-2 ${titleFont.className}`}>
-              Facilities
-            </h2>
-            <div className="w-24 h-2 bg-orange-300 rounded-full mx-auto mb-2"></div>
-            <p className="text-orange-800 text-lg">World-class amenities for your child and you.</p>
-          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {[
-              { title: "Safe Campus", icon: Camera },
-              { title: "Play Arena", icon: Rocket },
-              { title: "AC Rooms", icon: Wind },
-              { title: "Daycare", icon: Clock },
-              { title: "Montessori", icon: Shapes },
-              { title: "Library", icon: BookOpen },
-              { title: "Safe Interiors", icon: Armchair },
-              { title: "Trained Staff", icon: UserCheck },
-              { title: "Verification", icon: BadgeCheck },
-              { title: "Infrastructure", icon: Building2 },
-            ].map((item, index) => (
+          <div className="flex flex-col lg:flex-row-reverse gap-12 items-center mb-20">
+            <div className="w-full lg:w-3/5 space-y-6">
+              <h2 className={`text-3xl md:text-4xl font-bold text-slate-800 mb-6 ${titleFont.className}`}>
+                Established <span className="text-indigo-500">Ground Rules</span>
+              </h2>
+              <div className="space-y-4 text-slate-600 leading-relaxed">
+                <p>
+                  The Dhwani Montessori Preschool environment is child-centered, allowing children to progress at their own pace. Lessons are delivered individually or in small groups, enabling teachers to better understand each child's unique development. While we remain flexible to accommodate your needs within reasonable limits, some rules are firmly established to ensure the well-being of all children. For example, we have clear regulations governing operating hours and emergency procedures.
+                </p>
+                <p>
+                  We enforce a strict sick-child policy to prevent the spread of illness. Decisions about whether a child should attend class or stay home are made carefully to protect all children.
+                </p>
+                <p>
+                  Our open-door policy encourages parental involvement. We welcome you to join in activities, accompany field trips, and be an active part of our community.
+                </p>
+              </div>
+            </div>
+
+            <div className="w-full lg:w-2/5 flex items-center justify-center relative h-[350px]">
               <motion.div
-                key={index}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white rounded-3xl p-4 shadow-md text-center flex flex-col items-center gap-2 border-b-4 border-orange-200"
+                className="absolute inset-0 bg-gradient-to-tr from-rose-300 to-orange-300 shadow-2xl opacity-60 m-auto"
+                animate={{
+                  borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
+                }}
+                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                style={{ width: '90%', height: '90%' }}
+              />
+              <motion.div
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 w-full h-full p-6"
               >
-                <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                  <item.icon className="w-5 h-5 text-orange-600" />
-                </div>
-                <span className="font-bold text-slate-700 text-sm md:text-base leading-tight">
-                  {item.title}
-                </span>
+                <Image
+                  src={boywithelephant}
+                  alt="Boy playing"
+                  fill
+                  className="object-contain drop-shadow-2xl scale-110"
+                />
               </motion.div>
-            ))}
+            </div>
           </div>
+
+          {/* Cleanliness and Hygiene */}
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            <div className="w-full lg:w-3/5 space-y-6">
+              <h2 className={`text-3xl md:text-4xl font-bold text-slate-800 mb-6 ${titleFont.className}`}>
+                Cleanliness and <span className="text-teal-500">Hygiene</span>
+              </h2>
+              <div className="space-y-4 text-slate-600 leading-relaxed">
+                <p>
+                  At Dhwani Montessori, maintaining a clean and hygienic environment is our top priority. Our facilities are regularly sanitized, and we instill healthy habits in our children from an early age. The facility ensures that every part of the school is monitored via CCTV, ensuring the highest safety standards for your little ones.
+                </p>
+              </div>
+            </div>
+
+            <div className="w-full lg:w-2/5 flex items-center justify-center relative h-[300px]">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-tr from-teal-300 to-emerald-300 shadow-2xl opacity-60 m-auto"
+                animate={{
+                  borderRadius: ["40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%"]
+                }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                style={{ width: '90%', height: '90%' }}
+              />
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 w-full h-full p-4"
+              >
+                <Image
+                  src={girlonswing}
+                  alt="Girl on swing"
+                  fill
+                  className="object-contain drop-shadow-2xl scale-125 translate-y-4"
+                />
+              </motion.div>
+            </div>
+          </div>
+
         </div>
-
-        {/* Bottom Wave: Transitions to White */}
-        <WaveSeparator position="bottom" color="text-white" />
       </section>
-
-
-      {/* =========================================
-          SECTION 5: DOCUMENTS REQUIRED (White Theme)
-      ========================================= */}
-      {/* Reduced padding: py-20 -> py-12 */}
-
-      <Ctasection />
 
     </div>
   );
-};
+}

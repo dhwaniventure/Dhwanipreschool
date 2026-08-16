@@ -2,218 +2,226 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Cloud, Clock, Utensils, Heart, Sun } from "lucide-react";
+import {
+  BookOpen,
+  HeartPulse,
+  Share2,
+  ShieldCheck,
+  Heart,
+  GraduationCap
+} from "lucide-react";
 import Image from "next/image";
-// Using the boy image as it fits the Daycare theme well, replace if needed
-import childImage from "../public/boywithbrush.png"; 
-import { Titan_One, Nunito, Caveat } from 'next/font/google';
-import Link from "next/link";
+// Using the boy image as it fits the center image layout well
+import childImage from "../public/boywithbrush.png";
+import { Fredoka, Quicksand, Kalam } from 'next/font/google';
 
 // --- FONT CONFIGURATION ---
-const titleFont = Titan_One({ 
-  weight: '400', 
+const titleFont = Fredoka({
+  weight: ['500', '600', '700'],
   subsets: ['latin'],
   display: 'swap',
 });
 
-const bodyFont = Nunito({ 
+const bodyFont = Quicksand({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
-const handwritingFont = Caveat({
+const handwritingFont = Kalam({
   subsets: ['latin'],
   weight: ['400', '700'],
   display: 'swap',
 });
 
-const DayCareHero = () => {
+interface USPItemProps {
+  title: string;
+  text: string;
+  icon: React.ReactNode;
+  colorClass: string;
+  textColorClass: string;
+  align: 'left' | 'right';
+  delay: number;
+}
+
+const USPItem: React.FC<USPItemProps> = ({ title, text, icon, colorClass, textColorClass, align, delay }) => {
   return (
-    <section 
-      // CHANGED: Background color back to Amber theme
-      className={`relative w-full min-h-[700px] lg:h-[85vh] md:my-[4px] my-[10px] overflow-hidden bg-amber-50 flex items-center ${bodyFont.className}`}
+    <motion.div
+      initial={{ opacity: 0, x: align === 'left' ? -30 : 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay }}
+      className={`flex flex-col md:flex-row gap-5 ${align === 'right' ? 'md:flex-row-reverse text-center md:text-right' : 'text-center md:text-left'} items-center md:items-start`}
     >
-      
-      {/* --- TOP CLOUD WAVE --- */}
-      <div className="absolute top-0 left-0 w-full leading-none overflow-hidden z-30">
-        <svg 
-            className="relative block w-full h-[60px] md:h-[100px]" 
-            data-name="Layer 1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
-            preserveAspectRatio="none"
-        >
-            <path 
-                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-                className="fill-white"
-            ></path>
-        </svg>
+      <div className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center text-white ${colorClass} shadow-lg relative group cursor-pointer hover:scale-110 transition-transform duration-300`}>
+        {/* Inner white ring for styling */}
+        <div className="absolute inset-1 border-2 border-white/30 rounded-full"></div>
+        {icon}
       </div>
+      <div className="flex-1">
+        <h3 className={`text-2xl font-bold mb-3 ${textColorClass} ${titleFont.className}`}>
+          {title}
+        </h3>
 
-      {/* --- BACKGROUND DECORATIONS (Updated Colors) --- */}
-      <div className="absolute inset-0 pointer-events-none">
-         {/* 1. Large Amber Blob (Top Left) */}
-         <motion.div 
-           initial={{ scale: 0.8, opacity: 0 }}
-           animate={{ scale: 1, opacity: 1 }}
-           transition={{ duration: 1 }}
-           // CHANGED Color
-           className="absolute -top-20 -left-20 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl"
-        />
-        
-        {/* 2. Large Orange Blob (Middle Right) */}
-        <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            // CHANGED Color
-            className="absolute top-1/4 -right-20 w-80 h-80 bg-orange-300/20 rounded-full blur-3xl"
-        />
+        {/* Custom Underline */}
+        <div className={`w-12 h-1 bg-gradient-to-r from-slate-200 to-transparent mb-4 rounded-full ${align === 'right' ? 'md:ml-auto md:bg-gradient-to-l' : 'mx-auto md:mx-0'}`}></div>
 
-        {/* 3. Dotted Path Doodle (Updated Stroke Color) */}
-        <svg className="absolute top-10 left-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
-             {/* CHANGED stroke color */}
-             <path d="M0,10 Q30,40 60,10 T100,20" fill="none" stroke="#f59e0b" strokeWidth="0.3" strokeDasharray="1,1" />
-        </svg>
-
-        {/* 4. Floating Cloud/Sun Icon */}
-        <motion.div
-            className="absolute top-32 right-[20%] text-amber-300/80 hidden md:block"
-            animate={{y: [0, -20, 0], rotate: [0, 10, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        >
-            {/* Swapped Cloud for Sun for the Amber theme */}
-            <Sun size={64} fill="currentColor" className="drop-shadow-sm" />
-        </motion.div>
+        <p className="text-slate-600 text-sm md:text-base font-medium leading-relaxed">
+          {text}
+        </p>
       </div>
+    </motion.div>
+  );
+};
 
-      {/* --- FLOATING STICKERS --- */}
-      <motion.div 
-        animate={{ rotate: [0, 10, -10, 0], y: [0, -10, 0] }}
-        transition={{ duration: 5, repeat: Infinity }}
-        className="absolute top-[25%] left-[45%] hidden lg:block z-10"
+// --- REUSABLE EDGE COMPONENT ---
+const ElegantEdge = ({ position, fillColor = "#ffffff" }: { position: "top" | "bottom", fillColor?: string }) => {
+  return (
+    <div className={`absolute left-0 w-full overflow-hidden leading-none z-20 pointer-events-none ${position === "top" ? "top-0" : "bottom-0 rotate-180"}`}>
+      <svg
+        className="relative block w-[calc(100%+1.3px)] h-[50px] md:h-[90px] lg:h-[120px]"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
       >
-        {/* Changed Star color to match theme better */}
-        <Star className="w-10 h-10 text-orange-400 drop-shadow-md" fill="currentColor" strokeWidth={3} stroke="white" />
-      </motion.div>
+        <path
+          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+          style={{ fill: fillColor }}
+        ></path>
+      </svg>
+    </div>
+  );
+};
 
-      {/* --- CONTENT CONTAINER --- */}
-      <div className="container mx-auto px-6 relative z-20 h-full pt-32 pb-20 md:py-0">
-        <div className="flex flex-col md:flex-row items-center justify-between h-full">
-          
-          {/* LEFT: Text Content */}
-          <motion.div 
-            className="w-full md:w-1/2 text-center md:text-left flex flex-col items-center md:items-start z-30"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+const USPSection = () => {
+  return (
+    <section className={`py-24 relative overflow-hidden bg-[#F9F5FF] ${bodyFont.className}`}>
+      <ElegantEdge position="top" fillColor="#ffffff" />
+
+      {/* Background decorations */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-50 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-amber-50 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        {/* Header */}
+        <div className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            {/* Badge (Updated Colors) */}
-            {/* CHANGED text and border color */}
-            <span className={`inline-block px-4 py-1 mb-4 text-lg text-amber-600 bg-amber-100 rounded-full shadow-sm rotate-[-2deg] ${handwritingFont.className} font-bold border border-amber-200`}>
-                Safe, Engaging & Loving Care
-            </span>
-
-            {/* Headline (Updated Colors) */}
-            <h1 className={`${titleFont.className} leading-tight mb-6`}>
-              {/* CHANGED text color to slate-800 */}
-              <span className="block text-4xl md:text-6xl lg:text-7xl text-slate-800 drop-shadow-sm">
-                HOME AWAY
-              </span>
-              {/* CHANGED accent color to amber-500 */}
-              <span className="block text-4xl md:text-6xl lg:text-7xl text-amber-500 mt-2 relative">
-                From Home
-                {/* Underline decoration color changed */}
-                <svg className="absolute w-2/3 h-4 -bottom-2 left-0 md:left-0 right-0 md:right-auto mx-auto md:mx-0 text-orange-300" viewBox="0 0 100 10" preserveAspectRatio="none">
-                    <path d="M0,5 Q50,10 100,5" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-                </svg>
-              </span>
-            </h1>
-
-            {/* Tagline (Updated Color) */}
-            <p className="text-slate-600 text-lg md:text-xl font-medium mb-6 max-w-lg leading-relaxed">
-              Our Day Care program offers structured relaxation, nutritious snacks, and supervised play activities giving parents peace of mind.
-            </p>
-
-            {/* Feature Highlights */}
-            <div className="flex flex-wrap gap-4 mb-8 justify-center md:justify-start">
-               <div className="flex items-center gap-2 bg-white/80 border border-amber-100 px-3 py-1 rounded-full text-sm font-bold text-slate-700">
-                  <Clock size={16} className="text-amber-500" /> Flexible Hours
-               </div>
-               <div className="flex items-center gap-2 bg-white/80 border border-amber-100 px-3 py-1 rounded-full text-sm font-bold text-slate-700">
-                  <Utensils size={16} className="text-orange-500" /> Nutritious Meals
-               </div>
-               <div className="flex items-center gap-2 bg-white/80 border border-amber-100 px-3 py-1 rounded-full text-sm font-bold text-slate-700">
-                  <Heart size={16} className="text-rose-500" /> Loving Staff
-               </div>
-            </div>
-
-            {/* Buttons (Updated Colors) */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto font-bold">
-              <Link href="/contact">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    // CHANGED button colors to amber theme
-                    className="group relative inline-flex items-center justify-center bg-amber-500 text-white text-lg py-4 px-10 rounded-full shadow-[0_10px_20px_rgba(245,158,11,0.3)] hover:bg-amber-600 transition-all duration-300 overflow-hidden w-full sm:w-auto"
-                >
-                    <span className="relative z-10 flex items-center gap-2">
-                    Book a Visit
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                </motion.button>
-              </Link>
-
-           
+            <h2 className={`text-5xl md:text-6xl text-slate-800 font-bold mb-4 ${titleFont.className}`}>
+              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-rose-500">USP</span>
+            </h2>
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-12 h-0.5 bg-amber-400"></div>
+              <GraduationCap className="w-5 h-5 text-indigo-500" />
+              <div className="w-12 h-0.5 bg-amber-400"></div>
             </div>
           </motion.div>
+        </div>
 
-          {/* RIGHT: Image */}
-          <motion.div 
-            className="w-full md:w-1/2 flex justify-center md:justify-end mt-12 md:mt-0 relative z-20"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
-            transition={{ 
-                opacity: { duration: 0.8, delay: 0.3 },
-                x: { duration: 0.8, delay: 0.3 },
-                y: { duration: 6, repeat: Infinity, ease: "easeInOut" } // Float animation
-            }}
+        {/* 3-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
+
+          {/* Left Column (3 USPs) */}
+          <div className="flex flex-col gap-12 order-2 lg:order-1">
+            <USPItem
+              title="Montessori Environment"
+              text="The environment at our schools provides stimulating learning experiences designed to respond to each individual's unique characteristics and learning styles, helping them reach their full potential."
+              icon={<BookOpen size={28} />}
+              colorClass="bg-purple-400"
+              textColorClass="text-purple-500"
+              align="left"
+              delay={0.1}
+            />
+            <USPItem
+              title="Health & Hygiene"
+              text="We follow strict hygiene standards. Our schools maintain a high level of cleanliness, and every center adheres to standard protocols to ensure a clean environment and sanitary objects."
+              icon={<HeartPulse size={28} />}
+              colorClass="bg-emerald-400"
+              textColorClass="text-emerald-500"
+              align="left"
+              delay={0.3}
+            />
+            <USPItem
+              title="Different Approach"
+              text="With our unique teaching methods, children are encouraged to learn by touching, feeling, and doing. They gain a concrete understanding of materials, which fosters a sense of ownership and leadership."
+              icon={<Share2 size={28} />}
+              colorClass="bg-amber-400"
+              textColorClass="text-amber-500"
+              align="left"
+              delay={0.5}
+            />
+          </div>
+
+          {/* Center Column (Image) */}
+          <motion.div
+            className="flex justify-center items-center order-1 lg:order-2 relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, type: "spring" }}
           >
-              {/* Character Image container */}
-              <div className="relative w-[300px] h-[350px] md:w-[450px] md:h-[550px] lg:w-[600px] lg:h-[650px]">
-                 {/* Optional: Add a glowing blob behind the image matching the theme */}
-                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-amber-400/30 rounded-full blur-3xl -z-10"></div>
-                <Image
-                  src={childImage}
-                  alt="Happy child in daycare"
-                  fill
-                  className="object-contain object-bottom drop-shadow-2xl"
-                  priority
-                />
-              </div>
+            {/* Decorative morphing background behind image */}
+            <motion.div
+              className="absolute inset-0 bg-sky-100 rounded-full -z-10 opacity-70"
+              animate={{
+                borderRadius: ["40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%"]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              style={{ width: '80%', height: '80%', margin: 'auto' }}
+            />
+
+            <Image
+              src={childImage}
+              alt="Happy learning child"
+              className="object-contain drop-shadow-2xl z-10 w-3/4 lg:w-full max-w-sm"
+              priority
+            />
+
+            {/* Some floating decorative elements around image could go here */}
           </motion.div>
+
+          {/* Right Column (3 USPs) */}
+          <div className="flex flex-col gap-12 order-3 lg:order-3">
+            <USPItem
+              title="Safety & Security"
+              text="Given the tender age of our students, child safety and security are a top priority for us. Our services include 24-hour CCTV access, live GPS tracking, RFID installation, and robust security measures."
+              icon={<ShieldCheck size={28} />}
+              colorClass="bg-rose-500"
+              textColorClass="text-rose-500"
+              align="right"
+              delay={0.2}
+            />
+            <USPItem
+              title="Nurturing & Caring Environment"
+              text="Our students benefit from an engaging learning environment, intrinsically interesting materials, and age-appropriate developmental activities that enhance their creativity, thinking skills, and language abilities."
+              icon={<Heart size={28} />}
+              colorClass="bg-indigo-400"
+              textColorClass="text-indigo-500"
+              align="right"
+              delay={0.4}
+            />
+            <USPItem
+              title="Well Qualified Teachers"
+              text="Our teachers are highly qualified and receive ongoing training, workshops, and assessments to ensure their proficiency. This enables them to handle challenges effectively and provide necessary expertise."
+              icon={<GraduationCap size={28} />}
+              colorClass="bg-sky-400"
+              textColorClass="text-sky-500"
+              align="right"
+              delay={0.6}
+            />
+          </div>
+
         </div>
       </div>
 
-      {/* --- BOTTOM CLOUD WAVE (Flipped) --- */}
-      <div className="absolute bottom-0 left-0 w-full leading-none rotate-180 overflow-hidden z-30">
-        <svg 
-            className="relative block w-full h-[60px] md:h-[100px]" 
-            data-name="Layer 1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
-            preserveAspectRatio="none"
-        >
-            <path 
-                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-                className="fill-white"
-            ></path>
-        </svg>
-      </div>
-
+      <ElegantEdge position="bottom" />
     </section>
   );
 };
 
-export default DayCareHero;
+export default USPSection;
