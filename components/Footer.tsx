@@ -187,7 +187,7 @@ const Footer = () => {
                   <Mail className="w-5 h-5" />
                 </div>
                 <a href="mailto:info@littledreamersatcambridge.com" className={`font-bold text-slate-600 group-hover:text-rose-500 transition-colors truncate w-[200px] ${bodyFont.className}`}>
-                  info@littledreamers.com
+                  dhwanipreschool.com
                 </a>
               </li>
 
