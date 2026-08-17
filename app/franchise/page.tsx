@@ -76,9 +76,9 @@ export default function Page() {
 
   return (
     <div className="bg-neutral-950">
-      {/* < FranchisePage onHandleSubmit={onHandleSubmit} 
-                defaultFranchise={defaultFranchise} 
-                isLoading={isLoading} /> */}
+      < FranchisePage onHandleSubmit={onHandleSubmit}
+        defaultFranchise={defaultFranchise}
+        isLoading={isLoading} />
     </div>
   );
 }

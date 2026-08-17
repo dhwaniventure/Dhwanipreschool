@@ -12,6 +12,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Titan_One, Nunito, Caveat } from 'next/font/google';
 import logo from "../../public/logo.png";
+import logonew from "../../public/logohorizontal.png"
 
 // --- FONTS ---
 const titleFont = Titan_One({ weight: '400', subsets: ['latin'] });
@@ -103,12 +104,12 @@ const Navbar = () => {
       >
         {/* --- LOGO --- */}
         <Link href="/" className="flex items-center shrink-0">
-          <div className={`relative transition-all duration-300 ease-in-out hover:rotate-2 ${scrolled ? 'w-[120px] md:w-[150px]' : 'w-[180px] md:w-[240px]'}`}>
+          <div className={`relative transition-all duration-300 ease-in-out hover:rotate-2 ${scrolled ? 'w-[120px] md:w-[180px]' : 'w-[180px] md:w-[200px]'}`}>
             <Image
-              src={logo}
+              src={logonew}
               width={240}
               height={240}
-              alt="Little Dreamers Logo"
+              alt="Dhwani Cambridge Logo"
               className="object-contain w-full h-auto"
               priority
             />
@@ -116,12 +117,12 @@ const Navbar = () => {
         </Link>
 
         {/* --- DESKTOP MENU --- */}
-        <div className="hidden xl:flex items-end justify-center flex-1 ml-10">
+        <div className="hidden py-2 xl:flex items-end justify-center flex-1 ml-10">
           {navLinks.map((link, i) => {
             const isActive = hoveredLink === link.href || pathname === link.href || (pathname === "/" && activeSection === link.href);
 
             return (
-              <div key={link.href} className="flex px-2 items-end">
+              <div key={link.href} className="flex px-4 items-end">
                 <Link
                   href={link.href}
                   onMouseEnter={() => setHoveredLink(link.href)}
@@ -129,8 +130,8 @@ const Navbar = () => {
                   className="flex flex-col items-center group relative px-1"
                 >
                   {/* Icon in Circle */}
-                  <div className={`rounded-full border-2 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-1 mb-1 bg-white ${link.colorCls} ${scrolled ? 'w-8 h-8' : 'w-11 h-11'}`}>
-                    <link.icon className={`transition-all duration-300 ${scrolled ? 'w-4 h-4' : 'w-5 h-5'}`} />
+                  <div className={`rounded-full border-2 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-1 mb-1 bg-white ${link.colorCls} ${scrolled ? 'w-12 h-12' : 'w-14 h-14'}`}>
+                    <link.icon className={`transition-all duration-300 ${scrolled ? 'w-5 h-5' : 'w-6 h-6'}`} />
                   </div>
 
                   {/* Text Label */}
@@ -142,7 +143,7 @@ const Navbar = () => {
 
                 {/* Vertical Separator */}
                 {i < navLinks.length - 1 && (
-                  <span className={`text-slate-300 mx-2 transition-all duration-300 ${scrolled ? 'text-xs mb-[2px]' : 'text-sm mb-0.5'}`}>|</span>
+                  <span className={`text-slate-300 ml-4 transition-all duration-300 ${scrolled ? 'text-xs mb-[2px]' : 'text-sm mb-0.5'}`}>|</span>
                 )}
               </div>
             );
@@ -155,9 +156,9 @@ const Navbar = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`bg-rose-500 hover:bg-rose-600 text-white rounded-full shadow-md shadow-rose-200 flex items-center gap-1.5 font-bold transition-all ${bodyFont.className} ${scrolled ? 'px-4 py-1.5 text-xs' : 'px-5 py-2 text-sm'}`}
+              className={`bg-rose-500 hover:bg-rose-600 text-white rounded-full shadow-md shadow-rose-200 flex items-center gap-1.5 font-bold transition-all ${bodyFont.className} ${scrolled ? 'px-8 py-3 text-xs' : 'px-10 py-4 text-sm'}`}
             >
-              Enroll <ArrowRight className={scrolled ? 'w-3 h-3' : 'w-4 h-4'} />
+              Enroll <ArrowRight className={scrolled ? 'w-6 h-6' : 'w-5 h-5'} />
             </motion.button>
           </Link>
 
@@ -195,8 +196,8 @@ const Navbar = () => {
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={`flex items-center gap-4 px-4 py-3 rounded-xl text-lg font-bold transition-all ${bodyFont.className} ${isActive
-                          ? "text-rose-500 bg-rose-50"
-                          : "text-slate-600 hover:bg-slate-50"
+                        ? "text-rose-500 bg-rose-50"
+                        : "text-slate-600 hover:bg-slate-50"
                         }`}
                     >
                       <div className={`p-2 rounded-full border-2 ${link.colorCls}`}>

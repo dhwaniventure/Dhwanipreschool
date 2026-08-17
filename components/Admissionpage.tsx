@@ -17,22 +17,6 @@ import {
   Phone,
   MessageSquare,
   Send,
-  FileText,
-  CalendarCheck,
-  School,
-  CheckCircle,
-  Baby,
-  Smile,
-  BookOpen,
-  GraduationCap,
-  Camera,     // CCTV
-  Rocket,     // Play Arena
-  Wind,       // AC
-  Clock,      // Daycare
-  Shapes,     // Montessori
-  Armchair,   // Interiors
-  UserCheck,  // Trained Staff
-  BadgeCheck, // Verification
   Building2,  // Infrastructure
   ChevronRight,
   Loader2,    // Added for loading state
