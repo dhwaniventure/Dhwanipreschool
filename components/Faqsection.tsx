@@ -2,15 +2,15 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Plus, 
-  Minus, 
-  Baby, 
-  BookOpen, 
-  ShieldCheck, 
-  Clock, 
-  Sparkles, 
-  MessageCircle, 
+import {
+  Plus,
+  Minus,
+  Baby,
+  BookOpen,
+  ShieldCheck,
+  Clock,
+  Sparkles,
+  MessageCircle,
   Search,
   School,
   Smile,
@@ -21,13 +21,13 @@ import {
 import { Titan_One, Nunito } from 'next/font/google';
 
 // --- FONTS ---
-const titleFont = Titan_One({ 
-  weight: '400', 
+const titleFont = Titan_One({
+  weight: '400',
   subsets: ['latin'],
   display: 'swap',
 });
 
-const bodyFont = Nunito({ 
+const bodyFont = Nunito({
   subsets: ['latin'],
   weight: ['400', '600', '700', '800'],
   display: 'swap',
@@ -95,7 +95,7 @@ const faqData = [
     icon: Calendar
   },
   {
-    question: "What makes Little Dreamers different?",
+    question: "What makes Dhwani Cambridge Montessori  different?",
     answer: "Our child-centric approach, safe environment, trained educators, engaging curriculum, and strong parent partnership make us a trusted choice.",
     icon: HelpCircle
   },
@@ -109,25 +109,25 @@ const faqData = [
 // --- STYLES HELPER ---
 const getThemeStyles = (color: ThemeColor) => {
   const styles = {
-    rose:   { border: 'border-rose-200', activeBorder: 'border-rose-400', bg: 'bg-rose-50', text: 'text-rose-700', icon: 'text-rose-500' },
-    sky:    { border: 'border-sky-200', activeBorder: 'border-sky-400', bg: 'bg-sky-50', text: 'text-sky-700', icon: 'text-sky-500' },
+    rose: { border: 'border-rose-200', activeBorder: 'border-rose-400', bg: 'bg-rose-50', text: 'text-rose-700', icon: 'text-rose-500' },
+    sky: { border: 'border-sky-200', activeBorder: 'border-sky-400', bg: 'bg-sky-50', text: 'text-sky-700', icon: 'text-sky-500' },
     purple: { border: 'border-purple-200', activeBorder: 'border-purple-400', bg: 'bg-purple-50', text: 'text-purple-700', icon: 'text-purple-500' },
-    teal:   { border: 'border-teal-200', activeBorder: 'border-teal-400', bg: 'bg-teal-50', text: 'text-teal-700', icon: 'text-teal-500' },
-    amber:  { border: 'border-amber-200', activeBorder: 'border-amber-400', bg: 'bg-amber-50', text: 'text-amber-700', icon: 'text-amber-500' },
+    teal: { border: 'border-teal-200', activeBorder: 'border-teal-400', bg: 'bg-teal-50', text: 'text-teal-700', icon: 'text-teal-500' },
+    amber: { border: 'border-amber-200', activeBorder: 'border-amber-400', bg: 'bg-amber-50', text: 'text-amber-700', icon: 'text-amber-500' },
   };
   return styles[color];
 };
 
 // --- FAQ ITEM COMPONENT ---
 const FAQItem = ({ item, index, isOpen, onClick }: { item: any, index: number, isOpen: boolean, onClick: () => void }) => {
-  
+
   // FIX: Added "|| 'rose'" to ensure undefined is never passed to getThemeStyles
   const themeKey: ThemeColor = themeColors[index % themeColors.length] || 'rose';
-  
+
   const theme = getThemeStyles(themeKey);
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -137,7 +137,7 @@ const FAQItem = ({ item, index, isOpen, onClick }: { item: any, index: number, i
         ${isOpen ? `${theme.activeBorder} shadow-lg` : `${theme.border} shadow-sm hover:shadow-md`}
       `}
     >
-      <button 
+      <button
         onClick={onClick}
         className={`w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none ${isOpen ? theme.bg : 'bg-white'}`}
       >
@@ -146,22 +146,22 @@ const FAQItem = ({ item, index, isOpen, onClick }: { item: any, index: number, i
              hidden md:flex w-10 h-10 rounded-full items-center justify-center shrink-0 
              ${isOpen ? 'bg-white' : theme.bg}
           `}>
-             <item.icon className={`w-5 h-5 ${theme.icon}`} />
+            <item.icon className={`w-5 h-5 ${theme.icon}`} />
           </div>
           <span className={`text-lg md:text-xl font-bold ${isOpen ? theme.text : 'text-slate-700'}`}>
             {item.question}
           </span>
         </div>
-        
+
         <div className={`
           w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300
           ${isOpen ? 'bg-white rotate-180' : `${theme.bg} rotate-0`}
         `}>
-           {isOpen ? (
-             <Minus className={`w-5 h-5 ${theme.icon}`} />
-           ) : (
-             <Plus className={`w-5 h-5 ${theme.icon}`} />
-           )}
+          {isOpen ? (
+            <Minus className={`w-5 h-5 ${theme.icon}`} />
+          ) : (
+            <Plus className={`w-5 h-5 ${theme.icon}`} />
+          )}
         </div>
       </button>
 
@@ -175,9 +175,9 @@ const FAQItem = ({ item, index, isOpen, onClick }: { item: any, index: number, i
             className="overflow-hidden"
           >
             <div className={`p-6 pt-0 ${theme.bg}`}>
-               <p className="text-slate-600 font-semibold leading-relaxed ml-0 md:ml-14 border-t border-slate-200/50 pt-4">
-                 {item.answer}
-               </p>
+              <p className="text-slate-600 font-semibold leading-relaxed ml-0 md:ml-14 border-t border-slate-200/50 pt-4">
+                {item.answer}
+              </p>
             </div>
           </motion.div>
         )}
@@ -196,7 +196,7 @@ const FaqSection: React.FC = () => {
 
   return (
     <section className={`w-full py-20 bg-white relative overflow-hidden ${bodyFont.className}`}>
-      
+
       {/* Background Doodles */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30">
         <div className="absolute top-20 right-10 w-32 h-32 bg-yellow-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" />
@@ -204,28 +204,28 @@ const FaqSection: React.FC = () => {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        
+
         <div className="text-center mb-12">
-           <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-           >
-             <h2 className={`text-4xl md:text-6xl uppercase leading-tight ${titleFont.className} text-slate-800`}>
-               Parent <span className="text-rose-500">FAQs</span>
-             </h2>
-             <p className="text-slate-500 text-lg mt-3 font-bold">
-               Answers to your most common questions
-             </p>
-           </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className={`text-4xl md:text-6xl uppercase leading-tight ${titleFont.className} text-slate-800`}>
+              Parent <span className="text-rose-500">FAQs</span>
+            </h2>
+            <p className="text-slate-500 text-lg mt-3 font-bold">
+              Answers to your most common questions
+            </p>
+          </motion.div>
         </div>
 
         <div className="flex flex-col">
           {faqData.map((item, index) => (
-            <FAQItem 
-              key={index} 
-              item={item} 
-              index={index} 
+            <FAQItem
+              key={index}
+              item={item}
+              index={index}
               isOpen={openIndex === index}
               onClick={() => toggleFAQ(index)}
             />
