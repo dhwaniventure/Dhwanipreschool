@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import FranchisePage from "@/components/Franchiseform";
 export default function Page() {
   const router = useRouter();
-  
+
   // 2. Add loading state
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,12 +27,12 @@ export default function Page() {
         action: {
           label: "Try Again",
           onClick: () => {
-            router.push("/"); 
+            router.push("/");
           },
         },
       });
       setIsLoading(false); // Stop loading if validation fails
-      return; 
+      return;
     }
 
     try {
@@ -76,9 +76,9 @@ export default function Page() {
 
   return (
     <div className="bg-neutral-950">
-      < FranchisePage onHandleSubmit={onHandleSubmit} 
+      {/* < FranchisePage onHandleSubmit={onHandleSubmit} 
                 defaultFranchise={defaultFranchise} 
-                isLoading={isLoading} />
+                isLoading={isLoading} /> */}
     </div>
   );
 }
