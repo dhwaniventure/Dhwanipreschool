@@ -164,7 +164,6 @@ const ElegantEdge = ({ position, fillColor = "#ffffff" }: { position: "top" | "b
 const DetailedInfo: React.FC = () => {
   return (
     <section id='detailed-info' className={`pt-28 pb-40 relative bg-[#FDFBF7] overflow-hidden ${bodyFont.className}`}>
-      <ElegantEdge position="top" fillColor="#ffffff" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -196,7 +195,7 @@ const DetailedInfo: React.FC = () => {
 
             return (
               <div key={section.id} className="flex flex-col md:flex-row items-center gap-12 lg:gap-24">
-                
+
                 {/* Image Section */}
                 <motion.div
                   initial={{ opacity: 0, x: isEven ? 50 : -50 }}
@@ -246,7 +245,7 @@ const DetailedInfo: React.FC = () => {
                   <h3 className={`text-4xl md:text-5xl ${titleFont.className} text-slate-800 font-bold mb-4`}>
                     {section.subtitle}
                   </h3>
-                  
+
                   <div className={`w-20 h-1.5 bg-gradient-to-r from-slate-200 to-transparent mb-8 rounded-full mx-auto md:mx-0 ${isEven ? 'md:bg-gradient-to-l' : ''}`}></div>
 
                   <p className="text-slate-700 text-lg md:text-xl leading-relaxed font-bold mb-6">
@@ -269,7 +268,7 @@ const DetailedInfo: React.FC = () => {
 
       </div>
 
-      <ElegantEdge position="bottom" fillColor="#ffffff" />
+      <ElegantEdge position="bottom" fillColor="#EEF2FF" />
     </section>
   );
 };

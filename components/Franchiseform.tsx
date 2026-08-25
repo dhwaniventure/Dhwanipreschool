@@ -5,12 +5,12 @@ import { useForm } from "react-hook-form";
 import { FranchiseFormSchemaType } from "@/lib/schema";
 import { IFranchiseDetail } from "@/lib/types";
 import Image from "next/image";
-import { 
+import {
   Home,
-  User, 
-  Mail, 
-  Phone, 
-  Building2, 
+  User,
+  Mail,
+  Phone,
+  Building2,
   ChevronRight,
   Send,
   Loader2,
@@ -81,7 +81,7 @@ const FranchiseHeader = () => {
 
   return (
     <header className="relative w-full h-[60vh] md:h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden pt-20 md:pt-28 pb-32 md:py-0">
-      
+
       {/* --- BACKGROUND CAROUSEL --- */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="popLayout">
@@ -109,7 +109,7 @@ const FranchiseHeader = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-4xl px-6 flex flex-col items-center justify-center text-center">
-        
+
         {/* Logo */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
@@ -139,7 +139,7 @@ const FranchiseHeader = () => {
           <span className="text-white font-bold text-sm">Franchise</span>
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
@@ -147,8 +147,8 @@ const FranchiseHeader = () => {
         >
           Partner With <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300">Success</span>
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -208,15 +208,14 @@ export default function FranchisePage({
 
   return (
     <div className={`w-full flex flex-col ${bodyFont.className}`}>
-      
+
       <FranchiseHeader />
 
       {/* =========================================
           SECTION 1: FRANCHISE FORM (Modern Glassmorphism)
       ========================================= */}
       <section className="relative w-full bg-emerald-50 pt-16 pb-32 overflow-hidden">
-        <ElegantEdge position="top" fillColor="#f8fafc" />
-        
+
         {/* Background Blobs */}
         <div className="absolute bottom-20 right-0 w-[500px] h-[500px] bg-teal-200/40 rounded-full blur-[100px] pointer-events-none translate-y-1/3 translate-x-1/3"></div>
 
@@ -238,11 +237,11 @@ export default function FranchisePage({
             className="max-w-4xl mx-auto bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-white relative"
           >
             <div className="absolute -top-10 -right-6 w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center animate-bounce-slow shadow-sm border-4 border-white">
-               <Briefcase className="w-8 h-8 text-emerald-600" />
+              <Briefcase className="w-8 h-8 text-emerald-600" />
             </div>
 
             <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-              
+
               {/* Name */}
               <div className="flex flex-col gap-2">
                 <label className="font-bold text-slate-700 text-sm tracking-wide">Full Name <span className="text-red-500">*</span></label>
@@ -366,7 +365,7 @@ export default function FranchisePage({
       ========================================= */}
       <section className="relative w-full bg-white py-24 overflow-hidden">
         <ElegantEdge position="top" fillColor="#ecfdf5" />
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16 mt-8">
             <h2 className={`text-4xl md:text-5xl font-bold text-slate-800 mb-4 ${titleFont.className}`}>
@@ -396,7 +395,7 @@ export default function FranchisePage({
                 </div>
               </div>
             </div>
-            
+
             <div className="w-full lg:w-1/2 flex items-center justify-center relative h-[400px]">
               <motion.div
                 className="absolute inset-0 bg-gradient-to-tr from-emerald-300 to-teal-300 shadow-2xl opacity-60 m-auto"
@@ -407,9 +406,9 @@ export default function FranchisePage({
                 style={{ width: '90%', height: '90%' }}
               />
               <div className="relative z-10 w-full h-full p-8 flex items-center justify-center">
-                 <div className="w-full max-w-sm aspect-square bg-white/40 backdrop-blur-sm rounded-3xl border border-white/50 shadow-xl flex items-center justify-center">
-                    <TrendingUp className="w-32 h-32 text-emerald-600 opacity-80" />
-                 </div>
+                <div className="w-full max-w-sm aspect-square bg-white/40 backdrop-blur-sm rounded-3xl border border-white/50 shadow-xl flex items-center justify-center">
+                  <TrendingUp className="w-32 h-32 text-emerald-600 opacity-80" />
+                </div>
               </div>
             </div>
           </div>
@@ -421,7 +420,7 @@ export default function FranchisePage({
       ========================================= */}
       <section className="relative w-full bg-slate-50 py-24 overflow-hidden">
         <ElegantEdge position="top" fillColor="#ffffff" />
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16 mt-8">
             <h2 className={`text-4xl md:text-5xl font-bold text-slate-800 mb-4 ${titleFont.className}`}>
@@ -463,10 +462,10 @@ export default function FranchisePage({
       ========================================= */}
       <section className="relative w-full bg-white py-24 overflow-hidden">
         <ElegantEdge position="top" fillColor="#f8fafc" />
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col lg:flex-row-reverse gap-12 items-center">
-            
+
             <div className="w-full lg:w-1/2 space-y-6">
               <h2 className={`text-4xl md:text-5xl font-bold text-slate-800 mb-6 ${titleFont.className}`}>
                 Franchise <span className="text-teal-500">Requirements</span>
@@ -502,10 +501,10 @@ export default function FranchisePage({
                 transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
                 style={{ width: '90%', height: '90%' }}
               />
-               <div className="relative z-10 w-full h-full p-8 flex items-center justify-center">
-                 <div className="w-full max-w-sm aspect-square bg-white/40 backdrop-blur-sm rounded-3xl border border-white/50 shadow-xl flex items-center justify-center">
-                    <Building2 className="w-32 h-32 text-teal-600 opacity-80" />
-                 </div>
+              <div className="relative z-10 w-full h-full p-8 flex items-center justify-center">
+                <div className="w-full max-w-sm aspect-square bg-white/40 backdrop-blur-sm rounded-3xl border border-white/50 shadow-xl flex items-center justify-center">
+                  <Building2 className="w-32 h-32 text-teal-600 opacity-80" />
+                </div>
               </div>
             </div>
 
@@ -516,9 +515,9 @@ export default function FranchisePage({
       {/* =========================================
           SECTION 5: DOWNLOAD BROCHURES
       ========================================= */}
-      <section className="relative w-full bg-emerald-50 py-24 overflow-hidden">
+      <section className="relative w-full bg-indigo-50 py-24 overflow-hidden">
         <ElegantEdge position="top" fillColor="#ffffff" />
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16 mt-8">
             <h2 className={`text-4xl md:text-5xl font-bold text-slate-800 mb-4 ${titleFont.className}`}>
@@ -531,22 +530,22 @@ export default function FranchisePage({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Brochure 1 */}
-            <motion.div 
+            <motion.div
               whileHover={{ y: -5 }}
               className="bg-white rounded-[2rem] p-6 shadow-lg border border-emerald-100 flex flex-col items-center text-center group"
             >
               <div className="w-32 h-40 bg-emerald-100 rounded-xl mb-6 flex items-center justify-center shadow-inner relative overflow-hidden group-hover:shadow-emerald-200/50 transition-all">
-                 <FileText className="w-16 h-16 text-emerald-400 opacity-50 absolute" />
-                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-emerald-500/10"></div>
-                 <div className="relative z-10 bg-white p-2 rounded-lg shadow-sm">
-                    <FileText className="w-10 h-10 text-emerald-600" />
-                 </div>
+                <FileText className="w-16 h-16 text-emerald-400 opacity-50 absolute" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-emerald-500/10"></div>
+                <div className="relative z-10 bg-white p-2 rounded-lg shadow-sm">
+                  <FileText className="w-10 h-10 text-emerald-600" />
+                </div>
               </div>
               <h3 className={`text-xl font-bold text-slate-800 mb-2 ${bodyFont.className}`}>Franchise Prospectus</h3>
               <p className="text-slate-500 text-sm mb-6">Complete guide covering investment, returns, and support structure.</p>
-              
-              <a 
-                href="/brochures/franchise-prospectus.pdf" 
+
+              <a
+                href="/brochures/franchise-prospectus.pdf"
                 download
                 className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 text-white font-bold rounded-xl hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg w-full justify-center"
               >
@@ -556,22 +555,22 @@ export default function FranchisePage({
             </motion.div>
 
             {/* Brochure 2 */}
-            <motion.div 
+            <motion.div
               whileHover={{ y: -5 }}
               className="bg-white rounded-[2rem] p-6 shadow-lg border border-teal-100 flex flex-col items-center text-center group"
             >
               <div className="w-32 h-40 bg-teal-100 rounded-xl mb-6 flex items-center justify-center shadow-inner relative overflow-hidden group-hover:shadow-teal-200/50 transition-all">
-                 <FileText className="w-16 h-16 text-teal-400 opacity-50 absolute" />
-                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-teal-500/10"></div>
-                 <div className="relative z-10 bg-white p-2 rounded-lg shadow-sm">
-                    <FileText className="w-10 h-10 text-teal-600" />
-                 </div>
+                <FileText className="w-16 h-16 text-teal-400 opacity-50 absolute" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-teal-500/10"></div>
+                <div className="relative z-10 bg-white p-2 rounded-lg shadow-sm">
+                  <FileText className="w-10 h-10 text-teal-600" />
+                </div>
               </div>
               <h3 className={`text-xl font-bold text-slate-800 mb-2 ${bodyFont.className}`}>Curriculum Overview</h3>
               <p className="text-slate-500 text-sm mb-6">Explore our international standard Montessori curriculum details.</p>
-              
-              <a 
-                href="/brochures/curriculum-overview.pdf" 
+
+              <a
+                href="/brochures/curriculum-overview.pdf"
                 download
                 className="inline-flex items-center gap-2 px-6 py-3 bg-teal-500 text-white font-bold rounded-xl hover:bg-teal-600 transition-colors shadow-md hover:shadow-lg w-full justify-center"
               >

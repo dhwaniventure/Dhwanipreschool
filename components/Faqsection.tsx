@@ -175,7 +175,7 @@ const FaqSection: React.FC = () => {
   };
 
   return (
-    <section className={`w-full py-20 bg-white relative overflow-hidden ${bodyFont.className}`}>
+    <section className={`w-full py-20 bg-indigo-50 relative overflow-hidden ${bodyFont.className}`}>
 
       {/* Background Doodles */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30">

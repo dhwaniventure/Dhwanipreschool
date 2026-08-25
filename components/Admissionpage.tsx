@@ -356,7 +356,7 @@ export default function AdmissionPage({
       {/* =========================================
           NEW SECTION: GROUND RULES & HYGIENE
       ========================================= */}
-      <section className="relative w-full bg-slate-50 pt-24 pb-32 overflow-hidden">
+      <section className="relative w-full bg-indigo-50 pt-24 pb-32 overflow-hidden">
         <ElegantEdge position="top" fillColor="#ffffff" />
 
         <div className="container mx-auto px-6 relative z-10">

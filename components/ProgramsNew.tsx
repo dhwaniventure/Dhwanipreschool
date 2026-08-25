@@ -179,10 +179,10 @@ const ProgramSection: React.FC = () => {
 
   return (
     <section id='programs' className={`pt-28 pb-40 relative bg-white overflow-hidden ${bodyFont.className}`}>
-      <ElegantEdge position="top" fillColor="#FDF8F5" />
+      <ElegantEdge position="top" fillColor="#FDFBF7" />
 
       {/* Decorative Background Blurs */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-amber-200/30 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
+      <div className="absolute bottom-140 right-0 w-[600px] h-[600px] bg-amber-200/30 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/8"></div>
       <div className="absolute bottom-60 left-0 w-[600px] h-[600px] bg-sky-200/30 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/3"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

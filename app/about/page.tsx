@@ -11,7 +11,7 @@ import boysitting from "../../public/boysitting.png";
 import girlwithbook from "../../public/girlwithbook 1.svg";
 import boywithelephant from "../../public/boywithelephent.png";
 import girlonswing from "../../public/girlonwing.png";
-import boywithcup from "../../public/boywithcup.png"; 
+import boywithcup from "../../public/boywithcup.png";
 import girlfaceonly from "../../public/girlfaceonly.png";
 import boywithbrush from "../../public/boywithbrush.png";
 
@@ -251,7 +251,7 @@ const AboutUsSegmented: React.FC = () => {
 
             <div className="container mx-auto px-6 relative z-10 pt-10">
               <div className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 items-center`}>
-                
+
                 {/* TEXT SIDE */}
                 <div className="w-full lg:w-1/2 space-y-6">
                   <h2 className={`text-3xl md:text-4xl font-bold text-slate-800 mb-6 ${titleFont.className}`}>
@@ -267,7 +267,7 @@ const AboutUsSegmented: React.FC = () => {
                   <motion.div
                     className={`absolute inset-0 bg-gradient-to-tr ${section.blobColor} shadow-2xl opacity-40 m-auto`}
                     animate={{
-                      borderRadius: isEven 
+                      borderRadius: isEven
                         ? ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
                         : ["40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%"]
                     }}
@@ -313,7 +313,7 @@ const AboutUsSegmented: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programs.map((prog, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

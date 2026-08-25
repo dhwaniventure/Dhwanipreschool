@@ -220,7 +220,7 @@ const USPSection = () => {
         </div>
       </div>
 
-      <ElegantEdge position="bottom" />
+      <ElegantEdge position="bottom" fillColor="#FDFBF7" />
     </section>
   );
 };
