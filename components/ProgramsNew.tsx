@@ -4,10 +4,15 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, GraduationCap } from 'lucide-react';
 import { Fredoka, Quicksand, Kalam } from 'next/font/google';
-import boywithcup from "../public/boywithcup.png";
-import girlwithbook from "../public/girlwithbook 1.svg"
-import boywithelephant from "../public/boywithelephent.png"
-import girlonswing from "../public/girlonwing.png"
+
+import boywithbrush from "../public/boywithbrush.png";
+import girlwithbook from "../public/girlwithbook.png";
+import boywithelephant from "../public/boywithelephent.png";
+import gitlsandboysitting from "../public/gitlsandboysitting.png";
+import singlecheerfullbaby from "../public/singlecheerfullbaby.png";
+import foldedhandsboy from "../public/foldedhandsboy.png";
+import mainimage from "../public/mainimage.png";
+
 import Image from 'next/image';
 
 // --- TYPES & INTERFACES ---
@@ -55,72 +60,82 @@ const handwritingFont = Kalam({
 const programs: Program[] = [
   {
     id: 1,
-    title: "Little Explorers",
-    subtitle: "Play Group (2–3 Years)",
-    description: "At Little Dreamers, our Little Explorers begin their joyful learning journey through play and imagination.",
-    fullDescription: "Activities are thoughtfully designed to build sensory awareness, strengthen motor skills, and encourage social interaction. Children model their peers, recite rhymes and stories in a fun way, and gradually settle into the group.",
+    title: "Little Minds",
+    subtitle: "1-2 Years",
+    description: "An enriching toddler programme that fosters early learning through exploration, discovery, and meaningful interactions.",
+    fullDescription: "Designed to promote language development, sensory integration, and motor coordination. Our Montessori-trained facilitators create a welcoming environment where toddlers develop confidence, independence, and essential life skills through structured and free-play experiences.",
     theme: "rose",
-    image: boywithcup,
-    ids: "#explorers"
+    image: singlecheerfullbaby,
+    ids: "#littleminds"
   },
   {
     id: 2,
-    title: "Curious Learners",
-    subtitle: "Nursery (3–4 Years)",
-    description: "Our Curious Learners explore the world of colors, numbers, and letters through fun, interactive activities.",
-    fullDescription: "This stage builds imagination, communication, and growing independence. Children learn to observe and question. The thoughtfully planned school environment provides opportunities for developing basic motor skills, sensory and perceptual growth, and language acquisition.",
+    title: "Little Steps with Mommy",
+    subtitle: "Mom & Me Programme",
+    description: "A special journey of learning and bonding for mothers and their toddlers.",
+    fullDescription: "Through fun-filled activities, music, movement, storytelling, and sensory experiences, children explore the world while mothers actively participate. It helps parents understand developmental stages and provides guidance on supporting learning at home.",
     theme: "sky",
-    image: girlwithbook,
-    ids: "learners"
+    image: gitlsandboysitting,
+    ids: "littlesteps"
   },
   {
     id: 3,
-    title: "Creative Thinkers",
-    subtitle: "LKG (4–5 Years)",
-    description: "Children strengthen early academic skills while exploring creativity, imagination, and expression.",
-    fullDescription: "Through phonics, storytelling, art, and group play, they build confidence to think creatively. Our trained and caring teachers help children adjust, supporting them as they experience their first interactions with other children and learn to participate in a cooperative group.",
+    title: "Curious Minds",
+    subtitle: "Playgroup (2–3 Years)",
+    description: "An enriching Montessori experience within a thoughtfully prepared environment.",
+    fullDescription: "Children explore, question, and learn at their own pace. The curriculum integrates practical life activities, language development, early numeracy, and nature-based learning to enhance motor coordination, problem-solving, and social awareness.",
     theme: "purple",
-    image: boywithelephant,
-    ids: "thinkers"
+    image: girlwithbook,
+    ids: "curiousminds"
   },
   {
     id: 4,
-    title: "Future Leaders",
-    subtitle: "UKG (5–6 Years)",
-    description: "Prepares children for formal schooling by building a strong foundation in academics and life skills.",
-    fullDescription: "With structured learning in language, math, and environmental studies, children develop clarity. The focus is on meeting every child's needs through developmentally appropriate learning practices.",
+    title: "Emerging Learners",
+    subtitle: "Nursery (3–4 Years)",
+    description: "Providing a strong academic and developmental foundation through hands-on learning.",
+    fullDescription: "Children develop early literacy, numeracy, environmental awareness, and critical thinking skills. Active participation in Montessori learning centres strengthens analytical abilities, concentration, and prepares them for a smooth transition to formal schooling.",
     theme: "teal",
-    image: girlonswing,
-    ids: "leaders"
+    image: boywithbrush,
+    ids: "emerginglearners"
   },
   {
     id: 5,
-    title: "Daycare",
-    subtitle: "A Home Away From Home",
-    description: "A safe, nurturing, and engaging environment for children to spend their day while parents are at work.",
-    fullDescription: "Our daycare program provides comprehensive care that balances rest, play, and learning. Children are engaged in constructive activities under the supervision of caring professionals, ensuring they feel secure and loved.",
-    theme: "emerald",
-    image: girlonswing,
-    ids: "daycare"
+    title: "Ready for Tomorrow",
+    subtitle: "LKG (4–5 Years)",
+    description: "Empowering children with skills, confidence, and independence for their educational journey.",
+    fullDescription: "Through purposeful activities and collaborative learning, children advance academically and develop essential life skills. They learn the value of leadership, empathy, and responsibility, becoming capable, confident, and compassionate learners.",
+    theme: "amber",
+    image: foldedhandsboy,
+    ids: "readyfortomorrow"
   },
   {
     id: 6,
-    title: "Mind Lab",
-    subtitle: "Cognitive Skill Development",
-    description: "An innovative program focusing on developing critical thinking, problem-solving, and cognitive abilities.",
-    fullDescription: "Mind Lab utilizes engaging games and structured challenges to enhance memory, logical reasoning, and strategic thinking. It provides children with the mental tools they need to excel.",
-    theme: "indigo",
-    image: boywithcup,
-    ids: "mindlab"
+    title: "Future Achievers",
+    subtitle: "UKG (5–6 Years)",
+    description: "Equipping children with knowledge and skills required for lifelong success.",
+    fullDescription: "A blend of Montessori materials and experiential learning helps children develop advanced literacy, reasoning, and problem-solving abilities. They graduate as self-motivated learners ready to embrace future academic challenges with confidence.",
+    theme: "emerald",
+    image: boywithelephant,
+    ids: "futureachievers"
   },
   {
     id: 7,
+    title: "Mind Lab",
+    subtitle: "Learning Beyond Boundaries",
+    description: "A dynamic learning environment that encourages exploring, questioning, and innovating.",
+    fullDescription: "Designed to nurture higher-order thinking skills through strategy games and brain-based activities. It focuses on critical thinking, communication, collaboration, and emotional resilience, teaching children how to think effectively.",
+    theme: "indigo",
+    image: mainimage,
+    ids: "mindlab"
+  },
+  {
+    id: 8,
     title: "Teacher Training",
-    subtitle: "Empowering Educators",
-    description: "Comprehensive training programs designed to equip educators with modern pedagogical skills.",
-    fullDescription: "Our Teacher Training program focuses on advanced teaching methodologies, child psychology, and classroom management. We empower educators to create dynamic and effective learning environments.",
+    subtitle: "Centre for Montessori Teacher Education",
+    description: "A world-class professional training programme preparing educators for excellence.",
+    fullDescription: "Equips aspiring teachers with knowledge in Montessori philosophy, child psychology, and curriculum implementation. Emphasises experiential learning to ensure graduates are well-prepared to nurture confident, capable, and independent learners.",
     theme: "orange",
-    image: girlwithbook,
+    image: boywithbrush,
     ids: "teachertraining"
   }
 ];

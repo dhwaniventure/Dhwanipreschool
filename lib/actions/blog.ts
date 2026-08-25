@@ -1,18 +1,18 @@
 "use server";
 import { createSupabaseServerClient } from "@/lib/supabase";
 import { IBlog, IModule } from "@/lib/types";
-import { revalidatePath  } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { BlogFormSchemaType } from "@/lib/schema";
 const DASHBOARD = "/dashboard/blog";
 export async function createEmail(data: {
 	name: string,
-    email: string,
-    phone: string,
-	state:string
-	city:string
-	admission_seeking:string
-    message: string
-	country:string
+	email: string,
+	phone: string,
+	state: string
+	city: string
+	admission_seeking: string
+	message: string
+	country: string
 }) {
 	const supabase = await createSupabaseServerClient();
 	const admissionresult = await supabase
@@ -21,32 +21,32 @@ export async function createEmail(data: {
 		.single();
 
 
-    return admissionresult;
+	return admissionresult;
 }
 export async function createFranchise(data: {
-    name: string;
-    email: string;
-    phone: string;
-    city: string;
-    budget: string;
-    property: string;
+	name: string;
+	email: string;
+	phone: string;
+	city: string;
+	budget: string;
+	property: string;
 }) {
-    const supabase = await createSupabaseServerClient();
-    
-    // Inserting into a separate 'franchises' table
-    const result = await supabase
-        .from("franchises") 
-        .insert(data)
-        .select()
-        .single();
+	const supabase = await createSupabaseServerClient();
 
-    if (result.error) {
-        console.error("Franchise error:", result.error);
-    } else {
-        console.log("Franchise success:", result.data);
-    }
+	// Inserting into a separate 'franchises' table
+	const result = await supabase
+		.from("franchises")
+		.insert(data)
+		.select()
+		.single();
 
-    return result;
+	if (result.error) {
+		console.error("Franchise error:", result.error);
+	} else {
+		console.log("Franchise success:", result.data);
+	}
+
+	return result;
 }
 
 
@@ -56,14 +56,14 @@ export async function createBlog(data: {
 	content: string;
 	title: string;
 	image: string;
-	author:string;
+	author: string;
 	meta_title: string;
 	meta_description: string;
 	slug: string;
 	status: boolean;
 	created_at: string;
 	coments_enabled: boolean;
-	
+
 }) {
 
 	const supabase = await createSupabaseServerClient();
@@ -72,21 +72,21 @@ export async function createBlog(data: {
 		.insert(data)
 		.single();
 
-    return blogResult;
+	return blogResult;
 }
 
 export async function createlesson(data: {
 	catagory_id: number
 	chapter_name: string
-	content: string 
-	course_id: string 
+	content: string
+	course_id: string
 	created_at: string
-	description: string 
+	description: string
 	instructor: string
-	module_id: string 
-	chapterno:string 
-	slug: string 
-	
+	module_id: string
+	chapterno: string
+	slug: string
+
 }) {
 
 	const supabase = await createSupabaseServerClient();
@@ -95,7 +95,7 @@ export async function createlesson(data: {
 		.insert(data)
 		.single();
 
-    return blogResult;
+	return blogResult;
 }
 
 export async function createModule(data: {
@@ -105,7 +105,7 @@ export async function createModule(data: {
 	module_number: number;
 	course_id: string;
 	slug: string;
-	
+
 }) {
 
 	const supabase = await createSupabaseServerClient();
@@ -113,8 +113,8 @@ export async function createModule(data: {
 		.from("modules")
 		.insert(data)
 		.single();
-	revalidatePath("/dashbaord/course/build");	
-    return blogResult;
+	revalidatePath("/dashbaord/course/build");
+	return blogResult;
 }
 
 export async function createCourse(data: {
@@ -126,7 +126,7 @@ export async function createCourse(data: {
 	Name: string;
 	price: string;
 	slug: string;
-	
+
 }) {
 
 	const supabase = await createSupabaseServerClient();
@@ -134,9 +134,9 @@ export async function createCourse(data: {
 		.from("course")
 		.insert(data)
 		.single();
-	console.log(CourseResult);	
+	console.log(CourseResult);
 
-    return CourseResult;
+	return CourseResult;
 }
 
 
@@ -156,7 +156,7 @@ export async function readmodulescourse(id: string) {
 		.select("*")
 		.eq("slug", id)
 		.single();
-}	
+}
 
 
 
@@ -201,9 +201,9 @@ export async function readBlogAdmin() {
 	return supabase
 		.from("blog")
 		.select("*")
-		.eq('author', id || " " )
+		.eq('author', id || " ")
 		.order("created_at", { ascending: true });
-		
+
 }
 
 export async function Coursebyadmin() {
@@ -214,16 +214,16 @@ export async function Coursebyadmin() {
 	return supabase
 		.from("course")
 		.select("*")
-		.eq('instructor', '5023e815-5c4a-4cfe-8607-18c263d0fbe3' )
+		.eq('instructor', '5023e815-5c4a-4cfe-8607-18c263d0fbe3')
 		.order("created_at", { ascending: true });
-		
+
 }
 export async function readBlogIds() {
 	const supabase = await createSupabaseServerClient();
 	return supabase.from("blog").select("id");
 }
 
-export async function readBlogDeatailById(id : string) {
+export async function readBlogDeatailById(id: string) {
 	const supabase = await createSupabaseServerClient();
 	return await supabase
 		.from("blog")
@@ -262,7 +262,7 @@ export async function deleteBlogById(blogId: string) {
 	const result = await supabase.from("blog").delete().eq("id", blogId);
 	console.log(result);
 	revalidatePath(DASHBOARD);
-	revalidatePath("/blog/" + blogId);	
+	revalidatePath("/blog/" + blogId);
 	return JSON.stringify(result);
 }
 export async function deleteCoursebyid(course_id: string) {
@@ -270,7 +270,7 @@ export async function deleteCoursebyid(course_id: string) {
 	const result = await supabase.from("course").delete().eq("id", course_id);
 	console.log(result);
 	revalidatePath(DASHBOARD);
-	revalidatePath("/course/" + course_id);	
+	revalidatePath("/course/" + course_id);
 	return JSON.stringify(result);
 }
 export async function deleteModulebyid(mdoule_id: number) {
@@ -278,7 +278,7 @@ export async function deleteModulebyid(mdoule_id: number) {
 	const result = await supabase.from("modules").delete().eq("id", mdoule_id);
 	console.log(result);
 	revalidatePath(DASHBOARD);
-	revalidatePath("/course/" + mdoule_id);	
+	revalidatePath("/course/" + mdoule_id);
 	return JSON.stringify(result);
 }
 export async function deletechapterbyid(chapter_id: number) {

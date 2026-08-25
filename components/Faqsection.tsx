@@ -40,69 +40,49 @@ const themeColors: ThemeColor[] = ['rose', 'sky', 'purple', 'teal', 'amber'];
 
 const faqData = [
   {
-    question: "What age groups do you accept?",
-    answer: "We welcome children from 2 to 6 years, offering age-appropriate programs for infants, toddlers, preschoolers and kindergarten learners.",
-    icon: Baby
+    question: "What is our Vision?",
+    answer: "At Dhawni Cambridge Montessori Pre School, we nurture confident, independent, and compassionate learners through the internationally acclaimed Montessori philosophy of Dr Maria Montessori. We create a joyful and caring environment that encourages curiosity, critical thinking, confidence, and a lifelong love for learning. At DCMPS, we don't just prepare children for school; we prepare them for life.",
+    icon: Sparkles
   },
   {
-    question: "What curriculum does the preschool follow?",
-    answer: "We follow a play-based, Montessori-inspired and early learning approach that focuses on holistic development—academic, social, emotional, and physical growth.",
+    question: "What is the Montessori Way of Learning?",
+    answer: "Our thoughtfully designed curriculum focuses on the holistic development of every child, nurturing curiosity, independence, creativity, and confidence. We recognise that every child is unique, allowing them to explore individual interests through meaningful, hands-on experiences. Learning extends beyond the classroom through experiences with nature and the community.",
     icon: BookOpen
   },
   {
-    question: "Is your daycare safe and secure?",
-    answer: "Yes. Our daycare follows strict safety protocols, CCTV surveillance, secure entry-exit systems, trained staff, and regular hygiene and safety audits.",
-    icon: ShieldCheck
+    question: "How do we build Strong Foundations?",
+    answer: "We place special emphasis on the formative years from 12 months to 6 years. Our dedicated educators combine professional expertise with insights from child development and educational neuroscience to create an enriching early learning experience that respects each child's individuality while providing flexibility, encouragement, and support.",
+    icon: Baby
   },
   {
-    question: "What are the preschool and daycare timings?",
-    answer: "Preschool operates during morning hours, while daycare offers flexible full-day and half-day options to support working parents.",
-    icon: Clock
-  },
-  {
-    question: "What activities will my child be engaged in?",
-    answer: "Children participate in Montessori activities, storytelling, phonics, numeracy, art & craft, music, dance, sensory play and outdoor activities designed for joyful learning.",
-    icon: Sparkles
-  },
-  {
-    question: "How do you ensure hygiene and cleanliness?",
-    answer: "Our classrooms, toys and play areas are cleaned and sanitized with regular handwashing routines and child-friendly hygiene practices.",
-    icon: Sparkles
-  },
-  {
-    question: "How do you communicate with parents?",
-    answer: "We maintain regular communication through parent-teacher meetings, progress updates, activity photos, and direct communication channels.",
-    icon: MessageCircle
-  },
-  {
-    question: "Do you offer CCTV access to parents?",
-    answer: "CCTV access is available as per school policy, ensuring transparency while maintaining privacy and safety standards.",
+    question: "How do we inspire Curiosity & Independence?",
+    answer: "Our approach transforms children from passive learners into active explorers. Through hands-on Montessori materials, children develop essential foundations in reading, mathematics, communication, and problem-solving. Every child is encouraged to explore at their own pace, fostering self-discipline, confidence, and independence.",
     icon: Search
   },
   {
-    question: "What is the admission process?",
-    answer: "Admissions include counseling, school visit, form submission, and orientation, ensuring a smooth and comfortable onboarding for both child and parents.",
-    icon: School
-  },
-  {
-    question: "Is there a trial or settling period?",
-    answer: "Yes. We offer a settling-in period to help children adapt comfortably to the new environment at their own pace.",
+    question: "Where do children learn through discovery?",
+    answer: "Children are given the time, space, and freedom to learn at their own pace. Teachers work individually and in small groups, guiding learning according to interests and abilities. Children engage with Montessori materials, art, music, and practical experiences that encourage curiosity and a genuine love for learning.",
     icon: Smile
   },
   {
-    question: "Do you celebrate festivals and special days?",
-    answer: "Absolutely. We celebrate festivals, birthdays, theme days, and cultural events to encourage social skills, creativity, and inclusivity.",
-    icon: Calendar
+    question: "What is the Montessori Method?",
+    answer: "Inspired by Dr Maria Montessori's concept of the absorbent mind, our method recognises that young children learn continuously from their surroundings. We create a nurturing environment that supports academic foundations, independence, confidence, and social skills. Our teachers act as facilitators and guides, allowing children the freedom to explore and discover.",
+    icon: School
   },
   {
-    question: "What makes Dhwani Cambridge Montessori  different?",
-    answer: "Our child-centric approach, safe environment, trained educators, engaging curriculum, and strong parent partnership make us a trusted choice.",
-    icon: HelpCircle
+    question: "How do we create an environment where children feel safe to grow?",
+    answer: "We believe a child's learning begins with feeling safe, valued, and cared for. Our warm and child-centred environment encourages children to express themselves freely and develop confidence. Supportive teachers create positive relationships that encourage self-esteem, communication, and a love for learning.",
+    icon: ShieldCheck
   },
   {
-    question: "How can parents schedule a school visit?",
-    answer: "Parents can call us, visit the campus, or fill out the inquiry form, and our team will schedule a convenient school tour.",
-    icon: Phone
+    question: "What makes our learning spaces inspiring?",
+    answer: "Our classrooms are designed to be safe, welcoming, organised, and engaging. The environment supports children by building independence, encouraging active participation, developing social interaction, promoting collaborative learning, and creating a calm, focused atmosphere for discovery, connection, and growth.",
+    icon: Clock
+  },
+  {
+    question: "How are our classrooms designed to nurture children?",
+    answer: "Our classrooms are bright, welcoming, purposeful, and inspiring spaces. Carefully selected open-ended materials encourage creativity, exploration, and problem-solving. We maintain a clean, safe, and hygienic environment where dedicated reading spaces nurture early literacy, and children experience nature through real plants, developing responsibility and empathy.",
+    icon: MessageCircle
   }
 ];
 
@@ -212,10 +192,10 @@ const FaqSection: React.FC = () => {
             viewport={{ once: true }}
           >
             <h2 className={`text-4xl md:text-6xl uppercase leading-tight ${titleFont.className} text-slate-800`}>
-              Parent <span className="text-rose-500">FAQs</span>
+              Discover <span className="text-rose-500">More</span>
             </h2>
             <p className="text-slate-500 text-lg mt-3 font-bold">
-              Answers to your most common questions
+              Learn more about our vision, approach, and environment
             </p>
           </motion.div>
         </div>

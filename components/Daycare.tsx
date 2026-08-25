@@ -14,6 +14,7 @@ import Image from "next/image";
 // Using the boy image as it fits the center image layout well
 import childImage from "../public/boywithbrush.png";
 import { Fredoka, Quicksand, Kalam } from 'next/font/google';
+import singlecheerfullbaby from "@/public/singlecheerfullbaby.png"
 
 // --- FONT CONFIGURATION ---
 const titleFont = Fredoka({
@@ -129,8 +130,8 @@ const USPSection = () => {
           {/* Left Column (3 USPs) */}
           <div className="flex flex-col gap-12 order-2 lg:order-1">
             <USPItem
-              title="Montessori Environment"
-              text="The environment at our schools provides stimulating learning experiences designed to respond to each individual's unique characteristics and learning styles, helping them reach their full potential."
+              title="Designed Around Every Child"
+              text="At Dhawni Cambridge Montessori, our learning environments are created with the individual child in mind. Every classroom offers carefully planned experiences that encourage curiosity, independence, and discovery while respecting each child's unique pace, interests, and learning style."
               icon={<BookOpen size={28} />}
               colorClass="bg-purple-400"
               textColorClass="text-purple-500"
@@ -138,8 +139,8 @@ const USPSection = () => {
               delay={0.1}
             />
             <USPItem
-              title="Health & Hygiene"
-              text="We follow strict hygiene standards. Our schools maintain a high level of cleanliness, and every center adheres to standard protocols to ensure a clean environment and sanitary objects."
+              title="A Healthy & Hygienic Environment"
+              text="We understand that a healthy environment is essential to a child's well-being. Our preschool centres maintain rigorous cleanliness and hygiene practices, ensuring that classrooms, materials, play spaces, and facilities are regularly cleaned and maintained to high standards."
               icon={<HeartPulse size={28} />}
               colorClass="bg-emerald-400"
               textColorClass="text-emerald-500"
@@ -147,8 +148,8 @@ const USPSection = () => {
               delay={0.3}
             />
             <USPItem
-              title="Different Approach"
-              text="With our unique teaching methods, children are encouraged to learn by touching, feeling, and doing. They gain a concrete understanding of materials, which fosters a sense of ownership and leadership."
+              title="Learning Through Touch & Discovery"
+              text="Our Montessori methodology transforms everyday learning into an active experience. By encouraging children to touch, feel, manipulate, and explore learning materials, we help them understand concepts naturally while developing confidence, independence, problem-solving abilities, and a sense of responsibility."
               icon={<Share2 size={28} />}
               colorClass="bg-amber-400"
               textColorClass="text-amber-500"
@@ -176,7 +177,7 @@ const USPSection = () => {
             />
 
             <Image
-              src={childImage}
+              src={singlecheerfullbaby}
               alt="Happy learning child"
               className="object-contain drop-shadow-2xl z-10 w-3/4 lg:w-full max-w-sm"
               priority
@@ -188,8 +189,8 @@ const USPSection = () => {
           {/* Right Column (3 USPs) */}
           <div className="flex flex-col gap-12 order-3 lg:order-3">
             <USPItem
-              title="Safety & Security"
-              text="Given the tender age of our students, child safety and security are a top priority for us. Our services include 24-hour CCTV access, live GPS tracking, RFID installation, and robust security measures."
+              title="Safety You Can Trust"
+              text="Creating a secure environment is an integral part of our commitment to children and families. We implement multiple layers of safety and security, including CCTV surveillance, GPS tracking, RFID technology, controlled access, and established safety procedures across our centres."
               icon={<ShieldCheck size={28} />}
               colorClass="bg-rose-500"
               textColorClass="text-rose-500"
@@ -197,8 +198,8 @@ const USPSection = () => {
               delay={0.2}
             />
             <USPItem
-              title="Nurturing & Caring Environment"
-              text="Our students benefit from an engaging learning environment, intrinsically interesting materials, and age-appropriate developmental activities that enhance their creativity, thinking skills, and language abilities."
+              title="Caring Spaces That Inspire Growth"
+              text="Every child deserves an environment where they feel valued, supported, and encouraged to explore. Our nurturing classrooms combine engaging materials and age-appropriate activities to promote creativity, language development, communication, cognitive skills, and social-emotional growth."
               icon={<Heart size={28} />}
               colorClass="bg-indigo-400"
               textColorClass="text-indigo-500"
@@ -206,8 +207,8 @@ const USPSection = () => {
               delay={0.4}
             />
             <USPItem
-              title="Well Qualified Teachers"
-              text="Our teachers are highly qualified and receive ongoing training, workshops, and assessments to ensure their proficiency. This enables them to handle challenges effectively and provide necessary expertise."
+              title="Educators Who Make a Difference"
+              text="Our teachers play a vital role in creating meaningful learning experiences. We invest in their continuous professional development through training, workshops, and assessments, enabling them to understand individual learning needs and provide children with effective guidance, encouragement, and support."
               icon={<GraduationCap size={28} />}
               colorClass="bg-sky-400"
               textColorClass="text-sky-500"
