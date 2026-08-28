@@ -6,12 +6,12 @@ import { Sparkles, GraduationCap } from 'lucide-react';
 import { Fredoka, Quicksand, Kalam } from 'next/font/google';
 
 import boywithbrush from "../public/boywithbrush.png";
-import girlwithbook from "../public/girlwithbook.png";
+import girlwithbook from "../public/tobby_question_marked.png";
 import boywithelephant from "../public/boywithelephent.png";
-import gitlsandboysitting from "../public/gitlsandboysitting.png";
-import singlecheerfullbaby from "../public/singlecheerfullbaby.png";
-import foldedhandsboy from "../public/foldedhandsboy.png";
-import mainimage from "../public/mainimage.png";
+import gitlsandboysitting from "../public/mon_and_boy-small.png";
+import singlecheerfullbaby from "../public/tobby_with_his_teddy.png";
+import foldedhandsboy from "../public/leo_pointing_Some_thing.png";
+import mainimage from "../public/leo_with_magnyfying_glass.png";
 
 import Image from 'next/image';
 

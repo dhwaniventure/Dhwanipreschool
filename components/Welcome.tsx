@@ -7,7 +7,7 @@ import { Titan_One, Nunito } from 'next/font/google';
 import Image from "next/image";
 
 // Reusing an image from public
-import bothcharaters from "../public/bothcharacter.png";
+import bothcharaters from "../public/miaandleoforthankyoupage.png";
 
 // --- FONTS ---
 const titleFont = Titan_One({
@@ -25,11 +25,11 @@ const bodyFont = Nunito({
 const WelcomeSection = () => {
   return (
     <section className={`relative w-full bg-[#FDFBF7] pt-28 pb-20 overflow-hidden ${bodyFont.className}`}>
-      
+
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl mt-10">
-        
+
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-          
+
           {/* IMAGE SIDE */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

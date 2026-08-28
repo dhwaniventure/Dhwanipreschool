@@ -7,11 +7,11 @@ import AboutHeader from "@/components/AboutHeader";
 import { Fredoka, Quicksand } from 'next/font/google';
 
 // Images
-import boysitting from "../../public/boysitting.png";
-import girlwithbook from "../../public/girlwithbook 1.svg";
-import boywithelephant from "../../public/boywithelephent.png";
-import girlonswing from "../../public/girlonwing.png";
-import boywithcup from "../../public/boywithcup.png";
+import boysitting from "../../public/tobby_with_book.png";
+import girlwithbook from "../../public/tobby_And_mia_on_table_painting.png";
+import boywithelephant from "../../public/tobby_with_his_teddy.png";
+import girlonswing from "../../public/leo_with_magnyfying_glass.png";
+import boywithcup from "../../public/tobyy_skiping_rope.png";
 import girlfaceonly from "../../public/girlfaceonly.png";
 import boywithbrush from "../../public/boywithbrush.png";
 

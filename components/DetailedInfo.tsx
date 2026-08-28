@@ -5,11 +5,11 @@ import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { Fredoka, Quicksand, Kalam } from 'next/font/google';
 
-import girlwithbook from "../public/girlwithbook.png";
-import bothcharaters from "../public/bothcharacter.png";
-import gitlsandboysitting from "../public/gitlsandboysitting.png";
-import singlecheerfullbaby from "../public/singlecheerfullbaby.png";
-import mainimage from "../public/mainimage.png";
+import girlwithbook from "../public/leo_with_magnyfying_glass.png";
+import bothcharaters from "../public/leo_pointing_Some_thing.png";
+import gitlsandboysitting from "../public/tobby_And_mia_on_table_painting.png";
+import singlecheerfullbaby from "../public/tobby_with_book.png";
+import mainimage from "../public/tobyy_skiping_rope.png";
 
 import Image from 'next/image';
 

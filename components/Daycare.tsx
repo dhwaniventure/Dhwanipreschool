@@ -12,9 +12,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 // Using the boy image as it fits the center image layout well
-import childImage from "../public/boywithbrush.png";
 import { Fredoka, Quicksand, Kalam } from 'next/font/google';
-import singlecheerfullbaby from "@/public/singlecheerfullbaby.png"
+import singlecheerfullbaby from "@/public/leo_with_magnyfying_glass.png"
 
 // --- FONT CONFIGURATION ---
 const titleFont = Fredoka({
