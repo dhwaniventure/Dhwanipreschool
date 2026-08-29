@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import Admissionheader from "@/components/AdmissioHeader";
-import Ctasection from "@/components/HomeCta";
+import Admissionheader from "@/components/AboutHeader";
 import boysitting from "../public/boysitting.png";
 import girlwithbook from "../public/girlwithbook 1.svg";
 import boywithelephant from "../public/boywithelephent.png";

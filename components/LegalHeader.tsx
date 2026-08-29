@@ -6,6 +6,10 @@ import { Home, ChevronRight, ShieldCheck, FileText } from "lucide-react";
 import Image from "next/image";
 import { Fredoka, Quicksand } from 'next/font/google';
 
+import orangebanner from "@/public/orange_cultivating_knowledge.png";
+import rosebanner from "@/public/pink_montessori.png";
+import skybanner from "@/public/green_empowering_knowledge.png";
+
 const titleFont = Fredoka({
   weight: ['500', '600', '700'],
   subsets: ['latin'],
@@ -19,9 +23,9 @@ const bodyFont = Quicksand({
 });
 
 const carouselImages = [
-  '/gallery1.jpeg',
-  '/gallery2.jpeg',
-  '/gallery3.jpeg',
+  orangebanner,
+  rosebanner,
+  skybanner
 ];
 
 interface LegalHeaderProps {
@@ -41,7 +45,7 @@ const LegalHeader: React.FC<LegalHeaderProps> = ({ title, subtitle, icon }) => {
   }, []);
 
   return (
-    <header className={`relative mt-12 w-full h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden pt-20 pb-32 md:py-0 ${bodyFont.className}`}>
+    <header className={`relative mt-12 w-full h-[35vh] md:h-[50vh] lg:h-[60vh] min-h-[250px] md:min-h-[400px] flex items-center justify-center overflow-hidden pt-20 md:pt-28 pb-32 md:py-0 ${bodyFont.className}`}>
 
       {/* --- BACKGROUND CAROUSEL --- */}
       <div className="absolute inset-0 z-0">
@@ -63,51 +67,31 @@ const LegalHeader: React.FC<LegalHeaderProps> = ({ title, subtitle, icon }) => {
             />
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-slate-900/70 z-0 mix-blend-multiply"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/60 via-transparent to-transparent z-0"></div>
       </div>
 
       {/* --- MAIN CONTENT CONTAINER --- */}
-      <div className="relative z-10 w-full max-w-4xl px-6 flex flex-col items-center justify-center text-center">
+      <div className="absolute z-30 bottom-0 left-0 w-full flex justify-center pb-4 md:pb-8 pointer-events-none">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-center p-4 w-full"
+          className="flex flex-col items-center"
         >
-          {/* Breadcrumb Pill */}
+          {/* Logo */}
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="inline-flex items-center gap-2 bg-black/40 px-5 py-2 rounded-full mb-6 shadow-sm"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
+            className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full p-2 shadow-2xl flex items-center justify-center pointer-events-auto"
           >
-            <Home className="w-4 h-4 text-sky-300" />
-            <span className="text-white font-bold text-sm hover:text-sky-300 transition-colors cursor-pointer">Home</span>
-            <ChevronRight className="w-4 h-4 text-white/50" />
-            <span className="text-white font-bold text-sm">{title}</span>
+            <Image
+              src="/logo.png"
+              alt="Dhwani Montessori Logo"
+              width={120}
+              height={120}
+              className="object-contain"
+            />
           </motion.div>
-
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className={`text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight font-bold flex items-center gap-4 justify-center ${titleFont.className}`}
-          >
-             {icon === 'privacy' ? <ShieldCheck className="w-12 h-12 text-sky-400" /> : <FileText className="w-12 h-12 text-indigo-400" />}
-             {title}
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="text-lg md:text-xl text-slate-200 font-medium max-w-2xl mt-4"
-          >
-            {subtitle}
-          </motion.p>
         </motion.div>
       </div>
 

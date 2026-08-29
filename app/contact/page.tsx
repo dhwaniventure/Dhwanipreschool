@@ -14,7 +14,7 @@ import {
    ChevronRight
 } from "lucide-react";
 import { Fredoka, Quicksand } from 'next/font/google';
-import ContactHeader from "@/components/ContactHeader";
+import ContactHeader from "@/components/AboutHeader";
 
 // --- FONTS ---
 const titleFont = Fredoka({

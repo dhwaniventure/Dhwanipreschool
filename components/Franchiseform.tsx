@@ -5,6 +5,11 @@ import { useForm } from "react-hook-form";
 import { FranchiseFormSchemaType } from "@/lib/schema";
 import { IFranchiseDetail } from "@/lib/types";
 import Image from "next/image";
+import AboutHeader from "./AboutHeader";
+
+import orangebanner from "@/public/orange_cultivating_knowledge.png";
+import rosebanner from "@/public/pink_montessori.png";
+import skybanner from "@/public/green_empowering_knowledge.png";
 import {
   Home,
   User,
@@ -61,11 +66,9 @@ const ElegantEdge = ({ position, fillColor = "#ffffff" }: { position: "top" | "b
 
 
 const carouselImages = [
-  '/gallery1.jpeg',
-  '/gallery2.jpeg',
-  '/gallery3.jpeg',
-  '/gallery4.jpeg',
-  '/gallery5.jpeg'
+  orangebanner,
+  rosebanner,
+  skybanner
 ];
 
 // --- HEADER COMPONENT ---
@@ -80,7 +83,7 @@ const FranchiseHeader = () => {
   }, []);
 
   return (
-    <header className="relative w-full h-[60vh] md:h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden pt-20 md:pt-28 pb-32 md:py-0">
+    <header className="relative w-full h-[35vh] md:h-[50vh] lg:h-[60vh] min-h-[250px] md:min-h-[400px] flex items-center justify-center overflow-hidden pt-20 md:pt-28 pb-32 md:py-0">
 
       {/* --- BACKGROUND CAROUSEL --- */}
       <div className="absolute inset-0 z-0">
@@ -102,20 +105,15 @@ const FranchiseHeader = () => {
             />
           </motion.div>
         </AnimatePresence>
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-slate-900/60 z-0 mix-blend-multiply"></div>
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/60 via-transparent to-transparent z-0"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-4xl px-6 flex flex-col items-center justify-center text-center">
-
+      <div className="absolute z-30 bottom-0 left-0 w-full flex justify-center pb-4 md:pb-8 pointer-events-none">
         {/* Logo */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
-          className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full p-2 mb-6 shadow-xl flex items-center justify-center"
+          className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full p-2 shadow-2xl flex items-center justify-center pointer-events-auto"
         >
           <Image
             src="/logo.png"
@@ -125,37 +123,6 @@ const FranchiseHeader = () => {
             className="object-contain"
           />
         </motion.div>
-
-        {/* Breadcrumb Pill */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="inline-flex items-center gap-2 bg-black/40 px-5 py-2 rounded-full mb-6 shadow-sm"
-        >
-          <Home className="w-4 h-4 text-emerald-200" />
-          <span className="text-white font-bold text-sm hover:text-emerald-200 transition-colors cursor-pointer">Home</span>
-          <ChevronRight className="w-4 h-4 text-white/50" />
-          <span className="text-white font-bold text-sm">Franchise</span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className={`text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 ${titleFont.className}`}
-        >
-          Partner With <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300">Success</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="text-lg md:text-xl text-slate-200 font-medium max-w-2xl mx-auto"
-        >
-          Join the Little Dreamers family with our <span className="text-emerald-300 font-bold bg-white/10 px-3 py-1 rounded-full border border-white/20">Zero Royalty Model</span> and build a profitable future in education.
-        </motion.p>
       </div>
 
       {/* --- ELEGANT EDGE DIVIDER (Bottom) --- */}
@@ -209,7 +176,7 @@ export default function FranchisePage({
   return (
     <div className={`w-full flex flex-col ${bodyFont.className}`}>
 
-      <FranchiseHeader />
+      <AboutHeader />
 
       {/* =========================================
           SECTION 1: FRANCHISE FORM (Modern Glassmorphism)

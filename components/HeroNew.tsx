@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { ArrowRight, PlayCircle, Star, Sparkles, Cloud } from "lucide-react";
+import { ArrowRight, PlayCircle, Cloud } from "lucide-react";
 import { Fredoka, Quicksand, Kalam, Luckiest_Guy } from 'next/font/google';
 import Link from "next/link";
 import Particles from "react-tsparticles";
@@ -28,9 +28,9 @@ const handwritingFont = Kalam({
   display: 'swap',
 });
 
-const bubbleFont = Luckiest_Guy({ 
-  subsets: ['latin'], 
-  weight: ['400'] 
+const bubbleFont = Luckiest_Guy({
+  subsets: ['latin'],
+  weight: ['400']
 });
 
 // Dummy images for the carousel. 
@@ -42,33 +42,40 @@ const carouselImages = [
 
 // Component to render the multi-colored bubble text with "eyes"
 const BubbleHeading = ({ text }: { text: string }) => {
-  const colors = ['text-blue-500', 'text-red-500', 'text-yellow-400', 'text-green-500', 'text-orange-500', 'text-purple-500'];
-  
+  const colors = ['text-[#FF6B6B]', 'text-[#4D96FF]', 'text-[#6BCB77]', 'text-[#FFD93D]'];
+
   return (
-    <div className="flex flex-wrap justify-center lg:justify-start gap-x-1">
-      {text.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          initial={{ scale: 0, rotate: -20 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ delay: i * 0.05, type: 'spring', stiffness: 200 }}
-          className={`
-            relative inline-block text-4xl md:text-6xl lg:text-7xl
-            ${bubbleFont.className} 
-            ${colors[i % colors.length]}
-            [text-shadow:_4px_4px_0_#000,_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000]
-            hover:scale-110 transition-transform cursor-default
-          `}
-        >
-          {char === " " ? "\u00A0" : char}
-          {/* Adding "Eyes" to specific letters like the image */}
-          {['o', 'e', 'p', 'd', 'a', 'g'].includes(char.toLowerCase()) && (
-            <span className="absolute top-[40%] left-1/2 -translate-x-1/2 flex gap-1 lg:gap-2 pointer-events-none">
-              <span className="w-1 h-1 lg:w-2 lg:h-2 bg-black rounded-full" />
-              <span className="w-1 h-1 lg:w-2 lg:h-2 bg-black rounded-full" />
-            </span>
-          )}
-        </motion.span>
+    <div className="flex flex-wrap justify-center lg:justify-start gap-x-2 lg:gap-x-4 gap-y-1 lg:gap-y-2">
+      {text.split(" ").map((word, wordIndex) => (
+        <div key={wordIndex} className="flex gap-x-1">
+          {word.split("").map((char, i) => {
+            const globalIndex = wordIndex * 10 + i;
+            return (
+              <motion.span
+                key={i}
+                initial={{ scale: 0, rotate: -20 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: globalIndex * 0.05, type: 'spring', stiffness: 200 }}
+                className={`
+                  relative inline-block text-4xl md:text-5xl lg:text-6xl
+                  ${bubbleFont.className} 
+                  ${colors[globalIndex % colors.length]}
+                  [text-shadow:_3px_3px_0_#000,_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000]
+                  hover:scale-110 transition-transform cursor-default
+                `}
+              >
+                {char}
+                {/* Adding "Eyes" to specific letters like the image */}
+                {['o', 'e', 'p', 'd', 'a', 'g'].includes(char.toLowerCase()) && (
+                  <span className="absolute top-[40%] left-1/2 -translate-x-1/2 flex gap-1 lg:gap-2 pointer-events-none">
+                    <span className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-black rounded-full" />
+                    <span className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-black rounded-full" />
+                  </span>
+                )}
+              </motion.span>
+            );
+          })}
+        </div>
       ))}
     </div>
   );
@@ -108,10 +115,10 @@ const Hero = () => {
   }, []);
 
   return (
-    <section 
+    <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative mt-12 w-full min-h-[100vh] lg:min-h-[900px] bg-[#FDF8F5] flex items-center pt-32 pb-16 overflow-hidden"
+      className="relative mt-20 w-full min-h-[100vh] lg:min-h-[900px] bg-[#FDF8F5] flex items-center pt-32 pb-16 overflow-hidden"
     >
 
       {/* PARTICLES LAYER */}
@@ -132,20 +139,7 @@ const Hero = () => {
         }}
       />
 
-      {/* Playful scattered background elements */}
-      <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute top-40 left-10 text-yellow-300 opacity-60 pointer-events-none z-10">
-        <svg width="60" height="60" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50 0 L58 35 L95 25 L65 50 L95 75 L58 65 L50 100 L42 65 L5 75 L35 50 L5 25 L42 35 Z" />
-        </svg>
-      </motion.div>
 
-      <motion.div animate={{ y: [0, -30, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-20 left-1/4 text-sky-200 opacity-70 pointer-events-none z-10">
-        <Cloud className="w-20 h-20 fill-current" />
-      </motion.div>
-
-      <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 45, 0] }} transition={{ duration: 8, repeat: Infinity }} className="absolute top-32 right-1/4 text-rose-300 opacity-50 pointer-events-none z-10">
-        <Sparkles className="w-16 h-16 fill-current" />
-      </motion.div>
 
       <div className="container mx-auto relative z-20 max-w-9xl px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-8">
@@ -158,40 +152,47 @@ const Hero = () => {
             className="w-full lg:w-[50%] flex flex-col items-center text-center lg:items-start lg:text-left z-20"
           >
             {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white shadow-sm border-2 border-rose-100 mb-8">
-              <span className="text-xl">🎈</span>
-              <span className={`text-sm font-extrabold text-rose-500 tracking-wider uppercase ${bodyFont.className}`}>Admissions Open 2026</span>
-            </div>
+            <motion.div
+              whileHover={{ rotate: 5, scale: 1.05 }}
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#6BCB77]/20 border-2 border-[#6BCB77] shadow-sm mb-6 transform -rotate-2 cursor-default"
+            >
+              <span className="text-lg animate-bounce">🎈</span>
+              <span className={`text-xs sm:text-sm font-extrabold text-emerald-700 tracking-wider uppercase ${bodyFont.className}`}>Admissions Open 2026</span>
+            </motion.div>
 
             {/* Giant Bold Title */}
-            <h1 className={`${titleFont.className} text-5xl sm:text-6xl lg:text-[4.5rem] leading-[1.1] text-slate-800 mb-6 relative`}>
-              <span className="relative z-10">Dhwani Cambridge</span>
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500 relative z-10">Montessori</span>
+            <h1 className="mb-4 relative z-10 flex flex-col gap-1 md:gap-2">
+              <BubbleHeading text="Dhwani Cambridge" />
+              <BubbleHeading text="Montessori" />
             </h1>
 
-            <h2 className={`${titleFont.className} text-2xl sm:text-3xl lg:text-4xl text-slate-600 mb-6`}>
+            <h2 className={`${titleFont.className} text-xl sm:text-2xl lg:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#4D96FF] to-indigo-500 mb-5 font-bold`}>
               Trusted Montessori Preschool in India
             </h2>
 
             {/* Handwriting Tagline */}
-            <div className="mb-8">
-              <h3 className={`${handwritingFont.className} text-2xl sm:text-3xl text-rose-400 transform -rotate-3`}>
-                An enriching early-learning experience! ✨
+            <div className="mb-6 relative inline-block">
+              <span className="absolute -inset-1 bg-[#FFD93D]/40 rounded-xl transform rotate-2"></span>
+              <h3 className={`${handwritingFont.className} text-2xl sm:text-3xl text-rose-600 transform -rotate-2 relative z-10 font-bold px-2 py-1`}>
+                An enriching early-learning experience!
               </h3>
             </div>
 
-            <p className={`${bodyFont.className} text-slate-500 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl font-bold`}>
-              At Dhwani Cambridge Montessori, we are dedicated to creating an enriching early-learning experience that supports every child’s intellectual, emotional, social, and creative development. Our Montessori-based approach encourages independent learning while building essential foundations.
-            </p>
+            {/* Playful Text Card */}
+            <div className="relative mb-8 max-w-xl">
+              <div className="absolute inset-0 bg-[#4D96FF]/20 rounded-3xl transform rotate-2"></div>
+              <p className={`${bodyFont.className} relative text-slate-700 text-base sm:text-lg leading-relaxed font-semibold bg-white p-5 rounded-3xl border-2 border-[#4D96FF]/40 shadow-sm transform -rotate-1`}>
+                At Dhwani Cambridge Montessori, we are dedicated to creating an enriching early-learning experience that supports every child’s intellectual, emotional, social, and creative development. Our Montessori-based approach encourages independent learning while building essential foundations.
+              </p>
+            </div>
 
             {/* Colorful Buttons */}
-            <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start">
               <Link href="/admission" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05, rotate: -1 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`${titleFont.className} w-full sm:w-auto bg-rose-500 hover:bg-rose-600 text-white px-8 py-5 rounded-3xl text-xl shadow-[0_8px_0_theme(colors.rose.700)] hover:shadow-[0_4px_0_theme(colors.rose.700)] hover:translate-y-1 active:shadow-none active:translate-y-2 transition-all flex items-center justify-center gap-3 border-2 border-transparent hover:border-black`}
+                  className={`${titleFont.className} w-full sm:w-auto bg-rose-500 hover:bg-rose-600 text-white px-6 py-4 rounded-3xl text-lg shadow-[0_8px_0_theme(colors.rose.700)] hover:shadow-[0_4px_0_theme(colors.rose.700)] hover:translate-y-1 active:shadow-none active:translate-y-2 transition-all flex items-center justify-center gap-3 border-2 border-transparent hover:border-black`}
                 >
                   Enroll Now <ArrowRight className="w-6 h-6 stroke-[3px]" />
                 </motion.button>

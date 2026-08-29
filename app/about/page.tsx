@@ -62,6 +62,7 @@ const aboutSections = [
     image: boysitting,
     bgColor: "bg-white",
     blobColor: "from-sky-300 to-indigo-300",
+    textColor: "from-sky-500 to-indigo-600",
   },
   {
     title: "The Montessori Way of Learning",
@@ -77,6 +78,7 @@ const aboutSections = [
     image: girlwithbook,
     bgColor: "bg-slate-50",
     blobColor: "from-rose-300 to-orange-300",
+    textColor: "from-rose-500 to-orange-600",
   },
   {
     title: "Building Strong Foundations (Approach)",
@@ -90,6 +92,7 @@ const aboutSections = [
     image: boywithelephant,
     bgColor: "bg-white",
     blobColor: "from-teal-300 to-emerald-300",
+    textColor: "from-teal-500 to-emerald-600",
   },
   {
     title: "Inspiring Curiosity & Independence (Focus)",
@@ -104,6 +107,7 @@ const aboutSections = [
     image: girlonswing,
     bgColor: "bg-slate-50",
     blobColor: "from-purple-300 to-pink-300",
+    textColor: "from-purple-500 to-pink-600",
   },
   {
     title: "Where Children Learn Through Discovery",
@@ -119,6 +123,7 @@ const aboutSections = [
     image: boywithcup,
     bgColor: "bg-white",
     blobColor: "from-amber-300 to-yellow-300",
+    textColor: "from-amber-500 to-yellow-600",
   },
   {
     title: "The Montessori Method (Concept Method)",
@@ -133,6 +138,7 @@ const aboutSections = [
     image: girlfaceonly,
     bgColor: "bg-slate-50",
     blobColor: "from-cyan-300 to-blue-300",
+    textColor: "from-cyan-500 to-blue-600",
   },
   {
     title: "Our Approach in Action",
@@ -152,6 +158,7 @@ const aboutSections = [
     image: boywithbrush,
     bgColor: "bg-white",
     blobColor: "from-fuchsia-300 to-rose-300",
+    textColor: "from-fuchsia-500 to-rose-600",
   },
   {
     title: "Where Children Feel Safe to Grow",
@@ -168,6 +175,7 @@ const aboutSections = [
     image: boysitting,
     bgColor: "bg-slate-50",
     blobColor: "from-sky-300 to-indigo-300",
+    textColor: "from-sky-500 to-indigo-600",
   },
   {
     title: "Inspiring Learning Spaces & Classrooms",
@@ -190,6 +198,7 @@ const aboutSections = [
     image: girlwithbook,
     bgColor: "bg-white",
     blobColor: "from-teal-300 to-emerald-300",
+    textColor: "from-teal-500 to-emerald-600",
   }
 ];
 
@@ -254,7 +263,7 @@ const AboutUsSegmented: React.FC = () => {
 
                 {/* TEXT SIDE */}
                 <div className="w-full lg:w-1/2 space-y-6">
-                  <h2 className={`text-3xl md:text-4xl font-bold text-slate-800 mb-6 ${titleFont.className}`}>
+                  <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${titleFont.className} text-transparent bg-clip-text bg-gradient-to-r ${section.textColor}`}>
                     {section.title}
                   </h2>
                   <div className="text-slate-600 leading-relaxed text-[17px]">
@@ -312,22 +321,37 @@ const AboutUsSegmented: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {programs.map((prog, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center mb-6">
-                  <span className="text-indigo-500 font-black text-xl">{(index + 1).toString().padStart(2, '0')}</span>
-                </div>
-                <h3 className={`text-xl font-bold text-slate-800 mb-4 ${titleFont.className}`}>{prog.title}</h3>
-                <p className="text-slate-600 leading-relaxed text-sm">{prog.desc}</p>
-              </motion.div>
-            ))}
+            {programs.map((prog, index) => {
+              const cardColors = [
+                { bg: 'bg-rose-50', border: 'border-rose-200', iconBg: 'bg-rose-200', text: 'text-rose-600', shadow: 'hover:shadow-rose-100' },
+                { bg: 'bg-sky-50', border: 'border-sky-200', iconBg: 'bg-sky-200', text: 'text-sky-600', shadow: 'hover:shadow-sky-100' },
+                { bg: 'bg-emerald-50', border: 'border-emerald-200', iconBg: 'bg-emerald-200', text: 'text-emerald-600', shadow: 'hover:shadow-emerald-100' },
+                { bg: 'bg-purple-50', border: 'border-purple-200', iconBg: 'bg-purple-200', text: 'text-purple-600', shadow: 'hover:shadow-purple-100' },
+                { bg: 'bg-amber-50', border: 'border-amber-200', iconBg: 'bg-amber-200', text: 'text-amber-600', shadow: 'hover:shadow-amber-100' },
+                { bg: 'bg-indigo-50', border: 'border-indigo-200', iconBg: 'bg-indigo-200', text: 'text-indigo-600', shadow: 'hover:shadow-indigo-100' },
+                { bg: 'bg-fuchsia-50', border: 'border-fuchsia-200', iconBg: 'bg-fuchsia-200', text: 'text-fuchsia-600', shadow: 'hover:shadow-fuchsia-100' },
+                { bg: 'bg-orange-50', border: 'border-orange-200', iconBg: 'bg-orange-200', text: 'text-orange-600', shadow: 'hover:shadow-orange-100' },
+              ];
+              const color = cardColors[index % cardColors.length];
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className={`${color.bg} p-8 rounded-[2rem] shadow-sm border-2 ${color.border} hover:shadow-xl ${color.shadow} transition-all duration-300`}
+                >
+                  <div className={`w-14 h-14 ${color.iconBg} rounded-2xl flex items-center justify-center mb-6 transform -rotate-3`}>
+                    <span className={`${color.text} font-black text-2xl`}>{(index + 1).toString().padStart(2, '0')}</span>
+                  </div>
+                  <h3 className={`text-2xl font-bold ${color.text} mb-4 ${titleFont.className}`}>{prog.title}</h3>
+                  <p className="text-slate-700 leading-relaxed font-medium">{prog.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

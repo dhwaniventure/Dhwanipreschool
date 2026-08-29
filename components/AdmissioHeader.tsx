@@ -6,6 +6,10 @@ import { Home, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Fredoka, Quicksand } from 'next/font/google';
 
+import orangebanner from "@/public/orange_cultivating_knowledge.png";
+import rosebanner from "@/public/pink_montessori.png";
+import skybanner from "@/public/green_empowering_knowledge.png";
+
 const titleFont = Fredoka({
   weight: ['500', '600', '700'],
   subsets: ['latin'],
@@ -19,11 +23,9 @@ const bodyFont = Quicksand({
 });
 
 const carouselImages = [
-  '/gallery1.jpeg',
-  '/gallery2.jpeg',
-  '/gallery3.jpeg',
-  '/gallery4.jpeg',
-  '/gallery5.jpeg'
+  orangebanner,
+  rosebanner,
+  skybanner
 ];
 
 const Admissionheader = () => {
@@ -37,7 +39,7 @@ const Admissionheader = () => {
   }, []);
 
   return (
-    <header className={`relative mt-12 w-full h-[60vh] md:h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden pt-20 md:pt-28 pb-32 md:py-0 ${bodyFont.className}`}>
+    <header className={`relative mt-28 w-full h-[35vh] md:h-[50vh] lg:h-[60vh] min-h-[250px] md:min-h-[400px] flex justify-center overflow-hidden pt-20 md:pt-28 pb-32 md:py-0 ${bodyFont.className}`}>
 
       {/* --- BACKGROUND CAROUSEL --- */}
       <div className="absolute inset-0 z-0">
@@ -59,28 +61,24 @@ const Admissionheader = () => {
             />
           </motion.div>
         </AnimatePresence>
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-slate-900/60 z-0 mix-blend-multiply"></div>
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/40 via-transparent to-transparent z-0"></div>
       </div>
 
       {/* --- MAIN CONTENT CONTAINER --- */}
-      <div className="relative z-10 w-full max-w-4xl px-6 flex flex-col items-center justify-center text-center">
+      <div className="absolute z-30 bottom-0 left-0 w-full flex justify-center pb-4 md:pb-8 pointer-events-none">
 
         {/* Main Content */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-center p-4 w-full"
+          className="flex flex-col items-center"
         >
           {/* Logo */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
-            className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full p-2 mb-6 shadow-xl flex items-center justify-center"
+            className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full p-2 shadow-2xl flex items-center justify-center pointer-events-auto"
           >
             <Image
               src="/logo.png"
@@ -90,40 +88,6 @@ const Admissionheader = () => {
               className="object-contain"
             />
           </motion.div>
-
-          {/* Breadcrumb Pill */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="inline-flex items-center gap-2 bg-black/40 px-5 py-2 rounded-full mb-6 shadow-sm"
-          >
-            <Home className="w-4 h-4 text-sky-200" />
-            <span className="text-white font-bold text-sm hover:text-sky-200 transition-colors cursor-pointer">Home</span>
-            <ChevronRight className="w-4 h-4 text-white/50" />
-            <span className="text-white font-bold text-sm">Admission</span>
-          </motion.div>
-
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className={`text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight font-bold ${titleFont.className}`}
-          >
-            Dhwani <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-300">Montessori</span> <br className="hidden md:block" />
-            Preschool & Daycare
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="text-lg md:text-xl text-slate-200 font-medium max-w-2xl mt-4"
-          >
-            Admissions are now open for the <span className="text-sky-300 font-bold bg-white/10 px-3 py-1 rounded-full border border-white/20">2026-2027</span> Academic Session.
-          </motion.p>
         </motion.div>
       </div>
 

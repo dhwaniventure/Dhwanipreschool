@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Sparkles, CheckCircle2 } from "lucide-react";
-import { Titan_One, Nunito } from 'next/font/google';
+import { Titan_One, Nunito, Fredoka, Kalam } from 'next/font/google';
 import Image from "next/image";
 
 // Reusing an image from public
@@ -22,11 +22,37 @@ const bodyFont = Nunito({
   display: 'swap',
 });
 
+const fredoka = Fredoka({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+});
+
+const kalam = Kalam({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+});
+
 const WelcomeSection = () => {
   return (
     <section className={`relative w-full bg-[#FDFBF7] pt-28 pb-20 overflow-hidden ${bodyFont.className}`}>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl mt-10">
+
+        <div className="w-full text-center mb-12 lg:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="inline-block relative"
+          >
+            <h2 className={`${fredoka.className} text-4xl sm:text-5xl lg:text-[4rem] text-slate-800 font-bold mb-2 relative z-10`}>
+              Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-400">Dhwani Cambridge</span>
+            </h2>
+          </motion.div>
+        </div>
 
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
 
@@ -73,15 +99,9 @@ const WelcomeSection = () => {
             transition={{ duration: 0.8, delay: 0.2, type: "spring", bounce: 0.4 }}
             className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left"
           >
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white shadow-sm border border-slate-100 mb-6">
-              <Sparkles className="w-4 h-4 text-rose-500" />
-              <span className="text-sm font-bold text-slate-500 tracking-wider uppercase">Welcome to Dhwani Cambridge</span>
-              <Sparkles className="w-4 h-4 text-rose-500" />
-            </div>
-
-            <h2 className={`${titleFont.className} text-4xl lg:text-5xl text-slate-800 mb-6 leading-tight`}>
-              Trusted Montessori <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">Preschool in India</span>
-            </h2>
+            <h3 className={`${kalam.className} text-3xl lg:text-4xl text-sky-500 mb-6 transform -rotate-2 inline-block font-bold`}>
+              Trusted Montessori Preschool in India
+            </h3>
 
             <p className="text-slate-600 text-lg leading-relaxed mb-6 font-medium">
               At Dhwani Cambridge Montessori, we are dedicated to creating an enriching early-learning experience that supports every child's intellectual, emotional, social, and creative development. Our Montessori-based approach encourages independent learning while building essential foundations in reading, writing, composition, and mathematics.

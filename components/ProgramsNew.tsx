@@ -56,6 +56,13 @@ const handwritingFont = Kalam({
   display: 'swap',
 });
 
+
+const fredoka = Fredoka({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+});
+
 // --- DATA ---
 const programs: Program[] = [
   {
@@ -201,8 +208,8 @@ const ProgramSection: React.FC = () => {
               <Sparkles className="w-4 h-4 text-amber-500" />
             </div>
 
-            <h2 className={`text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-slate-800 max-w-4xl mx-auto ${titleFont.className}`}>
-              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">Programs</span>
+            <h2 className={`${fredoka.className} text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-slate-800 max-w-4xl mx-auto`}>
+              <span className="text-transparent bg-clip-text font-bold bg-gradient-to-r from-sky-400 to-indigo-500"> Our Programs</span>
             </h2>
           </motion.div>
         </div>

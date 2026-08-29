@@ -239,11 +239,11 @@ const DetailedInfo: React.FC = () => {
                   className="w-full md:w-1/2 flex flex-col justify-start text-center md:text-left"
                 >
                   <div className={`inline-block px-4 py-1.5 rounded-xl ${activeTheme.bg} ${activeTheme.text} font-bold text-sm mb-4 mx-auto md:mx-0 w-max`}>
-                    0{section.id} • {section.title}
+                    {section.subtitle}
                   </div>
 
-                  <h3 className={`text-4xl md:text-5xl ${titleFont.className} text-slate-800 font-bold mb-4`}>
-                    {section.subtitle}
+                  <h3 className={`text-4xl md:text-5xl ${titleFont.className} ${activeTheme.text} font-bold mb-4`}>
+                    0{section.id} • {section.title}
                   </h3>
 
                   <div className={`w-20 h-1.5 bg-gradient-to-r from-slate-200 to-transparent mb-8 rounded-full mx-auto md:mx-0 ${isEven ? 'md:bg-gradient-to-l' : ''}`}></div>
