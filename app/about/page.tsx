@@ -332,7 +332,7 @@ const AboutUsSegmented: React.FC = () => {
                 { bg: 'bg-fuchsia-50', border: 'border-fuchsia-200', iconBg: 'bg-fuchsia-200', text: 'text-fuchsia-600', shadow: 'hover:shadow-fuchsia-100' },
                 { bg: 'bg-orange-50', border: 'border-orange-200', iconBg: 'bg-orange-200', text: 'text-orange-600', shadow: 'hover:shadow-orange-100' },
               ];
-              const color = cardColors[index % cardColors.length];
+              const color = cardColors[index % cardColors.length]!;
 
               return (
                 <motion.div
