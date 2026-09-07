@@ -75,15 +75,26 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 flex flex-col">
       {/* --- TOP BAR (Hides on Scroll) --- */}
       <div
-        className={`bg-[#2c305c] w-full flex flex-col sm:flex-row justify-between items-center text-white transition-all duration-300 overflow-hidden px-4 md:px-10 lg:px-20 ${scrolled ? 'h-0 opacity-0' : 'h-auto py-2 sm:h-10 sm:py-0 opacity-100'
+        className={`bg-[#2c305c] w-full flex items-center text-white transition-all duration-300 overflow-hidden ${scrolled ? 'h-0 opacity-0' : 'h-8 sm:h-10 opacity-100'
           }`}
       >
-        <div className="font-semibold text-xs sm:text-sm flex items-center gap-2">
-          Call Us : +91 901 576 4000
-        </div>
-        <div className="flex items-center gap-2 text-xs sm:text-sm mt-1 sm:mt-0">
-          <AlertTriangle className="text-amber-400 w-4 h-4" />
-          <span><strong className="text-white">Public Notice:</strong> Instances of misuse</span>
+        <div className="w-full overflow-hidden flex whitespace-nowrap">
+          <motion.div
+            className="flex items-center gap-10 font-semibold text-xs sm:text-sm"
+            initial={{ x: "100vw" }}
+            animate={{ x: "-100%" }}
+            transition={{
+              repeat: Infinity,
+              duration: 35,
+              ease: "linear",
+            }}
+          >
+            <span>Call Us : +91 90715 25966</span>
+            <span className="flex items-center gap-2">
+              <AlertTriangle className="text-amber-400 w-4 h-4 shrink-0" />
+              <span><strong className="text-white">Public Notice:</strong> Any unauthorized instances of using the Dhwani Cambridge website are strictly prohibited.</span>
+            </span>
+          </motion.div>
         </div>
       </div>
 
