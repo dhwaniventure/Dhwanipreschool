@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Fredoka, Quicksand } from 'next/font/google';
 

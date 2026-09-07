@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import Admissionheader from "@/components/AboutHeader";
+import Admissionheader from "@/components/AdmissioHeader";
 import boysitting from "../public/boysitting.png";
 import girlwithbook from "../public/girlwithbook 1.svg";
 import boywithelephant from "../public/boywithelephent.png";
 import girlonswing from "../public/girlonwing.png";
+import boywithcup from "../public/boywithcup.png";
 import { EmailFormschemaType } from "@/lib/schema";
 import Image from "next/image";
 import { IEmaildetail } from "@/lib/types";
@@ -289,7 +290,7 @@ export default function AdmissionPage({
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className={`text-4xl md:text-5xl font-bold text-slate-800 mb-4 ${titleFont.className}`}>
-              Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">Dhwani Montessori</span> Preschool & Daycare?
+              Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">Dhawni Cambridge Montessori</span> Preschool & Daycare?
             </h2>
             <div className="w-20 h-1.5 bg-gradient-to-r from-slate-200 to-transparent mx-auto rounded-full mb-12"></div>
           </div>
@@ -298,18 +299,24 @@ export default function AdmissionPage({
             {/* Left side text */}
             <div className="w-full lg:w-3/5 space-y-6">
               {[
-                { title: "Child-centric curriculum matching the best in the world:", desc: "The environment at Dhwani Montessori Preschool & Daycare is child-centered, allowing children to progress at their own comfort. Lessons are delivered individually or in small groups, enabling teachers to understand each child's development and needs." },
-                { title: "International standard of Montessori education:", desc: "We strive to offer a learning environment based on the internationally renowned Montessori philosophy established by Dr. Maria Montessori. Our curriculum is sourced and researched globally and delivered through operational centers across Asia." },
-                { title: "Focus on holistic child development:", desc: "Dhwani is committed to ensuring love, compassion, and harmony, while fostering critical thinking and independence in every child." },
-                { title: "Supported by international Montessori experts:", desc: "Our team consists of passionate educators from esteemed institutions who utilize insights from recent research in educational neuroscience and child development to shape early years' education." },
-                { title: "Academically challenging and flexible curriculum:", desc: "The school provides a curriculum that is both challenging and adaptable to meet individual children's needs during these formative years." }
+                { title: "A Child-Centred Approach", desc: "Every child learns differently. Our child-centred approach allows children to explore concepts at their own pace while educators provide personalised guidance through individual and small-group learning experiences." },
+                { title: "Montessori-Based Learning", desc: "Inspired by the philosophy of Dr Maria Montessori, our learning environment encourages independence, curiosity, concentration, exploration, and hands-on discovery." },
+                { title: "Holistic Development", desc: "We nurture every aspect of a child’s development—academic, cognitive, physical, social, emotional, and creative—helping children grow into confident and compassionate learners." },
+                { title: "Expert & Passionate Educators", desc: "Our educators bring a strong understanding of early childhood development and participate in continuous professional learning to enhance their teaching practices and support children effectively." },
+                { title: "Flexible & Meaningful Curriculum", desc: "Our curriculum combines structure and flexibility, allowing educators to respond to each child’s developmental needs while providing stimulating, age-appropriate learning experiences." },
+                { title: "Safety & Security", desc: "Child safety is integral to our environment. CCTV surveillance and available live-monitoring facilities provide parents with added reassurance about their child’s safety and well-being." },
+                { title: "Mind Lab @ DCMPS", desc: "A space designed to inspire creative thinking, problem-solving, curiosity, and exploration, Mind Lab provides children with engaging experiences supported by trained educators and appropriate learning resources." },
+                { title: "Fun, Movement & Play", desc: "Children learn through movement and play. Our Fun Zone provides opportunities for children to develop coordination, confidence, social skills, creativity, and physical well-being in a safe and engaging environment." },
+                { title: "International-Standard Daycare", desc: "Our daycare programme offers a nurturing environment supported by trained staff, safety and hygiene practices, age-appropriate activities, and facilities designed around children’s comfort and well-being." },
+                { title: "Professional Teacher Development", desc: "Our teacher-training programmes help educators strengthen their understanding of Montessori principles, child development, and effective early-years teaching practices." },
+                { title: "Tracking Every Child’s Progress", desc: "We observe children continuously across multiple areas of development and share meaningful progress updates with parents. This helps us understand each child’s unique strengths and provide appropriate support when needed." }
               ].map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: (index % 5) * 0.1 }}
                   className="flex gap-4"
                 >
                   <div className="mt-1 shrink-0">
@@ -323,10 +330,20 @@ export default function AdmissionPage({
                   </div>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100"
+              >
+                <p className="text-indigo-800 font-medium italic">
+                  Dhawni Cambridge Montessori Preschool & Daycare is where purposeful learning meets care, curiosity, independence, and joyful discovery.
+                </p>
+              </motion.div>
             </div>
 
             {/* Right side floating oval background */}
-            <div className="w-full lg:w-2/5 flex items-center justify-center mt-10 lg:mt-0 relative h-[400px]">
+            <div className="w-full lg:w-2/5 flex items-center justify-center mt-10 lg:mt-0 relative h-[400px] lg:sticky lg:top-32 self-start">
               <motion.div
                 className="absolute inset-0 bg-gradient-to-tr from-sky-300 to-indigo-300 shadow-2xl opacity-60 m-auto"
                 animate={{
@@ -360,20 +377,24 @@ export default function AdmissionPage({
 
         <div className="container mx-auto px-6 relative z-10">
 
+          {/* Guidelines & Policies */}
           <div className="flex flex-col lg:flex-row-reverse gap-12 items-center mb-20">
             <div className="w-full lg:w-3/5 space-y-6">
               <h2 className={`text-3xl md:text-4xl font-bold text-slate-800 mb-6 ${titleFont.className}`}>
-                Established <span className="text-indigo-500">Ground Rules</span>
+                Our <span className="text-indigo-500">Guidelines & Policies</span>
               </h2>
               <div className="space-y-4 text-slate-600 leading-relaxed">
                 <p>
-                  The Dhwani Montessori Preschool environment is child-centered, allowing children to progress at their own pace. Lessons are delivered individually or in small groups, enabling teachers to better understand each child's unique development. While we remain flexible to accommodate your needs within reasonable limits, some rules are firmly established to ensure the well-being of all children. For example, we have clear regulations governing operating hours and emergency procedures.
+                  Dhawni Cambridge Montessori Preschool follows a child-centred approach that allows every child to learn, explore, and progress at their own pace. Through individual and small-group activities, our educators provide personalised attention based on each child’s developmental needs.
                 </p>
                 <p>
-                  We enforce a strict sick-child policy to prevent the spread of illness. Decisions about whether a child should attend class or stay home are made carefully to protect all children.
+                  To maintain a safe, healthy, and nurturing environment, we follow essential guidelines covering school hours, attendance, health, safety, and emergency procedures.
                 </p>
                 <p>
-                  Our open-door policy encourages parental involvement. We welcome you to join in activities, accompany field trips, and be an active part of our community.
+                  Our health and sick-child guidelines are designed to safeguard children, staff, and families by reducing the spread of illness.
+                </p>
+                <p>
+                  We believe in working closely with parents and welcome their participation in appropriate school activities, educational excursions, and community initiatives.
                 </p>
               </div>
             </div>
@@ -403,14 +424,17 @@ export default function AdmissionPage({
           </div>
 
           {/* Cleanliness and Hygiene */}
-          <div className="flex flex-col lg:flex-row gap-12 items-center">
+          <div className="flex flex-col lg:flex-row gap-12 items-center mb-20">
             <div className="w-full lg:w-3/5 space-y-6">
               <h2 className={`text-3xl md:text-4xl font-bold text-slate-800 mb-6 ${titleFont.className}`}>
-                Cleanliness and <span className="text-teal-500">Hygiene</span>
+                Cleanliness & <span className="text-teal-500">Hygiene</span>
               </h2>
               <div className="space-y-4 text-slate-600 leading-relaxed">
                 <p>
-                  At Dhwani Montessori, maintaining a clean and hygienic environment is our top priority. Our facilities are regularly sanitized, and we instill healthy habits in our children from an early age. The facility ensures that every part of the school is monitored via CCTV, ensuring the highest safety standards for your little ones.
+                  The health and well-being of every child are our priorities. Our facilities are thoroughly cleaned and maintained each day, while toys, play equipment, and learning materials are regularly sanitized to maintain a hygienic environment.
+                </p>
+                <p>
+                  We follow consistent hygiene practices to help minimise the spread of germs and create a clean, safe, and comfortable space for children to learn and explore.
                 </p>
               </div>
             </div>
@@ -434,6 +458,46 @@ export default function AdmissionPage({
                   alt="Girl on swing"
                   fill
                   className="object-contain drop-shadow-2xl scale-125 translate-y-4"
+                />
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Communication */}
+          <div className="flex flex-col lg:flex-row-reverse gap-12 items-center">
+            <div className="w-full lg:w-3/5 space-y-6">
+              <h2 className={`text-3xl md:text-4xl font-bold text-slate-800 mb-6 ${titleFont.className}`}>
+                <span className="text-blue-500">Communication</span>
+              </h2>
+              <div className="space-y-4 text-slate-600 leading-relaxed">
+                <p>
+                  We believe that strong communication builds strong partnerships. Our teachers and staff maintain open communication with parents through convenient channels and regular updates.
+                </p>
+                <p>
+                  Parents are kept informed about classroom activities, learning plans, menus, events, and important school announcements, ensuring they remain connected to their child’s learning journey.
+                </p>
+              </div>
+            </div>
+
+            <div className="w-full lg:w-2/5 flex items-center justify-center relative h-[300px]">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-tr from-blue-300 to-cyan-300 shadow-2xl opacity-60 m-auto"
+                animate={{
+                  borderRadius: ["50% 50% 30% 70% / 50% 30% 70% 50%", "40% 60% 70% 30% / 40% 50% 60% 50%", "50% 50% 30% 70% / 50% 30% 70% 50%"]
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                style={{ width: '90%', height: '90%' }}
+              />
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 w-full h-full p-4"
+              >
+                <Image
+                  src={boywithcup}
+                  alt="Boy with cup"
+                  fill
+                  className="object-contain drop-shadow-2xl scale-110"
                 />
               </motion.div>
             </div>

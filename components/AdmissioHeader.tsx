@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Fredoka, Quicksand } from 'next/font/google';
 
@@ -28,18 +27,18 @@ const carouselImages = [
   skybanner
 ];
 
-const Admissionheader = () => {
+const AdmissionHeader = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
-    }, 5000); // Change image every 5 seconds
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <header className={`relative mt-28 w-full h-[35vh] md:h-[50vh] lg:h-[60vh] min-h-[250px] md:min-h-[400px] flex justify-center overflow-hidden pt-20 md:pt-28 pb-32 md:py-0 ${bodyFont.className}`}>
+    <header className={`relative mt-[140px] md:mt-[160px] w-full h-[5vh] md:h-[50vh] lg:h-[60vh] min-h-[75px] md:min-h-[400px] flex items-center justify-center overflow-hidden  md:pt-28 pb-32 md:py-0 ${bodyFont.className}`}>
 
       {/* --- BACKGROUND CAROUSEL --- */}
       <div className="absolute inset-0 z-0">
@@ -66,7 +65,6 @@ const Admissionheader = () => {
       {/* --- MAIN CONTENT CONTAINER --- */}
       <div className="absolute z-30 bottom-0 left-0 w-full flex justify-center pb-4 md:pb-8 pointer-events-none">
 
-        {/* Main Content */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -78,7 +76,7 @@ const Admissionheader = () => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
-            className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full p-2 shadow-2xl flex items-center justify-center pointer-events-auto"
+            className="w-12 h-12 md:w-32 md:h-32 bg-white rounded-full p-2 shadow-2xl flex items-center justify-center pointer-events-auto"
           >
             <Image
               src="/logo.png"
@@ -101,7 +99,7 @@ const Admissionheader = () => {
         >
           <path
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            style={{ fill: "#eef2ff" }}
+            style={{ fill: "#EEF2FF" }}
           ></path>
         </svg>
       </div>
@@ -110,4 +108,4 @@ const Admissionheader = () => {
   );
 };
 
-export default Admissionheader;
+export default AdmissionHeader;
