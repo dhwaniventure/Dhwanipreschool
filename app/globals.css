@@ -11,7 +11,7 @@
     "wdth" 100.5;
 }
 
-.dynapuff{
+.dynapuff {
   font-family: "DynaPuff";
   font-optical-sizing: auto;
   font-weight: 400;
@@ -19,14 +19,17 @@
   font-variation-settings:
     "wdth" 100;
 }
+
 @keyframes scan {
   0% {
     top: 0;
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
+
   100% {
     top: 100%;
     opacity: 1;
@@ -34,10 +37,12 @@
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -171,46 +176,52 @@
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0px);
     }
+
     50% {
       transform: translateY(-20px);
     }
   }
 
   @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-10px);
     }
   }
 }
 
-  /* Scroll behavior */
-  html {
-    scroll-behavior: smooth;
-  }
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
 
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--muted));
-  }
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
 
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--medical-primary));
-    border-radius: 4px;
-  }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--medical-primary));
+  border-radius: 4px;
+}
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--medical-primary-dark));
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--medical-primary-dark));
+}
 
 @layer components {
   .medical-gradient {
@@ -235,12 +246,14 @@
 
 
 }
+
 @font-face {
   font-family: 'fedorikaregular';
   src: url('./fonts/Fredoka/static/Fredoka-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
-} 
+}
+
 /* /* @font-face {
   font-family: 'fedorikaBold';
   src: url('./fonts/Fredoka/static/Fredoka-Bold.ttf') format('truetype');
@@ -249,7 +262,7 @@
 @font-face {
   font-family: 'Fedorikamedium';
   src: url('./fonts/Fredoka/static/Fredoka-Medium.ttf') format('truetype');
-  font-weight: 300; 
+  font-weight: 300;
   font: 400;
   font-style: normal;
 }
@@ -265,9 +278,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -276,6 +291,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -296,4 +312,20 @@
 }
 
 
+.slow-bounce {
+  animation: slowBounce 3s infinite ease-in-out;
+  /* Adjust 3s to change speed */
+}
 
+@keyframes slowBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+    /* Adjust height of bounce here */
+  }
+}

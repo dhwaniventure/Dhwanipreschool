@@ -10,6 +10,7 @@ import boyandgirlimage from "@/public/miaandleoforthankyoupage.png"
 import orangebanner from "@/public/orange_cultivating_knowledge.png";
 import rosebanner from "@/public/pink_montessori.png";
 import skybanner from "@/public/green_empowering_knowledge.png";
+import tableimage from "@/public/tobby_with_book.png"
 import {
   Home,
   User,
@@ -187,7 +188,7 @@ const FranchiseFAQSection = () => {
   };
 
   return (
-    <section className="w-full py-24 bg-white relative overflow-hidden">
+    <section className="w-full py-24 bg-indigo-50 relative overflow-hidden">
       <ElegantEdge position="top" fillColor="#eef2ff" />
 
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30">
@@ -525,13 +526,14 @@ export default function FranchisePage({
                 style={{ width: '90%', height: '90%' }}
               />
               <div className="relative z-10 w-full h-full p-8 flex items-center justify-center">
-                <div className="w-full max-w-sm aspect-square bg-white/40 backdrop-blur-sm rounded-3xl border border-white/50 shadow-xl flex items-center justify-center p-8 text-center">
+                <Image className="slow-bounce" alt="table image" src={tableimage} width={400} height={400}></Image>
+                {/* <div className="w-full max-w-sm aspect-square bg-white/40 backdrop-blur-sm rounded-3xl border border-white/50 shadow-xl flex items-center justify-center p-8 text-center">
                   <div>
                     <TrendingUp className="w-16 h-16 text-emerald-600 opacity-80 mx-auto mb-4" />
                     <h3 className="font-bold text-slate-800 text-xl mb-2">Preschool Franchise in India</h3>
                     <p className="text-slate-600 text-sm">Combines educational purpose with entrepreneurial opportunity. Focuses on physical, cognitive, social, and emotional development.</p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
