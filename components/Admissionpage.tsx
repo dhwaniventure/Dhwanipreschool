@@ -83,7 +83,7 @@ export default function AdmissionPage({
       city: defaultEmail?.city,
       state: defaultEmail?.state,
       message: defaultEmail?.message,
-      admission_seeking: "Little Explorers - Playgroup (2 - 3 Years)" // Set a valid default
+      admission_seeking: "Little Minds (1-2 Years)" // Set a valid default
     },
   });
 
@@ -232,10 +232,14 @@ export default function AdmissionPage({
                     disabled={isLoading}
                     className="w-full bg-slate-50/50 border-2 border-slate-200 rounded-2xl py-3 px-4 text-slate-700 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all appearance-none cursor-pointer"
                   >
-                    <option value="Little Explorers - Playgroup (2 - 3 Years)">Little Explorers - Playgroup (2 - 3 Years)</option>
-                    <option value="Curious Learners - Nursery (3 - 4 Years)">Curious Learners - Nursery (3 - 4 Years)</option>
-                    <option value="Creative Thinkers - Junior Kindergarten (4 - 5 Years)">Creative Thinkers - Lower Kindergarten (4 - 5 Years)</option>
-                    <option value="Future Leaders - Senior Kindergarten (5 - 6 Years)">Future Leaders - Upper Kindergarten (5 - 6 Years)</option>
+                    <option value="Little Minds (1-2 Years)">Little Minds (1-2 Years)</option>
+                    <option value="Little Steps with Mommy (Mom & Me)">Little Steps with Mommy (Mom & Me)</option>
+                    <option value="Curious Minds - Playgroup (2-3 Years)">Curious Minds - Playgroup (2-3 Years)</option>
+                    <option value="Emerging Learners - Nursery (3-4 Years)">Emerging Learners - Nursery (3-4 Years)</option>
+                    <option value="Ready for Tomorrow - LKG (4-5 Years)">Ready for Tomorrow - LKG (4-5 Years)</option>
+                    <option value="Future Achievers - UKG (5-6 Years)">Future Achievers - UKG (5-6 Years)</option>
+                    <option value="Mind Lab">Mind Lab</option>
+                    <option value="Teacher Training">Teacher Training</option>
                     <option value="Daycare">Daycare</option>
                   </select>
                   <ChevronRight className="absolute right-4 top-3.5 w-5 h-5 text-slate-400 rotate-90 pointer-events-none group-focus-within:text-indigo-500" />
