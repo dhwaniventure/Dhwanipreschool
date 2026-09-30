@@ -115,7 +115,7 @@ export default function AdmissionPage({
               Enquiry Form
             </h2>
             <p className="text-slate-600 text-lg font-medium max-w-2xl mx-auto">
-              Ready to take the first step? Fill out the form below and our admissions team will contact you shortly.
+              Ready to take the first step? Fill out the form below and our admissions team will contact you shortly .
             </p>
           </div>
 
