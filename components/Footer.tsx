@@ -177,7 +177,7 @@ const Footer = () => {
                 <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sky-500 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-sky-500 group-hover:text-white transition-colors">
                   <Globe className="w-5 h-5" />
                 </div>
-                <a href="https://www.littledreamersatcambridge.com" target="_blank" rel="noopener noreferrer" className={`mt-1 font-bold text-slate-600 group-hover:text-sky-500 transition-colors max-w-[200px] leading-tight ${bodyFont.className}`}>
+                <a href="https://www.dhwanicambridge.com" target="_blank" rel="noopener noreferrer" className={`mt-1 font-bold text-slate-600 group-hover:text-sky-500 transition-colors max-w-[200px] leading-tight ${bodyFont.className}`}>
                   www.DhwaniCambridge.com
                 </a>
               </li>
@@ -186,7 +186,7 @@ const Footer = () => {
                 <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-500 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-rose-500 group-hover:text-white transition-colors">
                   <Mail className="w-5 h-5" />
                 </div>
-                <a href="mailto:info@littledreamersatcambridge.com" className={`font-bold text-slate-600 group-hover:text-rose-500 transition-colors truncate w-[200px] ${bodyFont.className}`}>
+                <a href="mailto:info@dhwanicambridge.com" className={`font-bold text-slate-600 group-hover:text-rose-500 transition-colors truncate w-[200px] ${bodyFont.className}`}>
                   dhwanipreschool.com
                 </a>
               </li>
