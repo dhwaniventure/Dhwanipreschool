@@ -57,7 +57,7 @@ const handwritingFont = Kalam({
 const infoSections: InfoSection[] = [
   {
     id: 1,
-    title: "Our Vision & Way",
+    title: "Our Vision & Mission",
     subtitle: "The Montessori Philosophy",
     description: "At Dhawni Cambridge Montessori Pre School, we nurture confident, independent, and compassionate learners through the internationally acclaimed Montessori philosophy of Dr Maria Montessori.",
     paragraphs: [

@@ -78,7 +78,7 @@ const ContactPage: React.FC = () => {
                         className="relative z-10 w-full h-full rounded-[2.5rem] overflow-hidden border-8 border-white shadow-2xl"
                      >
                         <iframe
-                           src="https://maps.google.com/maps?width=600&height=400&hl=en&q=pitampura%20delhi&t=p&z=14&ie=UTF8&iwloc=B&output=embed"
+                           src="https://maps.google.com/maps?width=600&height=400&hl=en&q=Rachana%20Towers%20Bangalore&t=p&z=14&ie=UTF8&iwloc=B&output=embed"
                            width="100%"
                            height="100%"
                            style={{ border: 0 }}
@@ -113,7 +113,7 @@ const ContactPage: React.FC = () => {
                         </p>
 
                         <button
-                           onClick={() => window.open('https://wa.me/919999996266', '_blank')}
+                           onClick={() => window.open('https://wa.me/919071525966', '_blank')}
                            className="group flex items-center gap-3 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-emerald-200 transition-all hover:-translate-y-1"
                         >
                            <MessageCircle className="w-6 h-6 fill-white" />
@@ -155,7 +155,7 @@ const ContactPage: React.FC = () => {
                      </div>
                      <h3 className={`text-xl font-bold text-slate-800 mb-2 ${titleFont.className}`}>Visit Us</h3>
                      <p className="text-slate-600 font-medium">
-                        Corporate Office: Pitampura, Delhi<br />
+                        Corporate Office:Rachana Towers, #2053/A, 1st floor, 3rd Stage, Sector 'B', Ward No.4, Yelahanka New Town Bangalore-560064<br />
                      </p>
                   </motion.div>
 
@@ -169,7 +169,7 @@ const ContactPage: React.FC = () => {
                      </div>
                      <h3 className={`text-xl font-bold text-slate-800 mb-2 ${titleFont.className}`}>Call Us</h3>
                      <p className="text-slate-600 font-medium">
-                        +91 9999996266<br />
+                        +91 9071525966<br />
                      </p>
                   </motion.div>
 
@@ -183,7 +183,7 @@ const ContactPage: React.FC = () => {
                      </div>
                      <h3 className={`text-xl font-bold text-slate-800 mb-2 ${titleFont.className}`}>Email Us</h3>
                      <p className="text-slate-600 font-medium break-words">
-                        info@littledreamersatcambridge.com
+                        info@dhwanicambridge.com
                      </p>
                   </motion.div>
                </div>

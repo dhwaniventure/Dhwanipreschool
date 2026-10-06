@@ -195,8 +195,8 @@ const Footer = () => {
                 <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-500 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-amber-500 group-hover:text-white transition-colors">
                   <Phone className="w-5 h-5" />
                 </div>
-                <a href="tel:+919999996266" className={`font-bold text-slate-600 group-hover:text-amber-500 transition-colors ${bodyFont.className}`}>
-                  +91-999 999 6266
+                <a href="tel:+919071525966" className={`font-bold text-slate-600 group-hover:text-amber-500 transition-colors ${bodyFont.className}`}>
+                  +91-9071525966
                 </a>
               </li>
             </ul>
