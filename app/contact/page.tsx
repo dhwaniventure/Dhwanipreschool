@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
    MapPin,
@@ -11,10 +11,13 @@ import {
    Globe,
    Smartphone,
    Mail,
-   ChevronRight
+   ChevronRight,
+   Loader2
 } from "lucide-react";
 import { Fredoka, Quicksand } from 'next/font/google';
 import ContactHeader from "@/components/AboutHeader";
+import { toast } from "sonner";
+import supabase from "@/utils/supabase/supabase";
 
 // --- FONTS ---
 const titleFont = Fredoka({
@@ -50,6 +53,64 @@ const ElegantEdge = ({ position, fillColor = "#ffffff" }: { position: "top" | "b
 
 
 const ContactPage: React.FC = () => {
+   const [name, setName] = useState("");
+   const [email, setEmail] = useState("");
+   const [subject, setSubject] = useState("");
+   const [message, setMessage] = useState("");
+   const [isLoading, setIsLoading] = useState(false);
+
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+   const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+
+      if (!name.trim()) {
+         toast.error("Please enter your name.");
+         return;
+      }
+
+      if (!email.trim() || !emailRegex.test(email.trim())) {
+         toast.error("Please enter a valid email address.");
+         return;
+      }
+
+      if (!message.trim()) {
+         toast.error("Please enter your message.");
+         return;
+      }
+
+      setIsLoading(true);
+
+      try {
+         const { data, error } = await supabase
+            .from("message")
+            .insert([
+               {
+                  name: name.trim(),
+                  email: email.trim(),
+                  subject: subject.trim(),
+                  message: message.trim(),
+               }
+            ]);
+
+         if (error) {
+            console.error("Supabase message insert error:", error);
+            toast.error(error.message || "Failed to submit message. Please try again.");
+         } else {
+            toast.success("Thank you! Your message has been sent successfully.");
+            setName("");
+            setEmail("");
+            setSubject("");
+            setMessage("");
+         }
+      } catch (err: any) {
+         console.error("Error submitting message:", err);
+         toast.error(err?.message || "An unexpected error occurred. Please try again.");
+      } finally {
+         setIsLoading(false);
+      }
+   };
+
    return (
       <div className={`w-full flex flex-col ${bodyFont.className}`}>
          <ContactHeader />
@@ -218,22 +279,36 @@ const ContactPage: React.FC = () => {
                      <Send className="w-8 h-8 text-white pr-1 pb-1" />
                   </div>
 
-                  <form className="flex flex-col gap-6">
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-6">
 
                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col gap-2">
-                           <label className="font-bold text-slate-700 ml-2">Your Name</label>
+                           <label className="font-bold text-slate-700 ml-2">Your Name *</label>
                            <div className="relative group">
                               <User className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-rose-400 transition-colors" />
-                              <input type="text" placeholder="John Doe" className="w-full bg-white border-2 border-slate-200 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-rose-400 transition-all" />
+                              <input
+                                 type="text"
+                                 required
+                                 value={name}
+                                 onChange={(e) => setName(e.target.value)}
+                                 placeholder="John Doe"
+                                 className="w-full bg-white border-2 border-slate-200 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-rose-400 transition-all"
+                              />
                            </div>
                         </div>
 
                         <div className="flex flex-col gap-2">
-                           <label className="font-bold text-slate-700 ml-2">Email Address</label>
+                           <label className="font-bold text-slate-700 ml-2">Email Address *</label>
                            <div className="relative group">
                               <Mail className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-rose-400 transition-colors" />
-                              <input type="email" placeholder="john@example.com" className="w-full bg-white border-2 border-slate-200 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-rose-400 transition-all" />
+                              <input
+                                 type="email"
+                                 required
+                                 value={email}
+                                 onChange={(e) => setEmail(e.target.value)}
+                                 placeholder="john@example.com"
+                                 className="w-full bg-white border-2 border-slate-200 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-rose-400 transition-all"
+                              />
                            </div>
                         </div>
                      </div>
@@ -242,22 +317,48 @@ const ContactPage: React.FC = () => {
                         <label className="font-bold text-slate-700 ml-2">Subject</label>
                         <div className="relative group">
                            <Globe className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-rose-400 transition-colors" />
-                           <input type="text" placeholder="e.g. Admission Inquiry" className="w-full bg-white border-2 border-slate-200 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-rose-400 transition-all" />
+                           <input
+                              type="text"
+                              value={subject}
+                              onChange={(e) => setSubject(e.target.value)}
+                              placeholder="e.g. Admission Inquiry"
+                              className="w-full bg-white border-2 border-slate-200 rounded-2xl py-3 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-rose-400 transition-all"
+                           />
                         </div>
                      </div>
 
                      <div className="flex flex-col gap-2">
-                        <label className="font-bold text-slate-700 ml-2">Your Message</label>
+                        <label className="font-bold text-slate-700 ml-2">Your Message *</label>
                         <div className="relative group">
                            <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-slate-400 group-focus-within:text-rose-400 transition-colors" />
-                           <textarea rows={4} placeholder="How can we help you?" className="w-full bg-white border-2 border-slate-200 rounded-2xl py-4 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-rose-400 transition-all resize-none" />
+                           <textarea
+                              rows={4}
+                              required
+                              value={message}
+                              onChange={(e) => setMessage(e.target.value)}
+                              placeholder="How can we help you?"
+                              className="w-full bg-white border-2 border-slate-200 rounded-2xl py-4 pl-12 pr-4 text-slate-700 focus:outline-none focus:border-rose-400 transition-all resize-none"
+                           />
                         </div>
                      </div>
 
                      <div className="mt-4">
-                        <button type="button" className="w-full bg-gradient-to-r from-rose-400 to-orange-400 hover:from-rose-500 hover:to-orange-500 text-white font-bold py-4 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 text-lg">
-                           Send Message
-                           <ChevronRight className="w-5 h-5" />
+                        <button
+                           type="submit"
+                           disabled={isLoading}
+                           className="w-full bg-gradient-to-r from-rose-400 to-orange-400 hover:from-rose-500 hover:to-orange-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 text-lg"
+                        >
+                           {isLoading ? (
+                              <>
+                                 <Loader2 className="w-5 h-5 animate-spin" />
+                                 Sending Message...
+                              </>
+                           ) : (
+                              <>
+                                 Send Message
+                                 <ChevronRight className="w-5 h-5" />
+                              </>
+                           )}
                         </button>
                      </div>
 
