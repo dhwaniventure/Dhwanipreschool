@@ -137,6 +137,25 @@ export type Database = {
         Relationships: [];
       };
 
+      emailnewsletter: {
+        Row: {
+          id: number | string;
+          email: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: number | string;
+          email: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: number | string;
+          email?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+
       admissions: {
         Row: {
 	name: string,

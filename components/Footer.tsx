@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
@@ -14,8 +14,12 @@ import {
   ArrowRight,
   Youtube,
   Globe,
-  Star
+  Star,
+  Loader2,
+  Check
 } from "lucide-react";
+import { toast } from "sonner";
+import { subscribeNewsletter } from "@/lib/actions/blog";
 import { Fredoka, Quicksand, Kalam } from 'next/font/google';
 
 import logo from "../public/logo.png";
@@ -71,6 +75,54 @@ const ElegantEdge = ({ position }: { position: "top" | "bottom" }) => {
 };
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmedEmail = email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!trimmedEmail) {
+      toast.error("Please enter your email address.");
+      return;
+    }
+
+    if (!emailRegex.test(trimmedEmail)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const res = await subscribeNewsletter(trimmedEmail);
+
+      if (res.success) {
+        if (res.alreadySubscribed) {
+          toast.info("You're already subscribed with this email address! ✨");
+        } else {
+          toast.success("Thank you for subscribing to our newsletter! 🎉");
+        }
+        setEmail("");
+        setIsSuccess(true);
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        console.error("Newsletter subscription failed:", res.error);
+        if (res.code === "PGRST205" || res.error?.includes("schema cache")) {
+          toast.error("Newsletter table 'emailnewsletter' not found in database. Please ensure the table is created in Supabase.");
+        } else {
+          toast.error(res.error || "Failed to subscribe. Please try again.");
+        }
+      }
+    } catch (error: any) {
+      console.error("Newsletter submission error:", error);
+      toast.error(error?.message || "An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Animation Variants
   const containerVariants: Variants = {
@@ -210,21 +262,44 @@ const Footer = () => {
             <p className={`${bodyFont.className} text-sm text-slate-600 mb-5 font-bold leading-relaxed`}>
               Subscribe for updates, parenting tips, and special event invites!
             </p>
-            <div className="relative group">
+            <form onSubmit={handleNewsletterSubmit} className="relative group">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
                 placeholder="Your email address..."
-                className={`${bodyFont.className} w-full bg-white border-2 border-slate-200 rounded-2xl pl-5 pr-14 py-4 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-indigo-400 transition-colors font-bold shadow-sm`}
+                aria-label="Your email address"
+                required
+                className={`${bodyFont.className} w-full bg-white border-2 border-slate-200 rounded-2xl pl-5 pr-14 py-4 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-indigo-400 transition-colors font-bold shadow-sm disabled:opacity-60 disabled:cursor-not-allowed`}
               />
-              <button className="absolute right-2 top-2 bottom-2 w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center text-white hover:bg-indigo-400 active:scale-95 transition-all shadow-md">
-                <Send className="w-5 h-5 ml-1" />
+              <button
+                type="submit"
+                disabled={isLoading}
+                aria-label="Subscribe to newsletter"
+                className="absolute right-2 top-2 bottom-2 w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center text-white hover:bg-indigo-400 active:scale-95 transition-all shadow-md disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+              >
+                {isLoading ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : isSuccess ? (
+                  <Check className="w-5 h-5 text-emerald-200" />
+                ) : (
+                  <Send className="w-5 h-5 ml-1" />
+                )}
               </button>
-            </div>
+            </form>
 
-            <p className={`${bodyFont.className} mt-4 text-xs font-bold text-slate-500 flex items-center gap-2`}>
-              <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_theme(colors.emerald.400)]"></span>
-              We respect your privacy. No spam.
-            </p>
+            {isSuccess ? (
+              <p className={`${bodyFont.className} mt-4 text-xs font-bold text-emerald-600 flex items-center gap-2`}>
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                You&apos;re subscribed! Welcome to our family.
+              </p>
+            ) : (
+              <p className={`${bodyFont.className} mt-4 text-xs font-bold text-slate-500 flex items-center gap-2`}>
+                <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_theme(colors.emerald.400)]"></span>
+                We respect your privacy. No spam.
+              </p>
+            )}
           </motion.div>
 
         </div>

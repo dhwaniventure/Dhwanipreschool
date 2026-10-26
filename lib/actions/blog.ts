@@ -49,9 +49,27 @@ export async function createFranchise(data: {
 	return result;
 }
 
+export async function subscribeNewsletter(email: string) {
+	try {
+		const supabase = await createSupabaseServerClient();
+		const result = await supabase
+			.from("emailnewsletter")
+			.insert([{ email: email.trim().toLowerCase() }]);
 
+		if (result.error) {
+			console.error("Newsletter subscription error:", result.error);
+			if (result.error.code === "23505") {
+				return { success: true, alreadySubscribed: true };
+			}
+			return { success: false, error: result.error.message, code: result.error.code };
+		}
 
-
+		return { success: true, alreadySubscribed: false };
+	} catch (err: any) {
+		console.error("Newsletter server action error:", err);
+		return { success: false, error: err?.message || "An unexpected error occurred. Please try again." };
+	}
+}
 export async function createBlog(data: {
 	content: string;
 	title: string;
